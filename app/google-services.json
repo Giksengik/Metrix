@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "628067409317",
+    "project_id": "metrix-b77cc",
+    "storage_bucket": "metrix-b77cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628067409317:android:5dbaacaad8b712ef9d1c4c",
+        "android_client_info": {
+          "package_name": "com.company.metrix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628067409317-bqnh27uvffj0ernftmvuc6d7qapa6ul9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.metrix",
+            "certificate_hash": "f83c2b371a73c0f0776edd85bb391b3e079ca7d6"
+          }
+        },
+        {
+          "client_id": "628067409317-2oru4c54664ac946q9re305fe5i46f1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA11CuN53e7f93dbDq075wui3yVJZkzCyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628067409317-2oru4c54664ac946q9re305fe5i46f1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
