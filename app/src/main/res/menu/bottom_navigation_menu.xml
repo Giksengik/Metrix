@@ -8,6 +8,12 @@
         android:id="@+id/notification_nav_graph"
         android:icon="@drawable/ic_baseline_notifications_24"
         android:title="" />
+
+    <item
+        android:id="@+id/fragment_auth"
+        android:icon="@drawable/ic_baseline_action_24"
+        android:title="" />
+
     <item
         android:id="@+id/favourite_nav_graph"
         android:icon="@drawable/ic_baseline_favorite_24"

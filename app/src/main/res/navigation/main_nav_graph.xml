@@ -15,4 +15,8 @@
 
     <include android:id="@+id/home_nav_graph"
         app:graph="@navigation/home_nav_graph" />
+    <fragment
+        android:id="@+id/fragment_auth"
+        android:name="com.company.metrix.FragmentAuth"
+        android:label="FragmentAuth" />
 </navigation>

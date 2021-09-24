@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Metrix</string>
+    <string name="auth_text">Авторизоваться</string>
+    <string name="employee_auth_description">Для дальнейшей работы с Metrix требуется авторизация</string>
+
+    <string-array name="auth_pages">
+        <item>Авторизация</item>
+        <item>Оценка</item>
+    </string-array>
 </resources>
