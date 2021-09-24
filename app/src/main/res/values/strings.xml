@@ -3,6 +3,7 @@
     <string name="auth_text">Авторизоваться</string>
     <string name="employee_auth_description">Для дальнейшей работы с Metrix требуется авторизация</string>
     <string name="print_phone_number_text">Введите номер телефона</string>
+    <string name="print_verification_code_text">Введите код подтверждения</string>
     <string name="confirm_text">Подтвердить</string>
 
     <string-array name="auth_pages">
