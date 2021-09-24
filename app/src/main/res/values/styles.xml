@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="SplashStyle">
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="SplashTheme" parent="Theme.MaterialComponents">
         <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
+
 </resources>
