@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/github/Metrix/app/src/main/res/drawable/bottom_navigation_icon_tint.xml" value="0.1" />
+        <entry key="..\:/github/Metrix/app/src/main/res/drawable/bottom_navigation_item_background.xml" value="0.1" />
+        <entry key="..\:/github/Metrix/app/src/main/res/drawable/red_circle.xml" value="0.1" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/activity_main.xml" value="0.17255434782608695" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_auth.xml" value="0.17255434782608695" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_employee_auth.xml" value="0.17255434782608695" />
