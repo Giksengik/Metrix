@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.company.metrix.databinding.FragmentHomeBinding
 
+
 class HomeFragment : Fragment() {
     private var binding : FragmentHomeBinding? = null
 
@@ -18,4 +19,5 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater)
         return binding?.root
     }
+
 }
