@@ -10,4 +10,5 @@
     <color name="red">#ffEB1C24</color>
     <color name="light_gray">#ff646E77</color>
     <color name="dark">#ff252837</color>
+    <color name="background_gray">#ffF8F8F9</color>
 </resources>
