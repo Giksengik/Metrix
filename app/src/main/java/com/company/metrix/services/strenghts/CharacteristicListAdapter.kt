@@ -2,12 +2,12 @@ package com.company.metrix.services.strenghts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.company.metrix.databinding.StrengthItemLayoutBinding
+import com.company.metrix.databinding.CharacteristicItemLayoutBinding
 import com.company.metrix.model.CharacteristicInfo
+import java.lang.StringBuilder
 
 class CharacteristicListAdapter :
     ListAdapter<CharacteristicInfo, CharacteristicListAdapter.ViewHolder>(StrengthDiffUtil()) {
@@ -15,7 +15,7 @@ class CharacteristicListAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            StrengthItemLayoutBinding.inflate(
+            CharacteristicItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -28,7 +28,7 @@ class CharacteristicListAdapter :
 
     class StrengthDiffUtil : DiffUtil.ItemCallback<CharacteristicInfo>() {
         override fun areItemsTheSame(oldItem: CharacteristicInfo, newItem: CharacteristicInfo): Boolean =
-            oldItem.iconId == newItem.iconId
+            oldItem.emoji == newItem.emoji
 
 
         override fun areContentsTheSame(oldItem: CharacteristicInfo, newItem: CharacteristicInfo): Boolean =
@@ -36,18 +36,12 @@ class CharacteristicListAdapter :
 
     }
 
-    class ViewHolder(val binding: StrengthItemLayoutBinding) :
+    class ViewHolder(val binding: CharacteristicItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(strenth: CharacteristicInfo) {
-            binding.strengthIcon.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    binding.root.resources,
-                    strenth.iconId,
-                    binding.root.context.theme
-                )
-            )
-            binding.strengthText.text = binding.root.context.getString(strenth.textId)
+            binding.characteristicEmoji.text = strenth.emoji
+            binding.strengthText.text = strenth.text
         }
     }
 }
