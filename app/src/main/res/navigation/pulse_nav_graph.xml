@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/pulse_fragment"
-        android:name="com.company.metrix.PulseFragment"
+        android:name="com.company.metrix.pulse.PulseFragment"
         android:label="PulseFragment" />
 </navigation>
