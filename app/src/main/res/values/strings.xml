@@ -10,7 +10,6 @@
     <string name="number_error">Неверный формат номера, попробуйте: +76665554433</string>
     <string name="code_error">Неверный код подтверждения</string>
     <string name="confirm_text">Подтвердить</string>
-    <string name="send_code_text">Отправить код</string>
     <string name="diagnostic_text">Диагностика</string>
     <string name="rating_text">Рейтинг</string>
     <string name="strengths_text">Сильные стороны</string>
@@ -18,6 +17,43 @@
     <string name="awards_text">Награды</string>
     <string name="team_text">Команда</string>
     <string name="services_text">Сервисы</string>
+    <string name="diagnostic_description">В этой анкете вам предстоит ответы на вопросы о вашем коллеге. Пожалуйста, отвечайте искренне. Все ответы анонимны.</string>
+    <string name="diagnostic_hint">Отметьте вариант ответа, который вы считаете верным</string>
+    <string name="no_text">Нет</string>
+    <string name="yes_text">Да</string>
+    <string name="your_rating">Ваш рейтинг:</string>
+    <string name="friendliness_strength_description">
+        Дружелюбность. Клиенты отмечают вас, как дружелюбного человека.
+    </string>
+    <string name="mobilnost_strength_description">
+        Мобильность. Здорово, что вы всегда на связи!
+    </string>
+    <string name="politness_strength_description">
+        Вежливость. Вы внимательны к своим клиентам.
+    </string>
+    <string name="profi_strength_description">
+        Профессионализм. Подходите к работе с трепетом, мы это ценим!
+    </string>
+    <string name="speed_strength_description">
+        Скорость. Вы выполняете свои задачи быстро.
+    </string>
+
+    <string name="friendliness_weakness_description">
+        Дружелюбность. Клиенты отмечают вас, как дружелюбного человека.
+    </string>
+    <string name="mobilnost_weakness_description">
+        Мобильность. Здорово, что вы всегда на связи!
+    </string>
+    <string name="politness_weakness_description">
+        Вежливость. Вы внимательны к своим клиентам.
+    </string>
+    <string name="profi_weakness_description">
+        Профессионализм. Подходите к работе с трепетом, мы это ценим!
+    </string>
+    <string name="speed_weakness_description">
+        Скорость. Вы выполняете свои задачи быстро.
+    </string>
+
     <string-array name="auth_pages">
         <item>Авторизация</item>
         <item>Оценка</item>
