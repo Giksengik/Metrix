@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.company.metrix.ProfileFragment"
+        android:name="com.company.metrix.profile.ProfileFragment"
         android:label="ProfileFragment" />
 </navigation>
