@@ -1,4 +1,4 @@
-package com.company.metrix
+package com.company.metrix.auth
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -19,7 +19,19 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class FragmentAuthEmployee : Fragment() {
+class FragmentAuthEmployee() : Fragment() {
+
+    companion object{
+        fun newInstance(authHandler: AuthHandler): Fragment {
+            return FragmentAuthEmployee(authHandler)
+        }
+    }
+
+    private constructor(authHandler: AuthHandler) : this(){
+        this.authHandler = authHandler
+    }
+
+    private var authHandler : AuthHandler? = null
     private var binding : FragmentEmployeeAuthBinding? = null
     private lateinit var auth: FirebaseAuth
 
@@ -68,7 +80,7 @@ class FragmentAuthEmployee : Fragment() {
 
     private fun onSignedIn(user: FirebaseUser) {
         val name = user.displayName
-        Toast.makeText(requireContext(), "Success, welcome $name", Toast.LENGTH_SHORT).show()
+        authHandler?.handleSuccessAuth()
     }
 
     private fun showErrorToast() {

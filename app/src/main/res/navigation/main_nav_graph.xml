@@ -16,9 +16,4 @@
         app:graph="@navigation/pulse_nav_graph"
         />
 
-    <fragment
-        android:id="@+id/fragment_auth"
-        android:name="com.company.metrix.FragmentAuth"
-        android:label="FragmentAuth" />
-
 </navigation>
