@@ -5,7 +5,13 @@
     <string name="print_phone_number_text">Введите номер телефона</string>
     <string name="print_verification_code_text">Введите код подтверждения</string>
     <string name="confirm_text">Подтвердить</string>
-
+    <string name="diagnostic_text">Диагностика</string>
+    <string name="rating_text">Рейтинг</string>
+    <string name="strengths_text">Сильные стороны</string>
+    <string name="recomendations_text">Рекомендации</string>
+    <string name="awards_text">Награды</string>
+    <string name="team_text">Команда</string>
+    <string name="services_text">Сервисы</string>
     <string-array name="auth_pages">
         <item>Авторизация</item>
         <item>Оценка</item>
