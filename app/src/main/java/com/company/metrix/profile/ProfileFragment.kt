@@ -17,7 +17,6 @@ import java.util.*
 class ProfileFragment : Fragment() {
 
     private var binding : FragmentProfileBinding? = null
-    private lateinit var database: DatabaseReference
     private var softSkillAdapter : SkillsListAdapter? = null
     private var hardSkillAdapter : SkillsListAdapter? = null
 
@@ -27,10 +26,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater)
-        database = Firebase.database.reference.child("users")
-
-        loadEmployeeToDatabase()
-
         return binding?.root
     }
 
@@ -70,24 +65,5 @@ class ProfileFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = softSkillAdapter
         }
-    }
-
-    private fun loadEmployeeToDatabase()  {
-        val em = Employee(
-            id = "hello",
-            team = 0,
-            ratings = listOf(3.0, 2.0, 5.0),
-            strongSkills = listOf("communication", "works_hard"),
-            weakSkills = listOf("code_skill", "speed"),
-            comments = listOf("code_skill", "speed"),
-            achievements = listOf("friendly")
-        )
-        val user = database.child(Firebase.auth.currentUser!!.uid)
-        user.child("id").setValue(em.id)
-        user.child("team").setValue(em.team)
-        user.child("ratings").setValue(em.ratings)
-        user.child("strongSkills").setValue(em.strongSkills)
-        user.child("weakSkills").setValue(em.weakSkills)
-        user.child("achievements").setValue(em.achievements)
     }
 }

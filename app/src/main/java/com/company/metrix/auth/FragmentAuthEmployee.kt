@@ -15,12 +15,18 @@ import com.company.metrix.databinding.FragmentEmployeeAuthBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class FragmentAuthEmployee() : Fragment() {
+
+    private lateinit var database: DatabaseReference
 
     companion object{
         fun newInstance(authHandler: AuthHandler): Fragment {
@@ -47,6 +53,8 @@ class FragmentAuthEmployee() : Fragment() {
             binding?.buttonEmployeeAuth?.visibility = View.INVISIBLE
             authorizationHandler.launch(getSignInIntent())
         }
+
+        database = Firebase.database.reference.child("users")
         auth = Firebase.auth
         return binding?.root
     }
@@ -76,15 +84,39 @@ class FragmentAuthEmployee() : Fragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    onSignedIn(auth.currentUser!!)
+                    checkInDatabase()
                 } else {
                     showError()
                 }
             }
     }
 
-    private fun onSignedIn(user: FirebaseUser) {
-        //val name = user.displayName
+    private fun checkInDatabase() {
+        val user = Firebase.auth.currentUser!!
+        database.orderByChild("id").equalTo(user.email).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (!snapshot.children.iterator().hasNext()) {
+                    addToDatabase(user.uid, user.email!!)
+                } else {
+                    onSignedIn()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun addToDatabase(uid: String, email: String) {
+        val userDatabase = database.child(uid)
+        userDatabase.child("id").setValue(email)
+        userDatabase.child("team").setValue(0)
+        onSignedIn()
+    }
+
+
+    private fun onSignedIn() {
         authHandler?.handleSuccessAuth()
     }
 
