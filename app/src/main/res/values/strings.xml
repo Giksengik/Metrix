@@ -71,6 +71,7 @@
     <string name="post_in_company_text">Должность:</string>
     <string name="soft_skills_text">Soft Skills</string>
     <string name="hard_skills_text">Hard skills:</string>
+    <string name="pulse_description">Пульс-опрос состояния</string>
 
     <string-array name="auth_pages">
         <item>Оценка</item>
