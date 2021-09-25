@@ -40,20 +40,22 @@
     </string>
 
     <string name="friendliness_weakness_description">
-        Дружелюбность. Клиенты отмечают вас, как дружелюбного человека.
+        Дружелюбность. К сожалению, не все клиенты считают вас дружелюбным.
     </string>
     <string name="mobilnost_weakness_description">
-        Мобильность. Здорово, что вы всегда на связи!
+        Мобильность. Клиенты отмечают, что иногда с вами сложно связаться.
     </string>
     <string name="politness_weakness_description">
-        Вежливость. Вы внимательны к своим клиентам.
+        Вежливость. Некоторые клиенты недовольны вашими манерами.
     </string>
     <string name="profi_weakness_description">
-        Профессионализм. Подходите к работе с трепетом, мы это ценим!
+        Профессионализм. Вам стоит поработать над своей квалификацией.
     </string>
     <string name="speed_weakness_description">
-        Скорость. Вы выполняете свои задачи быстро.
+        Скорость. Некоторые задачи можно выполнять быстрее.
     </string>
+    <string name="strenths_description">Какие сильные стороны отмечают клиенты:</string>
+    <string name="weakness_description_text">Что можно улучшить?</string>
 
     <string-array name="auth_pages">
         <item>Авторизация</item>
