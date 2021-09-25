@@ -1,4 +1,4 @@
-package com.company.metrix
+package com.company.metrix.auth
 
 import android.os.Bundle
 import android.telephony.PhoneNumberUtils
@@ -14,10 +14,25 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
-class FragmentEstimate : Fragment() {
+class FragmentEstimate() : Fragment() {
+
+    companion object{
+        fun newInstance(authHandler: AuthHandler): Fragment {
+            return FragmentEstimate(authHandler)
+        }
+    }
+
+    private constructor(authHandler: AuthHandler) : this(){
+        this.authHandler = authHandler
+    }
+
+    private var authHandler : AuthHandler? = null
     private var binding : FragmentEstimateBinding? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var verificationId: String
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,7 +87,7 @@ class FragmentEstimate : Fragment() {
 
     private fun onSignedIn(user: FirebaseUser) {
         val phoneNumber = user.phoneNumber
-        Toast.makeText(requireContext(), "Success, your number is $phoneNumber", Toast.LENGTH_SHORT).show()
+        authHandler?.handleSuccessAuth()
     }
 
     private fun showErrorToast() {

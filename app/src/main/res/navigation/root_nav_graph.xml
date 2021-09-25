@@ -2,9 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/fragmentAuth">
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.company.metrix.MainFragment"
         android:label="MainFragment" />
+    <fragment
+        android:id="@+id/fragmentAuth"
+        android:name="com.company.metrix.FragmentAuth"
+        android:label="FragmentAuth" >
+        <action
+            android:id="@+id/action_fragmentAuth_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
