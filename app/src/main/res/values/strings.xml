@@ -58,6 +58,10 @@
     <string name="weakness_description_text">Что можно улучшить?</string>
     <string name="awards_description">Ваши награды:</string>
     <string name="team_description">Моя команда</string>
+    <string name="in_company_text">В компании:</string>
+    <string name="post_in_company_text">Должность:</string>
+    <string name="soft_skills_text">Soft Skills</string>
+    <string name="hard_skills_text">Hard skills:</string>
 
     <string-array name="auth_pages">
         <item>Авторизация</item>
