@@ -3,4 +3,6 @@
     <dimen name="no_to_end_dimension">16dp</dimen>
     <dimen name="yes_to_no_dimension">32dp</dimen>
     <dimen name="answer_dim">30dp</dimen>
+    <dimen name="background_guy_width">300dp</dimen>
+    <dimen name="background_height">200dp</dimen>
 </resources>

@@ -7,28 +7,28 @@ class CharacteristicFactoryImpl : CharacteristicFactory {
     override fun produceAllStrengths(): List<CharacteristicInfo> =
         listOf(
             CharacteristicInfo(
-                iconId = R.drawable.ic_politeness,
-                textId = R.string.politness_strength_description,
+                emoji = "😁",
+                text = "Вежливость. Вы внимательны к своим клиентам.",
                 strengthStatus = 1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_mobilnost,
-                textId = R.string.mobilnost_strength_description,
+                emoji = "📱",
+                text = "Мобильность. Здорово, что вы всегда на связи!",
                 strengthStatus = 1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_profi,
-                textId = R.string.profi_strength_description,
+                emoji = "👍",
+                text = "Профессионализм. Подходите к работе с трепетом, мы это ценим!",
                 strengthStatus = 1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_speed,
-                textId = R.string.speed_strength_description,
+                emoji = "⌚",
+                text = "Скорость. Вы выполняете свои задачи быстро.",
                 strengthStatus = 1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_friendliness,
-                textId = R.string.friendliness_strength_description,
+                emoji = "🤗",
+                text = "Дружелюбность. Клиенты отмечают вас, как дружелюбного человека.",
                 strengthStatus = 1
             )
         )
@@ -36,28 +36,28 @@ class CharacteristicFactoryImpl : CharacteristicFactory {
     override fun produceAllWeakness(): List<CharacteristicInfo> =
         listOf(
             CharacteristicInfo(
-                iconId = R.drawable.ic_politeness,
-                textId = R.string.politness_weakness_description,
+                emoji = "😁",
+                text = "Вежливость. Некоторые клиенты недовольны вашими манерами.",
                 strengthStatus = -1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_mobilnost,
-                textId = R.string.mobilnost_weakness_description,
+                emoji = "📱",
+                text = "Мобильность. Клиенты отмечают, что иногда с вами сложно связаться.",
                 strengthStatus = -1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_profi,
-                textId = R.string.profi_weakness_description,
+                emoji = "👍",
+                text = "Профессионализм. Вам стоит поработать над своей квалификацией.",
                 strengthStatus = -1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_speed,
-                textId = R.string.speed_weakness_description,
+                emoji = "⌚",
+                text = "Скорость. Некоторые задачи можно выполнять быстрее.",
                 strengthStatus = -1
             ),
             CharacteristicInfo(
-                iconId = R.drawable.ic_friendliness,
-                textId = R.string.friendliness_weakness_description,
+                emoji = "🤗",
+                text = "Дружелюбность. К сожалению, не все клиенты считают вас дружелюбным.",
                 strengthStatus = -1
             )
         )
