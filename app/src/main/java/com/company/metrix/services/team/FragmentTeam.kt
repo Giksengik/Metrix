@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.company.metrix.databinding.FragmentStrengthsBinding
+import com.company.metrix.BackButtonHandler
 import com.company.metrix.databinding.FragmentTeamBinding
 
-class FragmentTeam : Fragment() {
+class FragmentTeam : Fragment(), BackButtonHandler {
     private var binding : FragmentTeamBinding? = null
 
     override fun onCreateView(
@@ -18,5 +18,15 @@ class FragmentTeam : Fragment() {
     ): View? {
         binding = FragmentTeamBinding.inflate(inflater)
         return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupOnBackButtonPressed()
+    }
+
+    override fun setupOnBackButtonPressed() {
+        binding?.backButton?.setOnClickListener{
+            activity?.onBackPressed()
+        }
     }
 }
