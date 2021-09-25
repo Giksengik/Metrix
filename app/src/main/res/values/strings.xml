@@ -21,6 +21,7 @@
     <string name="strengths_text">Сильные стороны</string>
     <string name="strengths_question">За что похвалить сотрудника?</string>
     <string name="sent_thanks">Отправлено, спасибо!</string>
+    <string name="estimates_count">Количество оценок:</string>
     <string name="recomendations_text">Рекомендации</string>
     <string name="awards_text">Награды</string>
     <string name="add_comment">Добавить комментарий</string>

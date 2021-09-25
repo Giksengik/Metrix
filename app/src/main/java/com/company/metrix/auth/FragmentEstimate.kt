@@ -95,6 +95,7 @@ class FragmentEstimate() : Fragment() {
             binding?.sentImage?.visibility = View.INVISIBLE
             binding?.sentTitle?.visibility = View.INVISIBLE
             binding?.loadingBackground?.visibility = View.INVISIBLE
+            binding?.buttonConfirmEstimate?.visibility = View.VISIBLE
         }
 
         return binding?.root
