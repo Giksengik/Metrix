@@ -21,6 +21,9 @@
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_team.xml" value="0.1598731884057971" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/service_item.xml" value="0.4" />
         <entry key="..\:/github/Metrix/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/ic_splash_logo.xml" value="0.2911458333333333" />
+        <entry key="app/src/main/res/drawable/layout_bg_white.xml" value="0.2765625" />
+        <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.2911458333333333" />
         <entry key="app/src/main/res/layout/fragment_employee_auth.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_estimate.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2911458333333333" />

@@ -9,6 +9,7 @@
     <string name="auth_error">Ошибка авторизации, попробуйте снова!</string>
     <string name="number_error">Неверный формат номера, попробуйте: +76665554433</string>
     <string name="code_error">Неверный код подтверждения</string>
+    <string name="send_code_text">Отправить код</string>
     <string name="confirm_text">Подтвердить</string>
     <string name="diagnostic_text">Диагностика</string>
     <string name="rating_text">Рейтинг</string>
