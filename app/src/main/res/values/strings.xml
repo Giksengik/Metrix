@@ -57,6 +57,7 @@
     <string name="strenths_description">Какие сильные стороны отмечают клиенты:</string>
     <string name="weakness_description_text">Что можно улучшить?</string>
     <string name="awards_description">Ваши награды:</string>
+    <string name="team_description">Моя команда</string>
 
     <string-array name="auth_pages">
         <item>Авторизация</item>

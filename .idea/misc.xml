@@ -27,15 +27,17 @@
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_main.xml" value="0.17255434782608695" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_notifications.xml" value="0.17255434782608695" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_profile.xml" value="0.17255434782608695" />
+        <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_pulse.xml" value="0.13020833333333334" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_rating.xml" value="0.264" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_recomendations.xml" value="0.176" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_services.xml" value="0.2" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_strengths.xml" value="0.264" />
-        <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_team.xml" value="0.1598731884057971" />
+        <entry key="..\:/github/Metrix/app/src/main/res/layout/fragment_team.xml" value="0.264" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/ny_rating_layout.xml" value="0.2" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/rounded_background.xml" value="0.1598731884057971" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/service_item.xml" value="0.4" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/strength_item_layout.xml" value="0.152" />
+        <entry key="..\:/github/Metrix/app/src/main/res/layout/team_member_item.xml" value="0.4" />
         <entry key="..\:/github/Metrix/app/src/main/res/layout/yes_no_template.xml" value="0.8" />
         <entry key="..\:/github/Metrix/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/fragment_employee_auth.xml" value="0.16847826086956522" />
