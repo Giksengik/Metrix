@@ -6,6 +6,73 @@
 
     <fragment
         android:id="@+id/service_fragment"
-        android:name="com.company.metrix.ServicesFragment"
-        android:label="ServiceFragment" />
+        android:name="com.company.metrix.services.ServicesFragment"
+        android:label="ServiceFragment" >
+        <action
+            android:id="@+id/action_service_fragment_to_fragmentAwards"
+            app:destination="@id/fragmentAwards" />
+        <action
+            android:id="@+id/action_service_fragment_to_fragmentDiagnostic"
+            app:destination="@id/fragmentDiagnostic" />
+        <action
+            android:id="@+id/action_service_fragment_to_fragmentTeam"
+            app:destination="@id/fragmentTeam" />
+        <action
+            android:id="@+id/action_service_fragment_to_fragmentRating"
+            app:destination="@id/fragmentRating" />
+        <action
+            android:id="@+id/action_service_fragment_to_fragmentStrengths"
+            app:destination="@id/fragmentStrengths" />
+        <action
+            android:id="@+id/action_service_fragment_to_fragmentRecomendations"
+            app:destination="@id/fragmentRecomendations" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAwards"
+        android:name="com.company.metrix.services.awards.FragmentAwards"
+        android:label="FragmentAwards" >
+        <action
+            android:id="@+id/action_fragmentAwards_to_service_fragment"
+            app:destination="@id/service_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDiagnostic"
+        android:name="com.company.metrix.services.diagnostic.FragmentDiagnostic"
+        android:label="FragmentDiagnostic" >
+        <action
+            android:id="@+id/action_fragmentDiagnostic_to_service_fragment"
+            app:destination="@id/service_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRating"
+        android:name="com.company.metrix.services.rating.FragmentRating"
+        android:label="FragmentRating" >
+        <action
+            android:id="@+id/action_fragmentRating_to_service_fragment"
+            app:destination="@id/service_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRecomendations"
+        android:name="com.company.metrix.services.recomendations.FragmentRecomendations"
+        android:label="FragmentRecomendations" >
+        <action
+            android:id="@+id/action_fragmentRecomendations_to_service_fragment"
+            app:destination="@id/service_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentStrengths"
+        android:name="com.company.metrix.services.strenghts.FragmentStrengths"
+        android:label="FragmentStrengths" >
+        <action
+            android:id="@+id/action_fragmentStrengths_to_service_fragment"
+            app:destination="@id/service_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTeam"
+        android:name="com.company.metrix.services.team.FragmentTeam"
+        android:label="FragmentTeam" >
+        <action
+            android:id="@+id/action_fragmentTeam_to_service_fragment"
+            app:destination="@id/service_fragment" />
+    </fragment>
 </navigation>
