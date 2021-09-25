@@ -7,4 +7,10 @@
         <item name="android:navigationBarColor">@color/red</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
+
+    <style name="yesNoTemplateStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
