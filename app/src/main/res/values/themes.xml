@@ -10,13 +10,14 @@
         <item name="colorSecondaryVariant">@color/red</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor" tools:targetApi="o_mr1">@color/white</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:textColor">@color/dark</item>
         <item name="fontFamily">@font/avenir_book</item>
         <item name="android:fontFamily">@font/avenir_book</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/background_gray</item>
     </style>
 </resources>
