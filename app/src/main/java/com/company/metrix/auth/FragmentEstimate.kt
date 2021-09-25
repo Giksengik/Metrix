@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.company.metrix.R
 import com.company.metrix.databinding.FragmentEstimateBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
@@ -31,17 +32,24 @@ class FragmentEstimate() : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var verificationId: String
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEstimateBinding.inflate(inflater)
-        binding?.buttonConfirmPhoneNumber?.setOnClickListener { sendVerificationCode() }
-        binding?.buttonConfirmVerificationCode?.setOnClickListener { signInWithPhoneAuthCredential() }
+        binding?.buttonConfirmPhoneNumber?.setOnClickListener {
+            binding?.phoneNumberBlock?.isEnabled = false
+            binding?.authProgressBar?.visibility = View.VISIBLE
+            binding?.buttonConfirmPhoneNumber?.visibility = View.INVISIBLE
+            sendVerificationCode()
+        }
+        binding?.buttonConfirmVerificationCode?.setOnClickListener {
+            binding?.authProgressBar?.visibility = View.VISIBLE
+            binding?.buttonConfirmVerificationCode?.visibility = View.INVISIBLE
+            binding?.verificationCodeBlock?.isEnabled = false
+            signInWithPhoneAuthCredential()
+        }
         auth = Firebase.auth
         return binding?.root
     }
@@ -55,12 +63,18 @@ class FragmentEstimate() : Fragment() {
                 .setActivity(requireActivity())
                 .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                        showCodeToast()
+                        binding?.phoneNumberBlock?.visibility = View.INVISIBLE
+                        binding?.buttonConfirmPhoneNumber?.visibility = View.INVISIBLE
+                        binding?.authProgressBar?.visibility = View.INVISIBLE
+                        binding?.verificationCodeBlock?.visibility = View.VISIBLE
+                        binding?.buttonConfirmVerificationCode?.visibility = View.VISIBLE
                     }
 
                     override fun onVerificationFailed(p0: FirebaseException) {
-                        showErrorToast()
-                        p0.printStackTrace()
+                        binding?.phoneNumberBlock?.isEnabled = true
+                        binding?.phoneNumberBlock?.error = getString(R.string.number_error)
+                        binding?.authProgressBar?.visibility = View.INVISIBLE
+                        binding?.buttonConfirmPhoneNumber?.visibility = View.VISIBLE
                     }
 
                     override fun onCodeSent(id: String, p1: PhoneAuthProvider.ForceResendingToken) {
@@ -80,22 +94,17 @@ class FragmentEstimate() : Fragment() {
                 if (task.isSuccessful) {
                     onSignedIn(task.result.user!!)
                 } else {
-                    showErrorToast()
+                    binding?.verificationCodeBlock?.error = getString(R.string.code_error)
+                    binding?.authProgressBar?.visibility = View.INVISIBLE
+                    binding?.buttonConfirmVerificationCode?.visibility = View.VISIBLE
+                    binding?.verificationCodeBlock?.isEnabled = true
                 }
             }
     }
 
     private fun onSignedIn(user: FirebaseUser) {
-        val phoneNumber = user.phoneNumber
+        //val phoneNumber = user.phoneNumber
         authHandler?.handleSuccessAuth()
-    }
-
-    private fun showErrorToast() {
-        Toast.makeText(requireContext(), "Sign In Error", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showCodeToast() {
-        Toast.makeText(requireContext(), "Введите код подтверждения", Toast.LENGTH_SHORT).show()
     }
 
 }
