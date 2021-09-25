@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.company.metrix.R
 import com.company.metrix.databinding.FragmentEmployeeAuthBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -41,7 +42,11 @@ class FragmentAuthEmployee() : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEmployeeAuthBinding.inflate(inflater)
-        binding?.buttonEmployeeAuth?.setOnClickListener { authorizationHandler.launch(getSignInIntent()) }
+        binding?.buttonEmployeeAuth?.setOnClickListener {
+            binding?.authProgressBar?.visibility = View.VISIBLE
+            binding?.buttonEmployeeAuth?.visibility = View.INVISIBLE
+            authorizationHandler.launch(getSignInIntent())
+        }
         auth = Firebase.auth
         return binding?.root
     }
@@ -53,7 +58,7 @@ class FragmentAuthEmployee() : Fragment() {
                 val account = task.result
                 firebaseAuthWithGoogle(account.idToken!!)
             } else {
-                showErrorToast()
+                showError()
             }
         }
 
@@ -73,18 +78,20 @@ class FragmentAuthEmployee() : Fragment() {
                 if (task.isSuccessful) {
                     onSignedIn(auth.currentUser!!)
                 } else {
-                    showErrorToast()
+                    showError()
                 }
             }
     }
 
     private fun onSignedIn(user: FirebaseUser) {
-        val name = user.displayName
+        //val name = user.displayName
         authHandler?.handleSuccessAuth()
     }
 
-    private fun showErrorToast() {
-        Toast.makeText(requireContext(), "Sign In Error", Toast.LENGTH_SHORT).show()
+    private fun showError() {
+        Toast.makeText(requireContext(), getString(R.string.auth_error), Toast.LENGTH_SHORT).show()
+        binding?.authProgressBar?.visibility = View.VISIBLE
+        binding?.buttonEmployeeAuth?.visibility = View.INVISIBLE
     }
 
 }

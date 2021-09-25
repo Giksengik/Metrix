@@ -12,7 +12,7 @@ class AuthPagerAdapter(fragment: FragmentActivity, val authHandler: AuthHandler)
     override fun getItemCount(): Int = numOfPages
 
     override fun createFragment(position: Int): Fragment =
-        when(position){
+        when (position){
             0 -> FragmentAuthEmployee.newInstance(authHandler = authHandler)
             1 -> FragmentEstimate.newInstance(authHandler = authHandler)
             else -> throw IllegalStateException("Unexpected Tab!!")

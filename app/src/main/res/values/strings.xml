@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">Metrix</string>
-    <string name="auth_text">Авторизоваться</string>
-    <string name="employee_auth_description">Для дальнейшей работы с Metrix требуется авторизация</string>
+    <string name="auth_text">Продолжить c Google</string>
+    <string name="employee_auth_title">Добро пожаловать в Metrix!</string>
+    <string name="estimate_auth_title">Вход в панель данных</string>
+    <string name="employee_auth_description">Умную и удобную систему оценки сотрудников. Для дальнейшей работы требуется авторизация</string>
     <string name="print_phone_number_text">Введите номер телефона</string>
     <string name="print_verification_code_text">Введите код подтверждения</string>
+    <string name="auth_error">Ошибка авторизации, попробуйте снова!</string>
+    <string name="number_error">Неверный формат номера, попробуйте: +76665544</string>
+    <string name="code_error">Неверный код подтверждения</string>
     <string name="confirm_text">Подтвердить</string>
+    <string name="send_code_text">Отправить код</string>
     <string name="diagnostic_text">Диагностика</string>
     <string name="rating_text">Рейтинг</string>
     <string name="strengths_text">Сильные стороны</string>
