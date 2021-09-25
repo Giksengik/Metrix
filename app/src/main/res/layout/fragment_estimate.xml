@@ -177,7 +177,7 @@
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:visibility="invisible"
-        android:src="@drawable/people_banner"
+        android:src="@drawable/background_guys1"
         app:layout_constraintBottom_toTopOf="@+id/sentButton"
         app:layout_constraintStart_toStartOf="parent" />
 
