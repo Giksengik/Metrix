@@ -38,9 +38,11 @@ android {
     }
 }
 
-dependencies {
 
+
+dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation 'com.google.firebase:firebase-common-ktx:20.0.0'
 
     def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
