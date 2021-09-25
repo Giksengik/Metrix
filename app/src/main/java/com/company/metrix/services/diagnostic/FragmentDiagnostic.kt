@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.company.metrix.databinding.FragmentAwardsBinding
+import com.company.metrix.BackButtonHandler
 import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.model.Question
 
-class FragmentDiagnostic : Fragment() {
+class FragmentDiagnostic : Fragment() , BackButtonHandler {
 
     private var binding : FragmentDiagnosticBinding? = null
     private var questionAdapter : DiagnosticQuestionListAdapter? = null
@@ -25,14 +25,8 @@ class FragmentDiagnostic : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupBackButton()
+        setupOnBackButtonPressed()
         setupQuestionsAdapter()
-    }
-
-    private fun setupBackButton() {
-        binding?.backButton?.setOnClickListener{
-            activity?.onBackPressed()
-        }
     }
 
     private fun setupQuestionsAdapter(){
@@ -51,6 +45,12 @@ class FragmentDiagnostic : Fragment() {
                 Question(it)
             }
         )
+    }
+
+    override fun setupOnBackButtonPressed() {
+        binding?.backButton?.setOnClickListener{
+            activity?.onBackPressed()
+        }
     }
 
 }
