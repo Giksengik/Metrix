@@ -6,16 +6,24 @@
     <string name="employee_auth_description">Умную и удобную систему оценки сотрудников. Для дальнейшей работы требуется авторизация</string>
     <string name="print_phone_number_text">Введите номер телефона</string>
     <string name="print_verification_code_text">Введите код подтверждения</string>
+    <string name="enter_employee_id">Введите ID сотрудника</string>
+    <string name="id_not_found">Сотрудник не найден</string>
     <string name="auth_error">Ошибка авторизации, попробуйте снова!</string>
+    <string name="database_error">Ошибка базы данных, попробуйте снова!</string>
     <string name="number_error">Неверный формат номера (попробуйте: +76665554433)</string>
     <string name="code_error">Неверный код подтверждения</string>
     <string name="send_code_text">Отправить код</string>
+    <string name="send">Отправить</string>
+    <string name="retry">Назад</string>
     <string name="confirm_text">Подтвердить</string>
     <string name="diagnostic_text">Диагностика</string>
     <string name="rating_text">Рейтинг</string>
     <string name="strengths_text">Сильные стороны</string>
+    <string name="strengths_question">За что похвалить сотрудника?</string>
+    <string name="sent_thanks">Отправлено, спасибо!</string>
     <string name="recomendations_text">Рекомендации</string>
     <string name="awards_text">Награды</string>
+    <string name="add_comment">Добавить комментарий</string>
     <string name="team_text">Команда</string>
     <string name="services_text">Сервисы</string>
     <string name="diagnostic_description">В этой анкете вам предстоит ответы на вопросы о вашем коллеге. Пожалуйста, отвечайте искренне. Все ответы анонимны.</string>
@@ -60,7 +68,7 @@
     <string name="team_description">Моя команда</string>
 
     <string-array name="auth_pages">
-        <item>Авторизация</item>
         <item>Оценка</item>
+        <item>Авторизация</item>
     </string-array>
 </resources>

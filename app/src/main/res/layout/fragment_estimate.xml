@@ -7,130 +7,204 @@
     android:animateLayoutChanges="true"
     android:background="@color/white">
 
-    <ProgressBar
-        android:id="@+id/authProgressBar"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/employeeIdBlock"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonConfirmPhoneNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/buttonConfirmPhoneNumber" />
-
-    <TextView
-        android:id="@+id/employeeAuthTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:text="@string/estimate_auth_title"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
+        android:hint="@string/enter_employee_id"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteY="309dp" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/employeeIdField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:id="@+id/ratingDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/divider_gray"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/employeeIdBlock" />
 
     <TextView
-        android:id="@+id/employeeAuthDesctiption"
-        android:layout_width="0dp"
+        android:id="@+id/ratingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rating_text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingDivider" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:rating="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingTitle" />
+
+    <View
+        android:id="@+id/strengthsDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/divider_gray"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <TextView
+        android:id="@+id/strengthsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/strengths_question"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/strengthsDivider" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/strengthsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        tools:listitem="@layout/characteristic_item"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/strengthsTitle"/>
+
+    <View
+        android:id="@+id/commentDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/divider_gray"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/strengthsView" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/employeeCommentBlock"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/add_comment"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commentDivider">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/employeeCommentField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonConfirmEstimate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="57dp"
         android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:text="@string/employee_auth_description"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/send"
+        android:textAllCaps="false"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employeeAuthTitle" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneNumberBlock"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <View
+        android:id="@+id/loadingBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/sentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sent_thanks"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sentImage" />
+
+    <ImageView
+        android:id="@+id/sentImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="57dp"
-        android:hint="@string/print_phone_number_text"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employeeAuthDesctiption">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneNumberField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:visibility="invisible"
+        android:src="@drawable/people_banner"
+        app:layout_constraintBottom_toTopOf="@+id/sentButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonConfirmPhoneNumber"
+        android:id="@+id/sentButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="57dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="57dp"
-        android:paddingTop="16dp"
+        android:layout_marginBottom="30dp"
         android:paddingBottom="16dp"
-        android:text="@string/send_code_text"
+        android:paddingTop="16dp"
+        android:text="@string/retry"
         android:textAllCaps="false"
         app:cornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumberBlock" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/verificationCodeBlock"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="57dp"
-        android:hint="@string/print_verification_code_text"
         android:visibility="invisible"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employeeAuthDesctiption">
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/verificationCodeField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonConfirmVerificationCode"
-        android:layout_width="0dp"
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="57dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="@string/confirm_text"
-        android:textAllCaps="false"
-        android:visibility="invisible"
-        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/strengthsView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verificationCodeBlock" />
+        app:layout_constraintTop_toTopOf="@+id/strengthsView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,21 +1,33 @@
 package com.company.metrix.auth
 
 import android.os.Bundle
-import android.telephony.PhoneNumberUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentEstimateBinding
-import com.google.firebase.FirebaseException
-import com.google.firebase.auth.*
-import com.google.firebase.auth.ktx.auth
+import com.company.metrix.model.CharacteristicInfo
+import com.company.metrix.services.CharacteristicAdapter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import java.util.concurrent.TimeUnit
+
 
 class FragmentEstimate() : Fragment() {
+
+    private lateinit var characteristicsDatabase: DatabaseReference
+    private lateinit var usersDatabase: DatabaseReference
+
+    private var userRating: Double = 5.0
+    private var userComment: String = ""
+    private val characteristicsList = mutableListOf<String>()
 
     companion object {
         fun newInstance(authHandler: AuthHandler): Fragment {
@@ -29,8 +41,6 @@ class FragmentEstimate() : Fragment() {
 
     private var authHandler: AuthHandler? = null
     private var binding: FragmentEstimateBinding? = null
-    private lateinit var auth: FirebaseAuth
-    private lateinit var verificationId: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,71 +48,104 @@ class FragmentEstimate() : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEstimateBinding.inflate(inflater)
-        binding?.buttonConfirmPhoneNumber?.setOnClickListener {
-            binding?.phoneNumberBlock?.isEnabled = false
-            binding?.authProgressBar?.visibility = View.VISIBLE
-            binding?.buttonConfirmPhoneNumber?.visibility = View.INVISIBLE
-            sendVerificationCode()
+
+        val adapter = CharacteristicAdapter(mutableListOf()) { id, isSelected ->
+            if (isSelected) {
+                if (id in characteristicsList) characteristicsList.remove(id)
+            } else {
+                characteristicsList.add(id)
+            }
         }
-        binding?.buttonConfirmVerificationCode?.setOnClickListener {
-            binding?.authProgressBar?.visibility = View.VISIBLE
-            binding?.buttonConfirmVerificationCode?.visibility = View.INVISIBLE
-            binding?.verificationCodeBlock?.isEnabled = false
-            signInWithPhoneAuthCredential()
+        binding?.strengthsView?.adapter = adapter
+
+        usersDatabase = Firebase.database.reference.child("users")
+        characteristicsDatabase = Firebase.database.reference.child("characteristics")
+        val characteristicsValueListener: ValueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val list: MutableList<CharacteristicInfo> = ArrayList()
+                for (ds in dataSnapshot.children) {
+                    val characteristic: CharacteristicInfo? =
+                        ds.getValue(CharacteristicInfo::class.java)
+                    if (characteristic != null) list.add(characteristic)
+                }
+                binding?.loadingBar?.visibility = View.INVISIBLE
+                adapter.setData(list)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.database_error),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-        auth = Firebase.auth
+        characteristicsDatabase.addListenerForSingleValueEvent(characteristicsValueListener)
+
+        binding?.buttonConfirmEstimate?.setOnClickListener { onSubmit() }
+        binding?.ratingBar?.onRatingBarChangeListener =
+            OnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                if (rating <= 0.5) {
+                    binding?.ratingBar?.rating = 1.0f
+                }
+            }
+
+        binding?.sentButton?.setOnClickListener {
+            binding?.sentButton?.visibility = View.INVISIBLE
+            binding?.sentImage?.visibility = View.INVISIBLE
+            binding?.sentTitle?.visibility = View.INVISIBLE
+            binding?.loadingBackground?.visibility = View.INVISIBLE
+        }
+
         return binding?.root
     }
 
-    private fun sendVerificationCode() {
-        val phoneNumber = binding?.phoneNumberField?.text.toString()
-        val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)
-            .setTimeout(60L, TimeUnit.SECONDS)
-            .setActivity(requireActivity())
-            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                }
-
-                override fun onVerificationFailed(e: FirebaseException) {
-                    binding?.phoneNumberBlock?.isEnabled = true
-                    binding?.phoneNumberBlock?.error = getString(R.string.number_error)
-                    binding?.authProgressBar?.visibility = View.INVISIBLE
-                    binding?.buttonConfirmPhoneNumber?.visibility = View.VISIBLE
-                }
-
-                override fun onCodeSent(id: String, p1: PhoneAuthProvider.ForceResendingToken) {
-                    verificationId = id
-                    binding?.phoneNumberBlock?.visibility = View.INVISIBLE
-                    binding?.buttonConfirmPhoneNumber?.visibility = View.INVISIBLE
-                    binding?.authProgressBar?.visibility = View.INVISIBLE
-                    binding?.verificationCodeBlock?.visibility = View.VISIBLE
-                    binding?.buttonConfirmVerificationCode?.visibility = View.VISIBLE
-                }
-            })
-            .build()
-        PhoneAuthProvider.verifyPhoneNumber(options)
-    }
-
-    private fun signInWithPhoneAuthCredential() {
-        val code = binding?.verificationCodeField?.text.toString()
-        val credential = PhoneAuthProvider.getCredential(verificationId, code)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    onSignedIn(task.result.user!!)
+    private fun onSubmit() {
+        val userId = binding?.employeeIdField?.text.toString().trim()
+        userRating = binding?.ratingBar?.rating?.toDouble() ?: 5.0
+        userComment = binding?.employeeCommentField?.text.toString().trim()
+        usersDatabase.orderByChild("id").equalTo(userId).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.children.iterator().hasNext()) {
+                    sendFeedback(snapshot.children.iterator().next())
                 } else {
-                    binding?.verificationCodeBlock?.error = getString(R.string.code_error)
-                    binding?.authProgressBar?.visibility = View.INVISIBLE
-                    binding?.buttonConfirmVerificationCode?.visibility = View.VISIBLE
-                    binding?.verificationCodeBlock?.isEnabled = true
+                    setError()
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                setError()
+            }
+        })
     }
 
-    private fun onSignedIn(user: FirebaseUser) {
-        //val phoneNumber = user.phoneNumber
-        authHandler?.handleSuccessAuth()
+    private fun setError() {
+        binding?.employeeIdBlock?.error = getString(R.string.id_not_found)
+    }
+
+    private fun sendFeedback(userSnapshot: DataSnapshot) {
+        binding?.loadingBackground?.visibility = View.VISIBLE
+        binding?.buttonConfirmEstimate?.visibility = View.INVISIBLE
+
+        val userDatabase = usersDatabase.child(userSnapshot.key!!)
+        val ratings : MutableList<Double> = userSnapshot.child("ratings").getValue<MutableList<Double>>() ?: mutableListOf()
+        val strongSkills  : MutableList<String> = userSnapshot.child("strongSkills").getValue<MutableList<String>>() ?: mutableListOf()
+        val comments  : MutableList<String> = userSnapshot.child("comments").getValue<MutableList<String>>() ?: mutableListOf()
+        ratings.add(userRating)
+        if (characteristicsList.size > 0) {
+            strongSkills.addAll(characteristicsList)
+            userDatabase.child("strongSkills").setValue(strongSkills)
+        }
+        if (userComment != "") {
+            comments.add(userComment)
+            userDatabase.child("comments").setValue(comments)
+        }
+        userDatabase.child("ratings").setValue(ratings)
+
+        binding?.sentButton?.visibility = View.VISIBLE
+        binding?.sentImage?.visibility = View.VISIBLE
+        binding?.sentTitle?.visibility = View.VISIBLE
     }
 
 }

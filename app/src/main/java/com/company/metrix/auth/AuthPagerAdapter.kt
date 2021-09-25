@@ -13,8 +13,8 @@ class AuthPagerAdapter(fragment: FragmentActivity, val authHandler: AuthHandler)
 
     override fun createFragment(position: Int): Fragment =
         when (position){
-            0 -> FragmentAuthEmployee.newInstance(authHandler = authHandler)
-            1 -> FragmentEstimate.newInstance(authHandler = authHandler)
+            0 -> FragmentEstimate.newInstance(authHandler = authHandler)
+            1 -> FragmentAuthEmployee.newInstance(authHandler = authHandler)
             else -> throw IllegalStateException("Unexpected Tab!!")
         }
 

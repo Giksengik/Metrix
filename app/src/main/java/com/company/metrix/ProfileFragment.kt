@@ -11,6 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class ProfileFragment : Fragment() {
 
@@ -23,7 +24,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater)
-        database = Firebase.database.reference
+        database = Firebase.database.reference.child("users")
 
         loadEmployeeToDatabase()
 
@@ -32,11 +33,12 @@ class ProfileFragment : Fragment() {
 
     private fun loadEmployeeToDatabase()  {
         val em = Employee(
-            id = 0,
+            id = "hello",
             team = 0,
             ratings = listOf(3.0, 2.0, 5.0),
             strongSkills = listOf("communication", "works_hard"),
             weakSkills = listOf("code_skill", "speed"),
+            comments = listOf("code_skill", "speed"),
             achievements = listOf("friendly")
         )
         val user = database.child(Firebase.auth.currentUser!!.uid)
