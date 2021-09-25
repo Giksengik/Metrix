@@ -17,18 +17,18 @@ import java.util.concurrent.TimeUnit
 
 class FragmentEstimate() : Fragment() {
 
-    companion object{
+    companion object {
         fun newInstance(authHandler: AuthHandler): Fragment {
             return FragmentEstimate(authHandler)
         }
     }
 
-    private constructor(authHandler: AuthHandler) : this(){
+    private constructor(authHandler: AuthHandler) : this() {
         this.authHandler = authHandler
     }
 
-    private var authHandler : AuthHandler? = null
-    private var binding : FragmentEstimateBinding? = null
+    private var authHandler: AuthHandler? = null
+    private var binding: FragmentEstimateBinding? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var verificationId: String
 
@@ -56,34 +56,32 @@ class FragmentEstimate() : Fragment() {
 
     private fun sendVerificationCode() {
         val phoneNumber = binding?.phoneNumberField?.text.toString()
-        if (PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)) {
-            val options = PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber(phoneNumber)
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(requireActivity())
-                .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                        binding?.phoneNumberBlock?.visibility = View.INVISIBLE
-                        binding?.buttonConfirmPhoneNumber?.visibility = View.INVISIBLE
-                        binding?.authProgressBar?.visibility = View.INVISIBLE
-                        binding?.verificationCodeBlock?.visibility = View.VISIBLE
-                        binding?.buttonConfirmVerificationCode?.visibility = View.VISIBLE
-                    }
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(phoneNumber)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(requireActivity())
+            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                }
 
-                    override fun onVerificationFailed(p0: FirebaseException) {
-                        binding?.phoneNumberBlock?.isEnabled = true
-                        binding?.phoneNumberBlock?.error = getString(R.string.number_error)
-                        binding?.authProgressBar?.visibility = View.INVISIBLE
-                        binding?.buttonConfirmPhoneNumber?.visibility = View.VISIBLE
-                    }
+                override fun onVerificationFailed(e: FirebaseException) {
+                    binding?.phoneNumberBlock?.isEnabled = true
+                    binding?.phoneNumberBlock?.error = getString(R.string.number_error)
+                    binding?.authProgressBar?.visibility = View.INVISIBLE
+                    binding?.buttonConfirmPhoneNumber?.visibility = View.VISIBLE
+                }
 
-                    override fun onCodeSent(id: String, p1: PhoneAuthProvider.ForceResendingToken) {
-                        verificationId = id
-                    }
-                })
-                .build()
-            PhoneAuthProvider.verifyPhoneNumber(options)
-        }
+                override fun onCodeSent(id: String, p1: PhoneAuthProvider.ForceResendingToken) {
+                    verificationId = id
+                    binding?.phoneNumberBlock?.visibility = View.INVISIBLE
+                    binding?.buttonConfirmPhoneNumber?.visibility = View.INVISIBLE
+                    binding?.authProgressBar?.visibility = View.INVISIBLE
+                    binding?.verificationCodeBlock?.visibility = View.VISIBLE
+                    binding?.buttonConfirmVerificationCode?.visibility = View.VISIBLE
+                }
+            })
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
     private fun signInWithPhoneAuthCredential() {
