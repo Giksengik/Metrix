@@ -72,6 +72,8 @@
     <string name="soft_skills_text">Soft Skills</string>
     <string name="hard_skills_text">Hard skills:</string>
     <string name="pulse_description">Пульс-опрос состояния</string>
+    <string name="conplete_text">Завершить</string>
+    <string name="pulse_data_sended">Информация отправлена, спасибо за уделенное время!</string>
 
     <string-array name="auth_pages">
         <item>Оценка</item>
