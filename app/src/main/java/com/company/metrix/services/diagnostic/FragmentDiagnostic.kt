@@ -12,10 +12,10 @@ import com.company.metrix.R
 import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.model.Question
 
-class FragmentDiagnostic : Fragment() , BackButtonHandler {
+class FragmentDiagnostic : Fragment(), BackButtonHandler {
 
-    private var binding : FragmentDiagnosticBinding? = null
-    private var questionAdapter : DiagnosticQuestionListAdapter? = null
+    private var binding: FragmentDiagnosticBinding? = null
+    private var questionAdapter: DiagnosticQuestionListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,9 +32,9 @@ class FragmentDiagnostic : Fragment() , BackButtonHandler {
         setupButton()
     }
 
-    private fun setupQuestionsAdapter(){
+    private fun setupQuestionsAdapter() {
         questionAdapter = DiagnosticQuestionListAdapter()
-        binding?.diagnosticList?.apply{
+        binding?.diagnosticList?.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = questionAdapter
         }
@@ -42,23 +42,29 @@ class FragmentDiagnostic : Fragment() , BackButtonHandler {
     }
 
     private fun setupButton() {
-        binding?.confirmDiagnosticButton?.setOnClickListener{
-            Toast.makeText(context, getString(R.string.diagnostic_send_text)
-                , Toast.LENGTH_SHORT).show()
+        binding?.confirmDiagnosticButton?.setOnClickListener {
+            Toast.makeText(
+                context, getString(R.string.diagnostic_send_text), Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
-    private fun addDummyQuestions(){
+    private fun addDummyQuestions() {
         questionAdapter?.submitList(
-            listOf("ABOBOBOBO", "KGSJGIOSDPOGJSOG", "OISJDGOPGJSOPDG",
-            "OISIGJDGOJPSODG", "MSGIDJGSD").map{
+            listOf(
+                "Точно исполняет поручения",
+                "Выполняет задания в полном объеме",
+                "Соблюдает сроки",
+                "Развивает навыки и умения",
+                "Повышает имидж компании"
+            ).map {
                 Question(it)
             }
         )
     }
 
     override fun setupOnBackButtonPressed() {
-        binding?.backButton?.setOnClickListener{
+        binding?.backButton?.setOnClickListener {
             activity?.onBackPressed()
         }
     }
