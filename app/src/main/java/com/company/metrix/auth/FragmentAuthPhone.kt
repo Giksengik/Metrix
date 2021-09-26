@@ -101,6 +101,8 @@ class FragmentAuthPhone() : Fragment() {
     private fun onSignedIn(user: FirebaseUser) {
         //val phoneNumber = user.phoneNumber
         authHandler?.handleSuccessAuth()
+        binding?.authProgressBar?.visibility = View.INVISIBLE
+        binding?.buttonConfirmVerificationCode?.visibility = View.VISIBLE
     }
 
 }
