@@ -118,6 +118,8 @@ class FragmentAuthEmployee() : Fragment() {
 
     private fun onSignedIn() {
         authHandler?.handleSuccessAuth()
+        binding?.authProgressBar?.visibility = View.VISIBLE
+        binding?.buttonEmployeeAuth?.visibility = View.INVISIBLE
     }
 
     private fun showError() {
