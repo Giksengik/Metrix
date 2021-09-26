@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -30,6 +31,13 @@ class PulseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupQuestionsAdapter()
         setupDummyData()
+        setupButton()
+    }
+
+    private fun setupButton() {
+        binding?.pulseConfirmButton?.setOnClickListener{
+            Toast.makeText(context, getString(R.string.pulse_data_sended), false).show()
+        }
     }
 
     private fun setupDummyData() {
