@@ -60,7 +60,7 @@ class FragmentRecomendations : Fragment() , BackButtonHandler{
                             snapshot.children.iterator().next().child("comments")
                                 .getValue<MutableList<String>>() ?: mutableListOf()
                         val list = comments.map {
-                            CharacteristicInfo(text = it, emoji = "\uD83C\uDFC6")
+                            CharacteristicInfo(text = it, emoji = "\uD83D\uDCAC")
                         }
                         if (list.size > 0) {
                             weaknessAdapter?.submitList(list)
