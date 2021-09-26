@@ -7,5 +7,5 @@ data class Employee(
     val strongSkills: List<String>,
     val weakSkills : List<String>,
     val comments : List<String>,
-    val achievements: List<String>
+    val awards: List<String>
 )
