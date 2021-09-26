@@ -18,6 +18,6 @@
         <item name="fontFamily">@font/avenir_book</item>
         <item name="android:fontFamily">@font/avenir_book</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/background_gray</item>
+        <item name="android:windowBackground">@color/dark_gray</item>
     </style>
 </resources>
