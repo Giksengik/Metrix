@@ -35,7 +35,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupDummyData() {
-        binding?.employeeProfileName?.text = "Федор Седов"
+        binding?.employeeProfileName?.text = "Юн Гук"
         binding?.employeeProfileCompany?.text = "It School Samsung"
         binding?.postInCompanyValue?.text = "Босс"
         binding?.timeInCompanyValue?.text = "3 года"
