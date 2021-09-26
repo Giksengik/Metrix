@@ -14,6 +14,7 @@
     <string name="code_error">Неверный код подтверждения</string>
     <string name="send_code_text">Отправить код</string>
     <string name="send">Отправить</string>
+    <string name="estimate_empty">У вас пока нет оценок</string>
     <string name="retry">Назад</string>
     <string name="confirm_text">Подтвердить</string>
     <string name="diagnostic_text">Диагностика</string>
