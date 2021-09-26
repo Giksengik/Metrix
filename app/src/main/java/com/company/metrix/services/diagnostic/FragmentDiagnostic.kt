@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
+import com.company.metrix.R
 import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.model.Question
 
@@ -27,6 +29,7 @@ class FragmentDiagnostic : Fragment() , BackButtonHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupOnBackButtonPressed()
         setupQuestionsAdapter()
+        setupButton()
     }
 
     private fun setupQuestionsAdapter(){
@@ -36,6 +39,13 @@ class FragmentDiagnostic : Fragment() , BackButtonHandler {
             adapter = questionAdapter
         }
         addDummyQuestions()
+    }
+
+    private fun setupButton() {
+        binding?.confirmDiagnosticButton?.setOnClickListener{
+            Toast.makeText(context, getString(R.string.diagnostic_send_text)
+                , Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun addDummyQuestions(){

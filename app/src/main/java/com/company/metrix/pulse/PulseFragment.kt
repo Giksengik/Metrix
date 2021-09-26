@@ -36,7 +36,7 @@ class PulseFragment : Fragment() {
 
     private fun setupButton() {
         binding?.pulseConfirmButton?.setOnClickListener{
-            Toast.makeText(context, getString(R.string.pulse_data_sended), false).show()
+            Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
         }
     }
 
