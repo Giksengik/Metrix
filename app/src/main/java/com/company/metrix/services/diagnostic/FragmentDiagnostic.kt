@@ -1,5 +1,6 @@
 package com.company.metrix.services.diagnostic
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.model.Question
+import com.company.metrix.model.TeamMemberInfo
 
 class FragmentDiagnostic : Fragment(), BackButtonHandler {
 
@@ -49,7 +51,28 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun addDummyQuestions() {
+        val team = listOf(
+            TeamMemberInfo(
+                "Степанов Илья",
+                "руководитель аналитического отдела"
+            ),
+            TeamMemberInfo(
+                "Большиков Степан",
+                "главный аналитик"
+            ),
+            TeamMemberInfo(
+                "Колесников Алексей",
+                "аналитик"
+            ),
+            TeamMemberInfo(
+                "Безбах Анатолий",
+                "аналитик"
+            )
+        )
+        val rand = java.util.Random()
+        val teamMember = team.get(rand.nextInt(team.size))
         questionAdapter?.submitList(
             listOf(
                 "Точно исполняет поручения",
@@ -61,6 +84,8 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
                 Question(it)
             }
         )
+        binding?.diagnosticDescription?.text = "${
+            binding?.diagnosticDescription?.text} ${teamMember.name}"
     }
 
     override fun setupOnBackButtonPressed() {

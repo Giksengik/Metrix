@@ -28,7 +28,8 @@
     <string name="add_comment">Добавить комментарий</string>
     <string name="team_text">Команда</string>
     <string name="services_text">Сервисы</string>
-    <string name="diagnostic_description">В этой анкете вам предстоит ответы на вопросы о вашем коллеге. Пожалуйста, отвечайте искренне. Все ответы анонимны.</string>
+    <string name="diagnostic_description">В этой анкете вам предстоит ответы на вопросы о вашем коллеге
+        . Пожалуйста, отвечайте искренне. Все ответы анонимны. Коллега:</string>
     <string name="diagnostic_hint">Отметьте вариант ответа, который вы считаете верным</string>
     <string name="no_text">Нет</string>
     <string name="yes_text">Да</string>
