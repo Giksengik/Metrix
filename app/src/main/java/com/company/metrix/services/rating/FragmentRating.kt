@@ -75,7 +75,7 @@ class FragmentRating : Fragment(), BackButtonHandler {
     private fun updateRatingView(ratings: List<Double>) {
         val average = ratings.average()
         binding?.ratingBar?.rating = average.toFloat()
-        binding?.averageRating?.text = String.format("%.02f", average)
+        binding?.averageRating?.text = if (average.isNaN()) "" else String.format("%.02f", average)
         binding?.ratingCount?.text = getString(R.string.estimates_count) + " " + ratings.size
         binding?.loadingBar?.visibility = View.INVISIBLE
         binding?.ratingContent?.visibility = View.VISIBLE
