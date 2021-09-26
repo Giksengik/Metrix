@@ -35,27 +35,27 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupDummyData() {
-        binding?.employeeProfileName?.text = "Юн Гук"
-        binding?.employeeProfileCompany?.text = "It School Samsung"
-        binding?.postInCompanyValue?.text = "Босс"
-        binding?.timeInCompanyValue?.text = "3 года"
+        val user = Firebase.auth.currentUser!!
+        binding?.employeeProfileName?.text = user.displayName
+        binding?.employeeProfileCompany?.text = user.email
+        binding?.postInCompanyValue?.text = " Сотрудник"
+        binding?.timeInCompanyValue?.text = " 27.09.2021"
         softSkillAdapter?.submitList(
             listOf(
-                "Крутой",
-                "Ваще крутой",
+                "Дружелюбный",
                 "Вежливый"
             )
         )
         hardSkillAdapter?.submitList(
             listOf(
-                "Ultra coder",
+                "Dagger, RxJava",
                 "Проектирование систем"
             )
         )
     }
 
     private fun setupList() {
-        hardSkillAdapter = SkillsListAdapter()
+        /*hardSkillAdapter = SkillsListAdapter()
         softSkillAdapter = SkillsListAdapter()
         binding?.hardSkillsList?.apply{
             layoutManager = LinearLayoutManager(activity)
@@ -64,6 +64,6 @@ class ProfileFragment : Fragment() {
         binding?.softSkillsList?.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = softSkillAdapter
-        }
+        }*/
     }
 }

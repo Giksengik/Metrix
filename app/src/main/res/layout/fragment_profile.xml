@@ -135,7 +135,7 @@
                 app:layout_constraintStart_toEndOf="@+id/postInCompanyText"
                 app:layout_constraintTop_toTopOf="@+id/postInCompanyText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+<!--
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
             android:layout_width="0dp"
@@ -199,7 +199,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/endGuideline"
