@@ -77,6 +77,14 @@
     <string name="conplete_text">Завершить</string>
     <string name="pulse_data_sended">Информация отправлена, спасибо за уделенное время!</string>
     <string name="diagnostic_send_text">Диагностика отправлена, спасибо за уделенное время!</string>
+    <string name="how_relationships_changed">Как за последнее время изменились отношения в команде?</string>
+    <string name="choose_one_definition">Выберите ОДНО утверждение, самое подходящее:</string>
+    <string name="point">•</string>
+    <string name="creativity">Креативность</string>
+    <string name="question">question</string>
+    <string name="award">Award</string>
+    <string name="name_surname">Имя фамилия</string>
+    <string name="company">Компания:</string>
 
     <string-array name="auth_pages">
         <item>Оценка</item>

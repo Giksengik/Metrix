@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/employeeProfileCompany" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/employeeProfileName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_marginTop="30dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Имя фамилия"
+            android:text="@string/name_surname"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -45,14 +45,14 @@
             android:layout_marginTop="32dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Компания:"
+            android:text="@string/company"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/employeeProfileName"
             app:layout_constraintTop_toBottomOf="@+id/employeeProfileName" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/employeeProfileIcon"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -74,7 +74,7 @@
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
             app:layout_constraintTop_toTopOf="@+id/layoutBackground">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/timeInCompanyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/timeInCompanyValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
