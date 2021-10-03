@@ -12,15 +12,15 @@ import com.company.metrix.model.TeamMemberInfo
 
 class FragmentTeam : Fragment(), BackButtonHandler {
 
-    private var binding : FragmentTeamBinding? = null
+    private lateinit var binding : FragmentTeamBinding
     private var teamMembersListAdapter : TeamMembersListAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTeamBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class FragmentTeam : Fragment(), BackButtonHandler {
 
     private fun setupTeamMembersList() {
         teamMembersListAdapter = TeamMembersListAdapter()
-        binding?.teamList?.apply {
+        binding.teamList.apply {
             adapter = teamMembersListAdapter
             layoutManager = LinearLayoutManager(activity)
         }
@@ -61,7 +61,7 @@ class FragmentTeam : Fragment(), BackButtonHandler {
     }
 
     override fun setupOnBackButtonPressed() {
-        binding?.backButton?.setOnClickListener{
+        binding.backButton.setOnClickListener{
             activity?.onBackPressed()
         }
     }

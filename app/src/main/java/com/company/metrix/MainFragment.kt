@@ -12,15 +12,15 @@ import com.company.metrix.databinding.FragmentMainBinding
 
 
 class MainFragment : Fragment() {
-    private var binding : FragmentMainBinding? = null
+    private lateinit var binding : FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,6 +31,6 @@ class MainFragment : Fragment() {
     private fun setupNav(){
         val fragment = childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val controller = fragment.findNavController()
-        binding?.bottomNav?.setupWithNavController(controller)
+        binding.bottomNav.setupWithNavController(controller)
     }
 }

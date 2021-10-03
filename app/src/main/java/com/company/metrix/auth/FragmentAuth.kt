@@ -1,4 +1,4 @@
-package com.company.metrix
+package com.company.metrix.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.company.metrix.auth.AuthHandler
-import com.company.metrix.auth.AuthPagerAdapter
+import com.company.metrix.R
 import com.company.metrix.databinding.FragmentAuthBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class FragmentAuth : Fragment() , AuthHandler {
 
     var binding : FragmentAuthBinding? = null
-    var authPagesAdapter : AuthPagerAdapter? = null
+    private lateinit var authPagesAdapter : AuthPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
