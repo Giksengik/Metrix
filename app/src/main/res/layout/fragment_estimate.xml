@@ -12,8 +12,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/enter_employee_id"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -36,21 +36,21 @@
         android:id="@+id/ratingDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/divider_gray"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/divider_gray"
         app:layout_constraintTop_toBottomOf="@+id/employeeIdBlock" />
 
     <TextView
         android:id="@+id/ratingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/rating_text"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingDivider" />
 
@@ -68,54 +68,68 @@
         android:id="@+id/strengthsDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/divider_gray"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/divider_gray"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/strengthsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/strengths_question"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/strengthsDivider" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/strengthsView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        tools:listitem="@layout/characteristic_item"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="16dp"
+        android:minHeight="80dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/sentImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/strengthsTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/strengthsTitle"
+        app:spanCount="2"
+        tools:itemCount="4"
+        tools:listitem="@layout/characteristic_item" />
 
     <View
         android:id="@+id/commentDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/divider_gray"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/divider_gray"
         app:layout_constraintTop_toBottomOf="@+id/strengthsView" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/sentImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_guys1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/sentButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/employeeCommentBlock"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/add_comment"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -136,64 +150,53 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonConfirmEstimate"
-        android:layout_width="0dp"
+        android:layout_width="297dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="30dp"
-        android:paddingBottom="16dp"
         android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/send"
         android:textAllCaps="false"
         app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employeeCommentBlock" />
 
     <View
         android:id="@+id/loadingBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:text="@string/sent_thanks"
         android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sentImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/sentImage" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sentImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:visibility="invisible"
-        android:src="@drawable/background_guys1"
-        app:layout_constraintBottom_toTopOf="@+id/sentButton"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sentButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="57dp"
         android:layout_marginEnd="57dp"
         android:layout_marginBottom="30dp"
-        android:paddingBottom="16dp"
         android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:text="@string/retry"
         android:textAllCaps="false"
-        app:cornerRadius="50dp"
         android:visibility="invisible"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

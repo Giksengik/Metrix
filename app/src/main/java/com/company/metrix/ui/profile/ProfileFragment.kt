@@ -11,9 +11,9 @@ import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var binding : FragmentProfileBinding
-    private var softSkillAdapter : SkillsListAdapter? = null
-    private var hardSkillAdapter : SkillsListAdapter? = null
+    private lateinit var binding: FragmentProfileBinding
+    private var softSkillAdapter: SkillsListAdapter? = null
+    private var hardSkillAdapter: SkillsListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,8 +33,13 @@ class ProfileFragment : Fragment() {
         val user = Firebase.auth.currentUser!!
         binding.employeeProfileName.text = user.displayName
         binding.employeeProfileCompany.text = user.email
-        binding.postInCompanyValue.text = " Сотрудник"
-        binding.timeInCompanyValue.text = " 27.09.2021"
+
+        binding.authorized.titleUser.text = "Авторизован"
+        binding.authorized.subtitle.text = " 27.09.2021"
+
+        binding.position.titleUser.text = " Должность"
+        binding.position.subtitle.text = " Сотрудник"
+
         softSkillAdapter?.submitList(
             listOf(
                 "Дружелюбный",

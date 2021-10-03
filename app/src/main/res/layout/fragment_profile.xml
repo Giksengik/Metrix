@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_gray">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,18 +52,48 @@
             app:layout_constraintStart_toStartOf="@+id/employeeProfileName"
             app:layout_constraintTop_toBottomOf="@+id/employeeProfileName" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/employeeProfileIcon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:src="@drawable/avatar_stab"
             app:layout_constraintBottom_toTopOf="@+id/layoutBackground"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+        <include
+            android:id="@+id/authorized"
+            android:layout_width="0dp"
+            layout="@layout/user_info_layout"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_background"
+            android:padding="16dp"
+            android:translationZ="1dp"
+            app:layout_constraintEnd_toStartOf="@+id/endGuideline"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toTopOf="@+id/layoutBackground"/>
+
+
+        <include
+            android:id="@+id/position"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            layout="@layout/user_info_layout"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_background"
+            android:padding="16dp"
+            android:translationZ="1dp"
+            app:layout_constraintEnd_toStartOf="@+id/endGuideline"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/authorized"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/soft_skills"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -72,35 +102,11 @@
             android:translationZ="1dp"
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toTopOf="@+id/layoutBackground">
+            app:layout_constraintTop_toBottomOf="@+id/position"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/timeInCompanyText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/in_company_text"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/timeInCompanyValue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="4 года"
-                android:textSize="20sp"
-                android:ellipsize="end"
-                app:layout_constraintBottom_toBottomOf="@+id/timeInCompanyText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/timeInCompanyText"
-                app:layout_constraintTop_toTopOf="@+id/timeInCompanyText" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hard_skills"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -109,97 +115,16 @@
             android:translationZ="1dp"
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+            app:layout_constraintTop_toBottomOf="@+id/soft_skills"/>
 
-            <TextView
-                android:id="@+id/postInCompanyText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/post_in_company_text"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/postInCompanyValue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Руководитель"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/postInCompanyText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/postInCompanyText"
-                app:layout_constraintTop_toTopOf="@+id/postInCompanyText" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-<!--
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/rounded_background"
-            android:padding="16dp"
-            android:translationZ="1dp"
-            app:layout_constraintEnd_toStartOf="@+id/endGuideline"
-            app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-            <TextView
-                android:id="@+id/softSkillsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/soft_skills_text"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/softSkillsList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/softSkillsText" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/co"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/rounded_background"
-            android:padding="16dp"
-            android:translationZ="1dp"
-            app:layout_constraintEnd_toStartOf="@+id/endGuideline"
-            app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout3">
-
-            <TextView
-                android:id="@+id/hardSkillsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hard_skills_text"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/hardSkillsList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/hardSkillsText"
-                tools:layout_editor_absoluteX="16dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
--->
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/separator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutBackground" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/endGuideline"
