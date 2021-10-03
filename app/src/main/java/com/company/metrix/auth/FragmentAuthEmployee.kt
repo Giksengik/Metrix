@@ -39,24 +39,24 @@ class FragmentAuthEmployee() : Fragment() {
     }
 
     private var authHandler : AuthHandler? = null
-    private var binding : FragmentEmployeeAuthBinding? = null
+    private lateinit var binding : FragmentEmployeeAuthBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEmployeeAuthBinding.inflate(inflater)
-        binding?.buttonEmployeeAuth?.setOnClickListener {
-            binding?.authProgressBar?.visibility = View.VISIBLE
-            binding?.buttonEmployeeAuth?.visibility = View.INVISIBLE
+        binding.buttonEmployeeAuth.setOnClickListener {
+            binding.authProgressBar.visibility = View.VISIBLE
+            binding.buttonEmployeeAuth.visibility = View.INVISIBLE
             authorizationHandler.launch(getSignInIntent())
         }
 
         database = Firebase.database.reference.child("users")
         auth = Firebase.auth
-        return binding?.root
+        return binding.root
     }
 
     private val authorizationHandler =
@@ -118,14 +118,14 @@ class FragmentAuthEmployee() : Fragment() {
 
     private fun onSignedIn() {
         authHandler?.handleSuccessAuth()
-        binding?.authProgressBar?.visibility = View.VISIBLE
-        binding?.buttonEmployeeAuth?.visibility = View.INVISIBLE
+        binding.authProgressBar.visibility = View.VISIBLE
+        binding.buttonEmployeeAuth.visibility = View.INVISIBLE
     }
 
     private fun showError() {
         Toast.makeText(requireContext(), getString(R.string.auth_error), Toast.LENGTH_SHORT).show()
-        binding?.authProgressBar?.visibility = View.VISIBLE
-        binding?.buttonEmployeeAuth?.visibility = View.INVISIBLE
+        binding.authProgressBar.visibility = View.VISIBLE
+        binding.buttonEmployeeAuth.visibility = View.INVISIBLE
     }
 
 }

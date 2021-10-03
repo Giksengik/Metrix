@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentAwardsBinding
-import com.company.metrix.databinding.FragmentMainBinding
 import com.company.metrix.model.AwardInfo
 import com.company.metrix.model.AwardNomination
 import com.company.metrix.model.AwardType
-import com.company.metrix.model.CharacteristicInfo
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,16 +23,16 @@ import com.google.firebase.ktx.Firebase
 
 class FragmentAwards : Fragment(), BackButtonHandler {
 
-    private var binding: FragmentAwardsBinding? = null
+    private lateinit var binding: FragmentAwardsBinding
     private var awardsAdapter: AwardsListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAwardsBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +42,7 @@ class FragmentAwards : Fragment(), BackButtonHandler {
     }
 
     override fun setupOnBackButtonPressed() {
-        binding?.backButton?.setOnClickListener {
+        binding.backButton.setOnClickListener {
             activity?.onBackPressed()
         }
     }
@@ -167,8 +165,8 @@ class FragmentAwards : Fragment(), BackButtonHandler {
             }
         }
         awardsAdapter?.submitList(list)
-        binding?.loadingBar?.visibility = View.INVISIBLE
-        binding?.awardsContent?.visibility = View.VISIBLE
+        binding.loadingBar.visibility = View.INVISIBLE
+        binding.awardsContent.visibility = View.VISIBLE
     }
 
     private fun showErrorToast() {
@@ -181,7 +179,7 @@ class FragmentAwards : Fragment(), BackButtonHandler {
 
     private fun setupAwards() {
         awardsAdapter = AwardsListAdapter()
-        binding?.awardsList?.apply {
+        binding.awardsList.apply {
             adapter = awardsAdapter
             layoutManager = LinearLayoutManager(activity)
         }

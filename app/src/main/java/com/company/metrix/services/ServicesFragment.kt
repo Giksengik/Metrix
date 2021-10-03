@@ -12,16 +12,16 @@ import com.company.metrix.databinding.FragmentServicesBinding
 
 class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
 
-    private var binding : FragmentServicesBinding? = null
+    private lateinit var binding : FragmentServicesBinding
     private var serviceAdapter : ServiceListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentServicesBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
 
     private fun setupServicesList(){
         serviceAdapter = ServiceListAdapter(this)
-        binding?.servicesList?.apply{
+        binding.servicesList.apply{
             adapter = serviceAdapter
             layoutManager = GridLayoutManager(context,2,
                 LinearLayoutManager.VERTICAL,false)
