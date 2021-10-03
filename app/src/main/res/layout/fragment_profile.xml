@@ -77,6 +77,15 @@
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
             app:layout_constraintTop_toTopOf="@+id/layoutBackground"/>
 
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_weight="1"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/separator"
+            app:layout_constraintTop_toBottomOf="@+id/position" />
+
 
         <include
             android:id="@+id/position"
@@ -117,14 +126,7 @@
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
             app:layout_constraintTop_toBottomOf="@+id/soft_skills"/>
 
-        <View
-            android:id="@+id/separator"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/separator"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutBackground" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/endGuideline"
