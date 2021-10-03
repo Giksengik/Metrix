@@ -11,7 +11,6 @@ import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentRecomendationsBinding
 import com.company.metrix.model.CharacteristicInfo
-import com.company.metrix.services.strenghts.CharacteristicFactoryImpl
 import com.company.metrix.services.strenghts.CharacteristicListAdapter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -23,16 +22,16 @@ import com.google.firebase.ktx.Firebase
 
 class FragmentRecomendations : Fragment() , BackButtonHandler{
 
-    private var binding : FragmentRecomendationsBinding? = null
+    private lateinit var binding : FragmentRecomendationsBinding
     private var weaknessAdapter : CharacteristicListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRecomendationsBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +41,7 @@ class FragmentRecomendations : Fragment() , BackButtonHandler{
 
     private fun setupStrengthsList() {
         weaknessAdapter = CharacteristicListAdapter()
-        binding?.weaknessList?.apply{
+        binding.weaknessList.apply{
             adapter = weaknessAdapter
             layoutManager = LinearLayoutManager(activity)
         }
@@ -62,13 +61,13 @@ class FragmentRecomendations : Fragment() , BackButtonHandler{
                         val list = comments.map {
                             CharacteristicInfo(text = it, emoji = "\uD83D\uDCAC")
                         }
-                        if (list.size > 0) {
+                        if (list.isNotEmpty()) {
                             weaknessAdapter?.submitList(list)
                         } else {
-                            binding?.emptyView?.visibility = View.VISIBLE
+                            binding.emptyView.visibility = View.VISIBLE
                         }
-                        binding?.loadingBar?.visibility = View.INVISIBLE
-                        binding?.recommendationContent?.visibility = View.VISIBLE
+                        binding.loadingBar.visibility = View.INVISIBLE
+                        binding.recommendationContent.visibility = View.VISIBLE
                     } else {
                         showErrorToast()
                     }
@@ -89,7 +88,7 @@ class FragmentRecomendations : Fragment() , BackButtonHandler{
     }
 
     override fun setupOnBackButtonPressed() {
-        binding?.backButton?.setOnClickListener{
+        binding.backButton.setOnClickListener{
             activity?.onBackPressed()
         }
     }

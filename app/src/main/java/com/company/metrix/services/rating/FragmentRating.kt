@@ -19,16 +19,16 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class FragmentRating : Fragment(), BackButtonHandler {
-    private var binding: FragmentRatingBinding? = null
+    private lateinit var binding: FragmentRatingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRatingBinding.inflate(inflater)
         loadData()
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class FragmentRating : Fragment(), BackButtonHandler {
     }
 
     override fun setupOnBackButtonPressed() {
-        binding?.backButton?.setOnClickListener {
+        binding.backButton.setOnClickListener {
             activity?.onBackPressed()
         }
     }
@@ -74,10 +74,10 @@ class FragmentRating : Fragment(), BackButtonHandler {
     @SuppressLint("SetTextI18n")
     private fun updateRatingView(ratings: List<Double>) {
         val average = ratings.average()
-        binding?.ratingBar?.rating = average.toFloat()
-        binding?.averageRating?.text = if (average.isNaN()) "" else String.format("%.02f", average)
-        binding?.ratingCount?.text = getString(R.string.estimates_count) + " " + ratings.size
-        binding?.loadingBar?.visibility = View.INVISIBLE
-        binding?.ratingContent?.visibility = View.VISIBLE
+        binding.ratingBar.rating = average.toFloat()
+        binding.averageRating.text = if (average.isNaN()) "" else String.format("%.02f", average)
+        binding.ratingCount.text = getString(R.string.estimates_count) + " " + ratings.size
+        binding.loadingBar.visibility = View.INVISIBLE
+        binding.ratingContent.visibility = View.VISIBLE
     }
 }
