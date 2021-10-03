@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/noText"
         style="@style/yesNoTemplateStyle"
         android:layout_width="@dimen/answer_dim"
@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/yesText"
         style="@style/yesNoTemplateStyle"
         android:layout_width="@dimen/answer_dim"

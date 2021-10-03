@@ -9,7 +9,7 @@
         android:label="MainFragment" />
     <fragment
         android:id="@+id/fragmentAuth"
-        android:name="com.company.metrix.FragmentAuth"
+        android:name="com.company.metrix.auth.FragmentAuth"
         android:label="FragmentAuth" >
         <action
             android:id="@+id/action_fragmentAuth_to_mainFragment"

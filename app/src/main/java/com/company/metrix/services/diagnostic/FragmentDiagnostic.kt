@@ -16,16 +16,16 @@ import com.company.metrix.model.TeamMemberInfo
 
 class FragmentDiagnostic : Fragment(), BackButtonHandler {
 
-    private var binding: FragmentDiagnosticBinding? = null
+    private lateinit var binding: FragmentDiagnosticBinding
     private var questionAdapter: DiagnosticQuestionListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDiagnosticBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
 
     private fun setupQuestionsAdapter() {
         questionAdapter = DiagnosticQuestionListAdapter()
-        binding?.diagnosticList?.apply {
+        binding.diagnosticList.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = questionAdapter
         }
@@ -44,7 +44,7 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
     }
 
     private fun setupButton() {
-        binding?.confirmDiagnosticButton?.setOnClickListener {
+        binding.confirmDiagnosticButton.setOnClickListener {
             Toast.makeText(
                 context, getString(R.string.diagnostic_send_text), Toast.LENGTH_SHORT
             ).show()
@@ -72,7 +72,7 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
             )
         )
         val rand = java.util.Random()
-        val teamMember = team.get(rand.nextInt(team.size))
+        val teamMember = team[rand.nextInt(team.size)]
         questionAdapter?.submitList(
             listOf(
                 "Точно исполняет поручения",
@@ -84,12 +84,13 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
                 Question(it)
             }
         )
-        binding?.diagnosticDescription?.text = "${
-            binding?.diagnosticDescription?.text} ${teamMember.name}"
+        binding.diagnosticDescription.text = "${
+            binding.diagnosticDescription.text
+        } ${teamMember.name}"
     }
 
     override fun setupOnBackButtonPressed() {
-        binding?.backButton?.setOnClickListener {
+        binding.backButton.setOnClickListener {
             activity?.onBackPressed()
         }
     }

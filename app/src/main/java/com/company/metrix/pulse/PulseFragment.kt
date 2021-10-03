@@ -16,16 +16,16 @@ import com.company.metrix.model.PulseQuestion
 
 class PulseFragment : Fragment() {
 
-    private var binding : FragmentPulseBinding? = null
+    private lateinit var binding : FragmentPulseBinding
     private var questionListAdapter: PulseQuestionsListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPulseBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class PulseFragment : Fragment() {
     }
 
     private fun setupButton() {
-        binding?.pulseConfirmButton?.setOnClickListener{
+        binding.pulseConfirmButton.setOnClickListener{
             Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
         }
     }
@@ -67,7 +67,7 @@ class PulseFragment : Fragment() {
 
     private fun setupQuestionsAdapter(){
         questionListAdapter = PulseQuestionsListAdapter()
-        binding?.pulseList?.apply {
+        binding.pulseList.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = questionListAdapter
         }

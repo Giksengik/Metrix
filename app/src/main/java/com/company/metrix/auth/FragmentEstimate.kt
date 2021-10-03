@@ -40,13 +40,13 @@ class FragmentEstimate() : Fragment() {
     }
 
     private var authHandler: AuthHandler? = null
-    private var binding: FragmentEstimateBinding? = null
+    private lateinit var binding: FragmentEstimateBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEstimateBinding.inflate(inflater)
 
         val adapter = CharacteristicAdapter(mutableListOf()) { id, isSelected ->
@@ -56,7 +56,7 @@ class FragmentEstimate() : Fragment() {
                 characteristicsList.add(id)
             }
         }
-        binding?.strengthsView?.adapter = adapter
+        binding.strengthsView.adapter = adapter
 
         usersDatabase = Firebase.database.reference.child("users")
         characteristicsDatabase = Firebase.database.reference.child("characteristics")
@@ -68,7 +68,7 @@ class FragmentEstimate() : Fragment() {
                         ds.getValue(CharacteristicInfo::class.java)
                     if (characteristic != null) list.add(characteristic)
                 }
-                binding?.loadingBar?.visibility = View.INVISIBLE
+                binding.loadingBar.visibility = View.INVISIBLE
                 adapter.setData(list)
             }
 
@@ -82,29 +82,29 @@ class FragmentEstimate() : Fragment() {
         }
         characteristicsDatabase.addListenerForSingleValueEvent(characteristicsValueListener)
 
-        binding?.buttonConfirmEstimate?.setOnClickListener { onSubmit() }
-        binding?.ratingBar?.onRatingBarChangeListener =
-            OnRatingBarChangeListener { ratingBar, rating, fromUser ->
+        binding.buttonConfirmEstimate.setOnClickListener { onSubmit() }
+        binding.ratingBar.onRatingBarChangeListener =
+            OnRatingBarChangeListener { _, rating, _ ->
                 if (rating <= 0.5) {
-                    binding?.ratingBar?.rating = 1.0f
+                    binding.ratingBar.rating = 1.0f
                 }
             }
 
-        binding?.sentButton?.setOnClickListener {
-            binding?.sentButton?.visibility = View.INVISIBLE
-            binding?.sentImage?.visibility = View.INVISIBLE
-            binding?.sentTitle?.visibility = View.INVISIBLE
-            binding?.loadingBackground?.visibility = View.INVISIBLE
-            binding?.buttonConfirmEstimate?.visibility = View.VISIBLE
+        binding.sentButton.setOnClickListener {
+            binding.sentButton.visibility = View.INVISIBLE
+            binding.sentImage.visibility = View.INVISIBLE
+            binding.sentTitle.visibility = View.INVISIBLE
+            binding.loadingBackground.visibility = View.INVISIBLE
+            binding.buttonConfirmEstimate.visibility = View.VISIBLE
         }
 
-        return binding?.root
+        return binding.root
     }
 
     private fun onSubmit() {
-        val userId = binding?.employeeIdField?.text.toString().trim()
-        userRating = binding?.ratingBar?.rating?.toDouble() ?: 5.0
-        userComment = binding?.employeeCommentField?.text.toString().trim()
+        val userId = binding.employeeIdField.text.toString().trim()
+        userRating = binding.ratingBar.rating.toDouble()
+        userComment = binding.employeeCommentField.text.toString().trim()
         usersDatabase.orderByChild("id").equalTo(userId).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -122,12 +122,12 @@ class FragmentEstimate() : Fragment() {
     }
 
     private fun setError() {
-        binding?.employeeIdBlock?.error = getString(R.string.id_not_found)
+        binding.employeeIdBlock.error = getString(R.string.id_not_found)
     }
 
     private fun sendFeedback(userSnapshot: DataSnapshot) {
-        binding?.loadingBackground?.visibility = View.VISIBLE
-        binding?.buttonConfirmEstimate?.visibility = View.INVISIBLE
+        binding.loadingBackground.visibility = View.VISIBLE
+        binding.buttonConfirmEstimate.visibility = View.INVISIBLE
 
         val userDatabase = usersDatabase.child(userSnapshot.key!!)
         val ratings : MutableList<Double> = userSnapshot.child("ratings").getValue<MutableList<Double>>() ?: mutableListOf()
@@ -144,9 +144,9 @@ class FragmentEstimate() : Fragment() {
         }
         userDatabase.child("ratings").setValue(ratings)
 
-        binding?.sentButton?.visibility = View.VISIBLE
-        binding?.sentImage?.visibility = View.VISIBLE
-        binding?.sentTitle?.visibility = View.VISIBLE
+        binding.sentButton.visibility = View.VISIBLE
+        binding.sentImage.visibility = View.VISIBLE
+        binding.sentTitle.visibility = View.VISIBLE
     }
 
 }

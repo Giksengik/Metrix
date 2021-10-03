@@ -22,7 +22,7 @@ import com.google.firebase.ktx.Firebase
 
 class FragmentStrengths : Fragment() , BackButtonHandler {
 
-    private var binding : FragmentStrengthsBinding? = null
+    private lateinit var binding : FragmentStrengthsBinding
     private var strengthsAdapter : CharacteristicListAdapter? = null
     private lateinit var characteristicsDatabase: DatabaseReference
     private lateinit var strengthsList : List<CharacteristicInfo>
@@ -31,9 +31,9 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentStrengthsBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,7 +77,7 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
                             snapshot.children.iterator().next().child("strongSkills")
                                 .getValue<MutableList<String>>() ?: mutableListOf()
                         updateStrengthsTop(strengths)
-                        binding?.loadingBar?.visibility = View.INVISIBLE
+                        binding.loadingBar.visibility = View.INVISIBLE
                     } else {
                         showErrorToast()
                     }
@@ -109,15 +109,15 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
         if (topStrengths.size > 0) {
             strengthsAdapter?.submitList(topStrengths)
         } else {
-            binding?.emptyView?.visibility = View.VISIBLE
+            binding.emptyView.visibility = View.VISIBLE
         }
-        binding?.strengthsContent?.visibility = View.VISIBLE
-        binding?.loadingBar?.visibility = View.INVISIBLE
+        binding.strengthsContent.visibility = View.VISIBLE
+        binding.loadingBar.visibility = View.INVISIBLE
     }
 
     private fun setupStrengthsList() {
         strengthsAdapter = CharacteristicListAdapter()
-        binding?.strengthsList?.apply{
+        binding.strengthsList.apply{
             adapter = strengthsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
@@ -125,7 +125,7 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
     }
 
     override fun setupOnBackButtonPressed() {
-        binding?.backButton?.setOnClickListener{
+        binding.backButton.setOnClickListener{
             activity?.onBackPressed()
         }
     }
