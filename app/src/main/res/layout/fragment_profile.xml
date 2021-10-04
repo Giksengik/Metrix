@@ -79,11 +79,13 @@
 
         <View
             android:id="@+id/separator"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="3dp"
-            android:layout_weight="1"
             android:layout_marginTop="16dp"
+            android:layout_weight="1"
             android:background="@drawable/separator"
+            app:layout_constraintEnd_toStartOf="@+id/endGuideline"
+            app:layout_constraintStart_toStartOf="@+id/startGuideline"
             app:layout_constraintTop_toBottomOf="@+id/position" />
 
 
@@ -109,6 +111,8 @@
             android:background="@drawable/rounded_background"
             android:padding="16dp"
             android:translationZ="1dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
             app:layout_constraintTop_toBottomOf="@+id/position"/>
@@ -121,6 +125,8 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_background"
             android:padding="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             android:translationZ="1dp"
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
