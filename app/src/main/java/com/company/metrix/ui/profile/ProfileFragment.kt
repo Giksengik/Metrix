@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.company.metrix.databinding.FragmentProfileBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
-
+    val profileViewModel: ProfileViewModel by viewModels()
     private lateinit var binding: FragmentProfileBinding
-    private var softSkillAdapter: SkillsListAdapter? = null
-    private var hardSkillAdapter: SkillsListAdapter? = null
+    private val softSkillAdapter: SkillsListAdapter by lazy { SkillsListAdapter() }
+    private val hardSkillAdapter: SkillsListAdapter by lazy { SkillsListAdapter() }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,8 +29,14 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupList()
+        profileViewModel.employee.observe(viewLifecycleOwner, {
+            setupDummyData()
+            setupList()
+        })
+
+        profileViewModel.getEmployeeInfo()
         setupDummyData()
+
     }
 
     private fun setupDummyData() {
@@ -37,16 +47,16 @@ class ProfileFragment : Fragment() {
         binding.authorized.titleUser.text = "Авторизован"
         binding.authorized.subtitle.text = " 27.09.2021"
 
-        binding.position.titleUser.text = " Должность"
-        binding.position.subtitle.text = " Сотрудник"
+        binding.position.titleUser.text = "Должность: "
+        binding.position.subtitle.text = profileViewModel.employee.value?.position
 
-        softSkillAdapter?.submitList(
+        softSkillAdapter.submitList(
             listOf(
                 "Дружелюбный",
                 "Вежливый"
             )
         )
-        hardSkillAdapter?.submitList(
+        hardSkillAdapter.submitList(
             listOf(
                 "Dagger, RxJava",
                 "Проектирование систем"
@@ -55,15 +65,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupList() {
-        /*hardSkillAdapter = SkillsListAdapter()
-        softSkillAdapter = SkillsListAdapter()
-        binding?.hardSkillsList?.apply{
-            layoutManager = LinearLayoutManager(activity)
-            adapter = hardSkillAdapter
-        }
-        binding?.softSkillsList?.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = softSkillAdapter
-        }*/
+        binding.softSkills.adapter = softSkillAdapter
+        binding.hardSkills.adapter = hardSkillAdapter
     }
 }
