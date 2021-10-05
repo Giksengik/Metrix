@@ -8,5 +8,6 @@ interface UserRepository {
     suspend fun getUserById(id : Long) : User
     suspend fun deleteUser(item : User)
     suspend fun getUserByEmail(email : String) : User
+    suspend fun getUsersByTeam(team_id : Long) : List<User>
 
 }

@@ -54,7 +54,20 @@ class FragmentRecomendations : Fragment(), BackButtonHandler {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupStrengthsList()
+        observeViewModel()
         setupOnBackButtonPressed()
+    }
+
+    private fun observeViewModel() {
+        viewModel.estimations.observe(viewLifecycleOwner, {
+            if (viewModel.estimations.value!!.isEmpty()) {
+                binding.emptyView.visibility = View.VISIBLE
+            } else {
+                weaknessAdapter?.submitList(viewModel.estimations.value)
+            }
+            binding.loadingBar.visibility = View.INVISIBLE
+            binding.recommendationContent.visibility = View.VISIBLE
+        })
     }
 
     private fun setupStrengthsList() {
@@ -63,17 +76,6 @@ class FragmentRecomendations : Fragment(), BackButtonHandler {
             adapter = weaknessAdapter
             layoutManager = LinearLayoutManager(activity)
         }
-
-        viewModel.estimations.observe(viewLifecycleOwner, {
-            if (viewModel.estimations.value!!.isEmpty()) {
-                binding.emptyView.visibility = View.VISIBLE
-            } else {
-                Log.d("test_test", "onViewCreated: ${viewModel.estimations.value}")
-                weaknessAdapter?.submitList(viewModel.estimations.value)
-            }
-            binding.loadingBar.visibility = View.INVISIBLE
-            binding.recommendationContent.visibility = View.VISIBLE
-        })
         //  loadData()
     }
 

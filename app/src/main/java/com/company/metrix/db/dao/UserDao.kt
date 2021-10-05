@@ -20,6 +20,8 @@ interface UserDao {
     @Query(value = "Select * from `users` where name = :email " )
     suspend fun getUserByEmail(email : String) : UserEntity
 
+    @Query(value = "Select * from `users` where team_id = :team_id " )
+    suspend fun getAllUsersByTeam(team_id : Long) :  List<UserEntity>
 
     @Delete()
     suspend fun deleteUser(item : UserEntity)
