@@ -11,7 +11,7 @@ data class UserEntity (
     val id: Long,
     val name : String,
     val email : String,
-    val team_id: Int,
+    val team_id: Long,
     val position : String,
     val role : String
 //    @Embedded

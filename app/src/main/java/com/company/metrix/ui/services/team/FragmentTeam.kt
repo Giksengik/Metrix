@@ -5,17 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.databinding.FragmentTeamBinding
 import com.company.metrix.data.model.TeamMemberInfo
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FragmentTeam : Fragment(), BackButtonHandler {
-
+    private val viewModel : TeamViewModel by viewModels()
     private lateinit var binding : FragmentTeamBinding
     private var teamMembersListAdapter : TeamMembersListAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.viewModelScope.launch {
+            viewModel.getMembersOfTeam(1)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,6 +37,10 @@ class FragmentTeam : Fragment(), BackButtonHandler {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.team.observe(viewLifecycleOwner, {
+            teamMembersListAdapter?.submitList(viewModel.team.value)
+        })
+
         setupOnBackButtonPressed()
         setupTeamMembersList()
     }
@@ -36,31 +51,8 @@ class FragmentTeam : Fragment(), BackButtonHandler {
             adapter = teamMembersListAdapter
             layoutManager = LinearLayoutManager(activity)
         }
-        setupDummyMembers()
     }
 
-    private fun setupDummyMembers() {
-        teamMembersListAdapter?.submitList(
-            listOf(
-                TeamMemberInfo(
-                    "Степанов Илья",
-                    "руководитель аналитического отдела"
-                ),
-                TeamMemberInfo(
-                    "Большиков Степан",
-                    "главный аналитик"
-                ),
-                TeamMemberInfo(
-                    "Колесников Алексей",
-                    "аналитик"
-                ),
-                TeamMemberInfo(
-                    "Безбах Анатолий",
-                    "аналитик"
-                )
-            )
-        )
-    }
 
     override fun setupOnBackButtonPressed() {
         binding.backButton.setOnClickListener{

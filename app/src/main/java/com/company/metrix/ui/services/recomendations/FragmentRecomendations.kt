@@ -1,17 +1,21 @@
 package com.company.metrix.ui.services.recomendations
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentRecomendationsBinding
 import com.company.metrix.data.model.CharacteristicInfo
 import com.company.metrix.ui.services.strenghts.CharacteristicListAdapter
+import com.company.metrix.ui.services.strenghts.StrengthViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -20,12 +24,24 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FragmentRecomendations : Fragment() , BackButtonHandler{
+class FragmentRecomendations : Fragment(), BackButtonHandler {
 
-    private lateinit var binding : FragmentRecomendationsBinding
-    private var weaknessAdapter : CharacteristicListAdapter? = null
+    private val viewModel: StrengthViewModel by viewModels()
+
+    private lateinit var binding: FragmentRecomendationsBinding
+    private var weaknessAdapter: CharacteristicListAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.viewModelScope.launch {
+            viewModel.initial()
+            viewModel.getNegativeFeedback(1)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,17 +54,31 @@ class FragmentRecomendations : Fragment() , BackButtonHandler{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupStrengthsList()
+        observeViewModel()
         setupOnBackButtonPressed()
+    }
+
+    private fun observeViewModel() {
+        viewModel.estimations.observe(viewLifecycleOwner, {
+            if (viewModel.estimations.value!!.isEmpty()) {
+                binding.emptyView.visibility = View.VISIBLE
+            } else {
+                weaknessAdapter?.submitList(viewModel.estimations.value)
+            }
+            binding.loadingBar.visibility = View.INVISIBLE
+            binding.recommendationContent.visibility = View.VISIBLE
+        })
     }
 
     private fun setupStrengthsList() {
         weaknessAdapter = CharacteristicListAdapter()
-        binding.weaknessList.apply{
+        binding.weaknessList.apply {
             adapter = weaknessAdapter
             layoutManager = LinearLayoutManager(activity)
         }
-      //  loadData()
+        //  loadData()
     }
+
 //
 //    private fun loadData() {
 //        val user = Firebase.auth.currentUser!!
@@ -90,7 +120,7 @@ class FragmentRecomendations : Fragment() , BackButtonHandler{
     }
 
     override fun setupOnBackButtonPressed() {
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             activity?.onBackPressed()
         }
     }

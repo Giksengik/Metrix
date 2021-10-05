@@ -8,9 +8,8 @@ class UserRepositoryImpl @Inject constructor(
     private val localUserProvider: LocalUserDataProvider
 ) : UserRepository {
 
-    override suspend fun addUser(item: User) {
+    override suspend fun addUser(item: User) =
         localUserProvider.insertUser(item)
-    }
 
     override suspend fun getAllUsers(): List<User> =
         localUserProvider.getAllUsers()
@@ -22,5 +21,8 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getUserByEmail(email: String): User =
         localUserProvider.getUserByEmail(email)
+
+    override suspend fun getUsersByTeam(team_id: Long): List<User> =
+        localUserProvider.getUsersByTeam(team_id)
 
 }
