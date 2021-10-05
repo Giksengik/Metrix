@@ -49,13 +49,14 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recommendationContent"
-        android:visibility="invisible"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="46dp"
         android:layout_marginEnd="16dp"
+        android:visibility="invisible"
         app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton">
@@ -78,6 +79,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/weaknessList"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weaknessDescription" />
+
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/emptyView"
                 android:layout_width="wrap_content"
@@ -87,21 +102,10 @@
                 android:text="@string/estimate_empty"
                 android:textSize="20sp"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/weaknessList"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weaknessList" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/weaknessList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="26dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weaknessDescription" />
+                app:layout_constraintStart_toStartOf="@+id/weaknessList"
+                app:layout_constraintTop_toTopOf="@+id/weaknessList" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
