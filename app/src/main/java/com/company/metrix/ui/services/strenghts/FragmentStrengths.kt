@@ -1,12 +1,14 @@
 package com.company.metrix.ui.services.strenghts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
@@ -21,16 +23,26 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FragmentStrengths : Fragment() , BackButtonHandler {
+class FragmentStrengths : Fragment(), BackButtonHandler {
 
-    private val viewModel : StrengthViewModel by viewModels()
+    private val viewModel: StrengthViewModel by viewModels()
 
-    private lateinit var binding : FragmentStrengthsBinding
-    private var strengthsAdapter : CharacteristicListAdapter? = null
+    private lateinit var binding: FragmentStrengthsBinding
+    private var strengthsAdapter: CharacteristicListAdapter? = null
     private lateinit var characteristicsDatabase: DatabaseReference
-    private lateinit var strengthsList : List<CharacteristicInfo>
+    private lateinit var strengthsList: List<CharacteristicInfo>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.viewModelScope.launch {
+            viewModel.initial()
+            viewModel.getUserEstimations(1)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,10 +55,24 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val user = Firebase.auth.currentUser!!
-        //binding.employeeProfileName.text = user.displayName
 
+        //binding.employeeProfileName.text = user.displayName
         setupOnBackButtonPressed()
         setupStrengthsList()
+
+        viewModel.estimations.observe(viewLifecycleOwner, {
+            if (viewModel.estimations.value!!.isEmpty()) {
+                binding.strengthsContent.visibility = View.VISIBLE
+                binding.loadingBar.visibility = View.INVISIBLE
+            } else {
+                val list: MutableList<CharacteristicInfo> = ArrayList()
+                for (i in viewModel.estimations.value!!){
+
+                }
+                //strengthsAdapter?.submitList(viewModel.estimations.value)
+            }
+
+        })
     }
 
     private fun loadSkills() {
@@ -125,7 +151,7 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
 
     private fun setupStrengthsList() {
         strengthsAdapter = CharacteristicListAdapter()
-        binding.strengthsList.apply{
+        binding.strengthsList.apply {
             adapter = strengthsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
@@ -133,7 +159,7 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
     }
 
     override fun setupOnBackButtonPressed() {
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             activity?.onBackPressed()
         }
     }

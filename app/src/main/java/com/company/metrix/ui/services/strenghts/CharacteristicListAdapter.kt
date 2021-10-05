@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.databinding.CharacteristicItemLayoutBinding
 import com.company.metrix.data.model.CharacteristicInfo
+import com.company.metrix.data.model.Estimation
 
 class CharacteristicListAdapter :
     ListAdapter<CharacteristicInfo, CharacteristicListAdapter.ViewHolder>(StrengthDiffUtil()) {
@@ -25,12 +26,12 @@ class CharacteristicListAdapter :
         holder.bind(getItem(position))
     }
 
-    class StrengthDiffUtil : DiffUtil.ItemCallback<CharacteristicInfo>() {
-        override fun areItemsTheSame(oldItem: CharacteristicInfo, newItem: CharacteristicInfo): Boolean =
-            oldItem.emoji == newItem.emoji
+    class StrengthDiffUtil : DiffUtil.ItemCallback<Estimation>() {
+        override fun areItemsTheSame(oldItem: Estimation, newItem: Estimation): Boolean =
+            oldItem.comment == newItem.comment
 
 
-        override fun areContentsTheSame(oldItem: CharacteristicInfo, newItem: CharacteristicInfo): Boolean =
+        override fun areContentsTheSame(oldItem: Estimation, newItem: Estimation): Boolean =
             oldItem == newItem
 
     }
@@ -38,9 +39,23 @@ class CharacteristicListAdapter :
     class ViewHolder(val binding: CharacteristicItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(strenth: CharacteristicInfo) {
-            binding.characteristicEmoji.text = strenth.emoji
-            binding.strengthText.text = strenth.text
+        fun bind(strength: Estimation) {
+            when(strength.skillName){
+                "Вежливость"->{
+
+                }
+                "Мобильность"->{
+
+                }
+                "Профессионализм"->{
+
+                }
+                "Дружелюбность"->{
+
+                }
+            }
+//            binding.characteristicEmoji.text = strenth.emoji
+//            binding.strengthText.text = strenth.text
         }
     }
 }
