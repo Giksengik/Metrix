@@ -41,21 +41,26 @@ class CharacteristicListAdapter :
 
         fun bind(strength: Estimation) {
             binding.strengthText.text = strength.comment
-            when(strength.skillName){
-                "Вежливость"->{
+            when (strength.skillName) {
+                "Вежливость" -> {
                     binding.characteristicEmoji.text = "\uD83D\uDE0A"
+                    binding.strengthText.text = "Вежливость. " + strength.comment
                 }
-                "Мобильность"->{
+                "Мобильность" -> {
                     binding.characteristicEmoji.text = "\uD83D\uDCF1"
+                    binding.strengthText.text = "Мобильность. " + strength.comment
                 }
-                "Профессионализм"->{
+                "Профессионализм" -> {
                     binding.characteristicEmoji.text = "\uD83D\uDC4D"
+                    binding.strengthText.text = "Профессионализм. " + strength.comment
                 }
-                "Скорость"->{
+                "Скорость" -> {
                     binding.characteristicEmoji.text = "⌚"
+                    binding.strengthText.text = "Скорость. " + strength.comment
                 }
-                "Дружелюбность"->{
+                "Дружелюбность" -> {
                     binding.characteristicEmoji.text = "\uD83E\uDD17"
+                    binding.strengthText.text = "Дружелюбность. " + strength.comment
                 }
             }
 //            binding.characteristicEmoji.text = strenth.emoji

@@ -7,6 +7,7 @@ class EstimationFactory {
     fun getAllEstimations(): List<Estimation> =
         listOf(
             Estimation(
+                id = 121,
                 user_id = 1,
                 reviewer_id = 2,
                 comment = "Грубиян!",
@@ -14,6 +15,7 @@ class EstimationFactory {
                 skillName = "Вежливость"
             ),
             Estimation(
+                id = 22,
                 user_id = 1,
                 reviewer_id = 2,
                 comment = "So slooow",
@@ -21,6 +23,7 @@ class EstimationFactory {
                 skillName = "Скорость"
             ),
             Estimation(
+                id = 1211,
                 user_id = 1,
                 reviewer_id = 3,
                 rate = 3.0,
@@ -28,6 +31,7 @@ class EstimationFactory {
                 comment = "Не особо профи"
             ),
             Estimation(
+                id = 234,
                 user_id = 3,
                 reviewer_id = 1,
                 rate = 1.0,
