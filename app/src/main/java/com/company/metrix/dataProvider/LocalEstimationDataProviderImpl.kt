@@ -12,16 +12,11 @@ class LocalEstimationDataProviderImpl @Inject constructor(val dao: EstimationDao
     LocalEstimationDataProvider {
     override suspend fun insertEstimation(item: Estimation) = dao.insertEstimation(
         EstimationEntity(
-            estimation_id = 1,
             user_id = item.user_id,
             reviewer_id = item.reviewer_id,
-            polite = item.polite,
-            mobile = item.mobile,
-            professional = item.professional,
-            speed = item.speed,
-            friendly = item.friendly,
-            comment = item.comment
-
+            rate = item.rate,
+            comment = item.comment,
+            skillName = item.skillName
         )
     )
 
@@ -30,28 +25,19 @@ class LocalEstimationDataProviderImpl @Inject constructor(val dao: EstimationDao
             Estimation(
                 user_id = it.user_id,
                 reviewer_id = it.reviewer_id,
-                polite = it.polite,
-                mobile = it.mobile,
-                professional = it.professional,
-                speed = it.speed,
-                friendly = it.friendly,
-                comment = it.comment
-
+                comment = it.comment,
+                rate = it.rate,
+                skillName = it.skillName
             )
         }
 
     override suspend fun deleteEstimation(item: Estimation) = dao.deleteEstimation(
         EstimationEntity(
-            estimation_id = 1,
             user_id = item.user_id,
             reviewer_id = item.reviewer_id,
-            polite = item.polite,
-            mobile = item.mobile,
-            professional = item.professional,
-            speed = item.speed,
-            friendly = item.friendly,
-            comment = item.comment
-
+            rate = item.rate,
+            comment = item.comment,
+            skillName = item.skillName
         )
     )
 
@@ -60,13 +46,9 @@ class LocalEstimationDataProviderImpl @Inject constructor(val dao: EstimationDao
             Estimation(
                 user_id = it.user_id,
                 reviewer_id = it.reviewer_id,
-                polite = it.polite,
-                mobile = it.mobile,
-                professional = it.professional,
-                speed = it.speed,
-                friendly = it.friendly,
-                comment = it.comment
-
+                comment = it.comment,
+                rate = it.rate,
+                skillName = it.skillName
             )
         }
 

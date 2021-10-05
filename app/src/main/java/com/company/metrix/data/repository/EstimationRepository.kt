@@ -7,4 +7,5 @@ interface EstimationRepository {
     suspend fun getAllEstimations(): List<Estimation>
     suspend fun deleteEstimation(item: Estimation)
     suspend fun getEstimationsByUserId(user_id: Long): List<Estimation>
+    //suspend fun getEstimationsByUserEmail(email: String): List<Estimation>
 }

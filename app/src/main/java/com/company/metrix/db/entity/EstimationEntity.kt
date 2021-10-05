@@ -5,14 +5,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "estimation")
 data class EstimationEntity(
-    @PrimaryKey(autoGenerate = true)
-    val estimation_id : Long,
+    @PrimaryKey
+    val comment: String,
     val user_id : Long,
     val reviewer_id : Long,
-    val polite : Double,
-    val mobile : Double,
-    val professional : Double,
-    val speed : Double,
-    val friendly : Double,
-    val comment: String
-)
+    val rate : Double,
+    val skillName : String
+//    val mobile : Double,
+//    val professional : Double,
+//    val speed : Double,
+//    val friendly : Double,
+ )
