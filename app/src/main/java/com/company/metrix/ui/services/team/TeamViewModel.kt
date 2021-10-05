@@ -6,4 +6,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamViewModel @Inject constructor(): ViewModel() {
+
+    fun getMembersOfTeam(){
+
+    }
 }

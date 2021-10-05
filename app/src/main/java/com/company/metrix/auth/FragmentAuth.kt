@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentAuthBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentAuth : Fragment() , AuthHandler {
+
+    val viewModel : AuthViewModel by viewModels()
 
     var binding : FragmentAuthBinding? = null
     private lateinit var authPagesAdapter : AuthPagerAdapter

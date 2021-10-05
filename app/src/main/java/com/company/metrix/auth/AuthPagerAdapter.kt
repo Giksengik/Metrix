@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.company.metrix.auth.estimates.FragmentEstimate
 import java.lang.IllegalStateException
 
 class AuthPagerAdapter(fragment: FragmentActivity, val authHandler: AuthHandler) : FragmentStateAdapter(fragment) {

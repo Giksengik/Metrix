@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.databinding.CharacteristicItemLayoutBinding
 import com.company.metrix.data.model.CharacteristicInfo
+import com.company.metrix.data.model.Estimation
 
 class CharacteristicListAdapter :
-    ListAdapter<CharacteristicInfo, CharacteristicListAdapter.ViewHolder>(StrengthDiffUtil()) {
+    ListAdapter<Estimation, CharacteristicListAdapter.ViewHolder>(StrengthDiffUtil()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -25,12 +26,12 @@ class CharacteristicListAdapter :
         holder.bind(getItem(position))
     }
 
-    class StrengthDiffUtil : DiffUtil.ItemCallback<CharacteristicInfo>() {
-        override fun areItemsTheSame(oldItem: CharacteristicInfo, newItem: CharacteristicInfo): Boolean =
-            oldItem.emoji == newItem.emoji
+    class StrengthDiffUtil : DiffUtil.ItemCallback<Estimation>() {
+        override fun areItemsTheSame(oldItem: Estimation, newItem: Estimation): Boolean =
+            oldItem.comment == newItem.comment
 
 
-        override fun areContentsTheSame(oldItem: CharacteristicInfo, newItem: CharacteristicInfo): Boolean =
+        override fun areContentsTheSame(oldItem: Estimation, newItem: Estimation): Boolean =
             oldItem == newItem
 
     }
@@ -38,9 +39,32 @@ class CharacteristicListAdapter :
     class ViewHolder(val binding: CharacteristicItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(strenth: CharacteristicInfo) {
-            binding.characteristicEmoji.text = strenth.emoji
-            binding.strengthText.text = strenth.text
+        fun bind(strength: Estimation) {
+            binding.strengthText.text = strength.comment
+            when (strength.skillName) {
+                "Вежливость" -> {
+                    binding.characteristicEmoji.text = "\uD83D\uDE0A"
+                    binding.strengthText.text = "Вежливость. " + strength.comment
+                }
+                "Мобильность" -> {
+                    binding.characteristicEmoji.text = "\uD83D\uDCF1"
+                    binding.strengthText.text = "Мобильность. " + strength.comment
+                }
+                "Профессионализм" -> {
+                    binding.characteristicEmoji.text = "\uD83D\uDC4D"
+                    binding.strengthText.text = "Профессионализм. " + strength.comment
+                }
+                "Скорость" -> {
+                    binding.characteristicEmoji.text = "⌚"
+                    binding.strengthText.text = "Скорость. " + strength.comment
+                }
+                "Дружелюбность" -> {
+                    binding.characteristicEmoji.text = "\uD83E\uDD17"
+                    binding.strengthText.text = "Дружелюбность. " + strength.comment
+                }
+            }
+//            binding.characteristicEmoji.text = strenth.emoji
+//            binding.strengthText.text = strenth.text
         }
     }
 }

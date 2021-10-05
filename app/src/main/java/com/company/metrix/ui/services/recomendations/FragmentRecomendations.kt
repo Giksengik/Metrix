@@ -47,39 +47,39 @@ class FragmentRecomendations : Fragment() , BackButtonHandler{
             adapter = weaknessAdapter
             layoutManager = LinearLayoutManager(activity)
         }
-        loadData()
+      //  loadData()
     }
-
-    private fun loadData() {
-        val user = Firebase.auth.currentUser!!
-        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
-            .addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.children.iterator().hasNext()) {
-                        val comments: MutableList<String> =
-                            snapshot.children.iterator().next().child("comments")
-                                .getValue<MutableList<String>>() ?: mutableListOf()
-                        val list = comments.map {
-                            CharacteristicInfo(text = it, emoji = "\uD83D\uDCAC")
-                        }
-                        if (list.isNotEmpty()) {
-                            weaknessAdapter?.submitList(list)
-                        } else {
-                            binding.emptyView.visibility = View.VISIBLE
-                        }
-                        binding.loadingBar.visibility = View.INVISIBLE
-                        binding.recommendationContent.visibility = View.VISIBLE
-                    } else {
-                        showErrorToast()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    showErrorToast()
-                }
-            })
-    }
+//
+//    private fun loadData() {
+//        val user = Firebase.auth.currentUser!!
+//        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
+//            .addListenerForSingleValueEvent(object :
+//                ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    if (snapshot.children.iterator().hasNext()) {
+//                        val comments: MutableList<String> =
+//                            snapshot.children.iterator().next().child("comments")
+//                                .getValue<MutableList<String>>() ?: mutableListOf()
+//                        val list = comments.map {
+//                            CharacteristicInfo(text = it, emoji = "\uD83D\uDCAC")
+//                        }
+//                        if (list.isNotEmpty()) {
+//                            weaknessAdapter?.submitList(list)
+//                        } else {
+//                            binding.emptyView.visibility = View.VISIBLE
+//                        }
+//                        binding.loadingBar.visibility = View.INVISIBLE
+//                        binding.recommendationContent.visibility = View.VISIBLE
+//                    } else {
+//                        showErrorToast()
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    showErrorToast()
+//                }
+//            })
+//    }
 
     private fun showErrorToast() {
         Toast.makeText(

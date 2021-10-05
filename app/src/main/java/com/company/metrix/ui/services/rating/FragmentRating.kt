@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentRatingBinding
@@ -18,10 +20,22 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FragmentRating : Fragment(), BackButtonHandler {
+    private val ratingViewModel: RatingViewModel by viewModels()
     private lateinit var binding: FragmentRatingBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        ratingViewModel.apply {
+            viewModelScope.launch {
+                calculateRating()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,12 +43,16 @@ class FragmentRating : Fragment(), BackButtonHandler {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRatingBinding.inflate(inflater)
-        loadData()
+        //loadData()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        ratingViewModel.rating.observe(viewLifecycleOwner, {
+            ratingViewModel.rating.value?.let { it1 -> updateRatingView(it1) }
+        })
         setupOnBackButtonPressed()
+
     }
 
     override fun setupOnBackButtonPressed() {
@@ -43,27 +61,27 @@ class FragmentRating : Fragment(), BackButtonHandler {
         }
     }
 
-    private fun loadData() {
-        val user = Firebase.auth.currentUser!!
-        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
-            .addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.children.iterator().hasNext()) {
-                        val ratings: MutableList<Double> =
-                            snapshot.children.iterator().next().child("ratings")
-                                .getValue<MutableList<Double>>() ?: mutableListOf()
-                        updateRatingView(ratings)
-                    } else {
-                        showErrorToast()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    showErrorToast()
-                }
-            })
-    }
+//    private fun loadData() {
+//        val user = Firebase.auth.currentUser!!
+//        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
+//            .addListenerForSingleValueEvent(object :
+//                ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    if (snapshot.children.iterator().hasNext()) {
+//                        val ratings: MutableList<Double> =
+//                            snapshot.children.iterator().next().child("ratings")
+//                                .getValue<MutableList<Double>>() ?: mutableListOf()
+//                        updateRatingView(ratings)
+//                    } else {
+//                        showErrorToast()
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    showErrorToast()
+//                }
+//            })
+//    }
 
     private fun showErrorToast() {
         Toast.makeText(
