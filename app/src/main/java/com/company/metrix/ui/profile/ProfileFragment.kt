@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.company.metrix.databinding.FragmentProfileBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -25,19 +27,33 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater)
+
+        profileViewModel.viewModelScope.launch {
+            profileViewModel.initial();
+            profileViewModel.getEmployeeInfo(1)
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         profileViewModel.user.observe(viewLifecycleOwner, {
             setupDummyData()
             setupList()
         })
 
-        profileViewModel.getEmployeeInfo()
-        setupDummyData()
 
+        profileViewModel.viewModelScope.launch {
+            profileViewModel.getEmployeeInfo(1)
+        }
+
+        profileViewModel.viewModelScope.launch {
+            profileViewModel.initial();
+        }
+
+        setupDummyData()
     }
+
 
     private fun setupDummyData() {
         val user = Firebase.auth.currentUser!!

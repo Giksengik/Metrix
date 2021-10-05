@@ -1,10 +1,13 @@
 package com.company.metrix.db
 
+import com.company.metrix.data.model.User
 import com.company.metrix.db.entity.UserEntity
 
 interface LocalUserDataProvider {
-    suspend fun insertUser(item : UserEntity)
-    suspend fun getAllUsers() :  List<UserEntity>
-    suspend fun getUserById(id : Long) : UserEntity
-    suspend fun deleteUser(item : UserEntity)
+    suspend fun insertUser(item: User)
+    suspend fun getAllUsers(): List<User>
+    suspend fun getUserById(id: Long): User
+    suspend fun deleteUser(item: User)
+    suspend fun getUserByEmail(email : String) : User
+
 }

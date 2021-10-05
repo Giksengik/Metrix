@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
@@ -24,6 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentStrengths : Fragment() , BackButtonHandler {
 
+    private val viewModel : StrengthViewModel by viewModels()
+
     private lateinit var binding : FragmentStrengthsBinding
     private var strengthsAdapter : CharacteristicListAdapter? = null
     private lateinit var characteristicsDatabase: DatabaseReference
@@ -39,6 +42,9 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val user = Firebase.auth.currentUser!!
+        //binding.employeeProfileName.text = user.displayName
+
         setupOnBackButtonPressed()
         setupStrengthsList()
     }

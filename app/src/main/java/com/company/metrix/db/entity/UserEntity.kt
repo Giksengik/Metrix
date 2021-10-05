@@ -10,8 +10,10 @@ data class UserEntity (
     @PrimaryKey(autoGenerate = false)
     val id: Long,
     val name : String,
+    val email : String,
     val team_id: Int,
-    val position : String
+    val position : String,
+    val role : String
 //    @Embedded
 //    val ratings: Array<Estimation>,
 //    @Embedded

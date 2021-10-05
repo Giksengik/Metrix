@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "estimation")
 data class EstimationEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val estimation_id : Long,
     val user_id : Long,
     val reviewer_id : Long,
