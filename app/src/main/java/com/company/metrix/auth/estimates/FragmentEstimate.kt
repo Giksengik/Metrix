@@ -1,6 +1,7 @@
-package com.company.metrix.auth
+package com.company.metrix.auth.estimates
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.company.metrix.R
+import com.company.metrix.auth.AuthHandler
 import com.company.metrix.databinding.FragmentEstimateBinding
 import com.company.metrix.data.model.CharacteristicInfo
 import com.company.metrix.ui.services.CharacteristicAdapter
@@ -66,7 +68,10 @@ class FragmentEstimate() : Fragment() {
                 for (ds in dataSnapshot.children) {
                     val characteristic: CharacteristicInfo? =
                         ds.getValue(CharacteristicInfo::class.java)
-                    if (characteristic != null) list.add(characteristic)
+                    if (characteristic != null) {
+                        list.add(characteristic)
+                        Log.d("test_test", "onDataChange: ${characteristic.emoji} ")
+                    }
                 }
                 binding.loadingBar.visibility = View.INVISIBLE
                 adapter.setData(list)
