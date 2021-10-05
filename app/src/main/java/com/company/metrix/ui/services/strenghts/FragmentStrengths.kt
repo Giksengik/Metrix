@@ -40,7 +40,7 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
 
         viewModel.viewModelScope.launch {
             viewModel.initial()
-            viewModel.getUserEstimations(1)
+            viewModel.getPositiveFeedback(1)
         }
     }
 
