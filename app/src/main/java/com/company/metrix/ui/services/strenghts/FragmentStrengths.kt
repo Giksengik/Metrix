@@ -1,11 +1,14 @@
 package com.company.metrix.ui.services.strenghts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
@@ -20,14 +23,26 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FragmentStrengths : Fragment() , BackButtonHandler {
+class FragmentStrengths : Fragment(), BackButtonHandler {
 
-    private lateinit var binding : FragmentStrengthsBinding
-    private var strengthsAdapter : CharacteristicListAdapter? = null
+    private val viewModel: StrengthViewModel by viewModels()
+
+    private lateinit var binding: FragmentStrengthsBinding
+    private var strengthsAdapter: CharacteristicListAdapter? = null
     private lateinit var characteristicsDatabase: DatabaseReference
-    private lateinit var strengthsList : List<CharacteristicInfo>
+    private lateinit var strengthsList: List<CharacteristicInfo>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.viewModelScope.launch {
+            viewModel.initial()
+            viewModel.getUserEstimations(1)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +54,24 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val user = Firebase.auth.currentUser!!
+
+        //binding.employeeProfileName.text = user.displayName
         setupOnBackButtonPressed()
         setupStrengthsList()
+
+        viewModel.estimations.observe(viewLifecycleOwner, {
+            if (viewModel.estimations.value!!.isEmpty()) {
+                binding.strengthsContent.visibility = View.VISIBLE
+                binding.loadingBar.visibility = View.INVISIBLE
+            } else {
+                Log.d("test_test", "onViewCreated: ${viewModel.estimations.value}")
+                 strengthsAdapter?.submitList(viewModel.estimations.value)
+                binding.strengthsContent.visibility = View.VISIBLE
+                binding.loadingBar.visibility = View.INVISIBLE
+            }
+
+        })
     }
 
     private fun loadSkills() {
@@ -54,7 +85,7 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
                     if (characteristic != null) list.add(characteristic)
                 }
                 strengthsList = list
-                loadUserData()
+              //  loadUserData()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -68,28 +99,28 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
         characteristicsDatabase.addListenerForSingleValueEvent(characteristicsValueListener)
     }
 
-    private fun loadUserData() {
-        val user = Firebase.auth.currentUser!!
-        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
-            .addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.children.iterator().hasNext()) {
-                        val strengths: MutableList<String> =
-                            snapshot.children.iterator().next().child("strongSkills")
-                                .getValue<MutableList<String>>() ?: mutableListOf()
-                        updateStrengthsTop(strengths)
-                        binding.loadingBar.visibility = View.INVISIBLE
-                    } else {
-                        showErrorToast()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    showErrorToast()
-                }
-            })
-    }
+//    private fun loadUserData() {
+//        val user = Firebase.auth.currentUser!!
+//        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
+//            .addListenerForSingleValueEvent(object :
+//                ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    if (snapshot.children.iterator().hasNext()) {
+//                        val strengths: MutableList<String> =
+//                            snapshot.children.iterator().next().child("strongSkills")
+//                                .getValue<MutableList<String>>() ?: mutableListOf()
+//                        updateStrengthsTop(strengths)
+//                        binding.loadingBar.visibility = View.INVISIBLE
+//                    } else {
+//                        showErrorToast()
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    showErrorToast()
+//                }
+//            })
+//    }
 
     private fun showErrorToast() {
         Toast.makeText(
@@ -99,27 +130,27 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
         ).show()
     }
 
-    private fun updateStrengthsTop(strengths: MutableList<String>) {
-        val topStrengths = mutableListOf<CharacteristicInfo>()
-        val sortedStrengths = strengths.sortedByDescending { it }.distinct().reversed()
-        var i = 0
-        while (topStrengths.size < 3 && i < sortedStrengths.size) {
-            val characteristic = strengthsList.find { it.id == sortedStrengths[i] }
-            if (characteristic != null) topStrengths.add(characteristic)
-            i += 1
-        }
-        if (topStrengths.size > 0) {
-            strengthsAdapter?.submitList(topStrengths)
-        } else {
-            binding.emptyView.visibility = View.VISIBLE
-        }
-        binding.strengthsContent.visibility = View.VISIBLE
-        binding.loadingBar.visibility = View.INVISIBLE
-    }
+//    private fun updateStrengthsTop(strengths: MutableList<String>) {
+//        val topStrengths = mutableListOf<CharacteristicInfo>()
+//        val sortedStrengths = strengths.sortedByDescending { it }.distinct().reversed()
+//        var i = 0
+//        while (topStrengths.size < 3 && i < sortedStrengths.size) {
+//            val characteristic = strengthsList.find { it.id == sortedStrengths[i] }
+//            if (characteristic != null) topStrengths.add(characteristic)
+//            i += 1
+//        }
+//        if (topStrengths.size > 0) {
+//            strengthsAdapter?.submitList(topStrengths)
+//        } else {
+//            binding.emptyView.visibility = View.VISIBLE
+//        }
+//        binding.strengthsContent.visibility = View.VISIBLE
+//        binding.loadingBar.visibility = View.INVISIBLE
+//    }
 
     private fun setupStrengthsList() {
         strengthsAdapter = CharacteristicListAdapter()
-        binding.strengthsList.apply{
+        binding.strengthsList.apply {
             adapter = strengthsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
@@ -127,7 +158,7 @@ class FragmentStrengths : Fragment() , BackButtonHandler {
     }
 
     override fun setupOnBackButtonPressed() {
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             activity?.onBackPressed()
         }
     }

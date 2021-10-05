@@ -9,6 +9,7 @@ import com.company.metrix.data.model.CharacteristicInfo
 
 class CharacteristicAdapter(private val data: MutableList<CharacteristicInfo>, private val clickListener: (id: String, isSelected: Boolean) -> Unit) :
     RecyclerView.Adapter<CharacteristicAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = CharacteristicItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
