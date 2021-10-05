@@ -10,22 +10,28 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class StrengthViewModel @Inject constructor(val estimationRepo: EstimationRepository): ViewModel() {
+class StrengthViewModel @Inject constructor(val estimationRepo: EstimationRepository) :
+    ViewModel() {
     val estimations: MutableLiveData<List<Estimation>> = MutableLiveData<List<Estimation>>()
 
-    suspend fun initial(){
+    suspend fun initial() {
         //Stub!
         val v = EstimationFactory().getAllEstimations()
-        for (i in v){
+        for (i in v) {
             estimationRepo.addEstimation(i)
         }
         Log.d("test_test", "initial!: ${estimationRepo.getAllEstimations()}")
 
     }
 
-    suspend fun getUserEstimations(id : Long) {
-        estimations.value =  estimationRepo.getEstimationsByUserId(id)
-        Log.d("test_test", "getUserEstimations!: ${estimationRepo.getAllEstimations()}")
+
+    suspend fun getPositiveFeedback(id: Long) {
+        estimations.value = estimationRepo.getEstimationsByUserId(id).filter { it.rate >= 4.0 }
+
+    }
+
+    suspend fun getNegativeFeedback(id: Long) {
+        estimations.value = estimationRepo.getEstimationsByUserId(id).filter { it.rate < 4.0 }
     }
 
 }
