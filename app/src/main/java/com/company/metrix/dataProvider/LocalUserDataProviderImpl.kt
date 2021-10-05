@@ -6,7 +6,7 @@ import com.company.metrix.db.dao.UserDao
 import com.company.metrix.db.entity.UserEntity
 import javax.inject.Inject
 
-class LocalUserDataProviderImpl  @Inject constructor(val dao: UserDao) : LocalUserDataProvider {
+class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUserDataProvider {
     override suspend fun insertUser(item: User) = dao.insertUser(
         UserEntity(
             id = item.id,
@@ -18,7 +18,7 @@ class LocalUserDataProviderImpl  @Inject constructor(val dao: UserDao) : LocalUs
         )
     )
 
-    override suspend fun getAllUsers(): List<User>  =
+    override suspend fun getAllUsers(): List<User> =
         dao.getAllUsers().map {
             User(
                 id = it.id,
@@ -67,4 +67,18 @@ class LocalUserDataProviderImpl  @Inject constructor(val dao: UserDao) : LocalUs
             role = userEntity.role
         )
     }
+
+    override suspend fun getUsersByTeam(team_id: Long): List<User> =
+        dao.getAllUsersByTeam(team_id)
+            .map {
+                User(
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
+                    team_id = it.team_id,
+                    position = it.position,
+                    role = it.role
+                )
+            }
+
 }
