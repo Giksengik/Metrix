@@ -19,11 +19,13 @@ class StrengthViewModel @Inject constructor(val estimationRepo: EstimationReposi
         for (i in v){
             estimationRepo.addEstimation(i)
         }
+        Log.d("test_test", "initial!: ${estimationRepo.getAllEstimations()}")
+
     }
 
     suspend fun getUserEstimations(id : Long) {
         estimations.value =  estimationRepo.getEstimationsByUserId(id)
-        Log.d("Check_strength", "getUserEstimations!: ${estimationRepo.getAllEstimations()}")
+        Log.d("test_test", "getUserEstimations!: ${estimationRepo.getAllEstimations()}")
     }
 
 }

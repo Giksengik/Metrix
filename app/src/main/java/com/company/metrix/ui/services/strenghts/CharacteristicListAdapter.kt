@@ -10,7 +10,7 @@ import com.company.metrix.data.model.CharacteristicInfo
 import com.company.metrix.data.model.Estimation
 
 class CharacteristicListAdapter :
-    ListAdapter<CharacteristicInfo, CharacteristicListAdapter.ViewHolder>(StrengthDiffUtil()) {
+    ListAdapter<Estimation, CharacteristicListAdapter.ViewHolder>(StrengthDiffUtil()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -40,18 +40,22 @@ class CharacteristicListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(strength: Estimation) {
+            binding.strengthText.text = strength.comment
             when(strength.skillName){
                 "Вежливость"->{
-
+                    binding.characteristicEmoji.text = "\uD83D\uDE0A"
                 }
                 "Мобильность"->{
-
+                    binding.characteristicEmoji.text = "\uD83D\uDCF1"
                 }
                 "Профессионализм"->{
-
+                    binding.characteristicEmoji.text = "\uD83D\uDC4D"
+                }
+                "Скорость"->{
+                    binding.characteristicEmoji.text = "⌚"
                 }
                 "Дружелюбность"->{
-
+                    binding.characteristicEmoji.text = "\uD83E\uDD17"
                 }
             }
 //            binding.characteristicEmoji.text = strenth.emoji

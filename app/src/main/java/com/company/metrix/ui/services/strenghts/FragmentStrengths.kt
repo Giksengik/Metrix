@@ -65,11 +65,10 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
                 binding.strengthsContent.visibility = View.VISIBLE
                 binding.loadingBar.visibility = View.INVISIBLE
             } else {
-                val list: MutableList<CharacteristicInfo> = ArrayList()
-                for (i in viewModel.estimations.value!!){
-
-                }
-                //strengthsAdapter?.submitList(viewModel.estimations.value)
+                Log.d("test_test", "onViewCreated: ${viewModel.estimations.value}")
+                 strengthsAdapter?.submitList(viewModel.estimations.value)
+                binding.strengthsContent.visibility = View.VISIBLE
+                binding.loadingBar.visibility = View.INVISIBLE
             }
 
         })
@@ -86,7 +85,7 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
                     if (characteristic != null) list.add(characteristic)
                 }
                 strengthsList = list
-                loadUserData()
+              //  loadUserData()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -100,28 +99,28 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
         characteristicsDatabase.addListenerForSingleValueEvent(characteristicsValueListener)
     }
 
-    private fun loadUserData() {
-        val user = Firebase.auth.currentUser!!
-        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
-            .addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.children.iterator().hasNext()) {
-                        val strengths: MutableList<String> =
-                            snapshot.children.iterator().next().child("strongSkills")
-                                .getValue<MutableList<String>>() ?: mutableListOf()
-                        updateStrengthsTop(strengths)
-                        binding.loadingBar.visibility = View.INVISIBLE
-                    } else {
-                        showErrorToast()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    showErrorToast()
-                }
-            })
-    }
+//    private fun loadUserData() {
+//        val user = Firebase.auth.currentUser!!
+//        Firebase.database.reference.child("users").orderByChild("id").equalTo(user.email)
+//            .addListenerForSingleValueEvent(object :
+//                ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    if (snapshot.children.iterator().hasNext()) {
+//                        val strengths: MutableList<String> =
+//                            snapshot.children.iterator().next().child("strongSkills")
+//                                .getValue<MutableList<String>>() ?: mutableListOf()
+//                        updateStrengthsTop(strengths)
+//                        binding.loadingBar.visibility = View.INVISIBLE
+//                    } else {
+//                        showErrorToast()
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    showErrorToast()
+//                }
+//            })
+//    }
 
     private fun showErrorToast() {
         Toast.makeText(
@@ -131,23 +130,23 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
         ).show()
     }
 
-    private fun updateStrengthsTop(strengths: MutableList<String>) {
-        val topStrengths = mutableListOf<CharacteristicInfo>()
-        val sortedStrengths = strengths.sortedByDescending { it }.distinct().reversed()
-        var i = 0
-        while (topStrengths.size < 3 && i < sortedStrengths.size) {
-            val characteristic = strengthsList.find { it.id == sortedStrengths[i] }
-            if (characteristic != null) topStrengths.add(characteristic)
-            i += 1
-        }
-        if (topStrengths.size > 0) {
-            strengthsAdapter?.submitList(topStrengths)
-        } else {
-            binding.emptyView.visibility = View.VISIBLE
-        }
-        binding.strengthsContent.visibility = View.VISIBLE
-        binding.loadingBar.visibility = View.INVISIBLE
-    }
+//    private fun updateStrengthsTop(strengths: MutableList<String>) {
+//        val topStrengths = mutableListOf<CharacteristicInfo>()
+//        val sortedStrengths = strengths.sortedByDescending { it }.distinct().reversed()
+//        var i = 0
+//        while (topStrengths.size < 3 && i < sortedStrengths.size) {
+//            val characteristic = strengthsList.find { it.id == sortedStrengths[i] }
+//            if (characteristic != null) topStrengths.add(characteristic)
+//            i += 1
+//        }
+//        if (topStrengths.size > 0) {
+//            strengthsAdapter?.submitList(topStrengths)
+//        } else {
+//            binding.emptyView.visibility = View.VISIBLE
+//        }
+//        binding.strengthsContent.visibility = View.VISIBLE
+//        binding.loadingBar.visibility = View.INVISIBLE
+//    }
 
     private fun setupStrengthsList() {
         strengthsAdapter = CharacteristicListAdapter()
