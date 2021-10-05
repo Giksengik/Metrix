@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        profileViewModel.employee.observe(viewLifecycleOwner, {
+        profileViewModel.user.observe(viewLifecycleOwner, {
             setupDummyData()
             setupList()
         })
@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
         binding.authorized.subtitle.text = " 27.09.2021"
 
         binding.position.titleUser.text = "Должность: "
-        binding.position.subtitle.text = profileViewModel.employee.value?.position
+        binding.position.subtitle.text = profileViewModel.user.value?.position
 
         softSkillAdapter.submitList(
             listOf(
