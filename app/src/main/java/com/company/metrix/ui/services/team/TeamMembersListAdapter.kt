@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.company.metrix.data.model.User
 import com.company.metrix.databinding.TeamMemberItemBinding
-import com.company.metrix.data.model.TeamMemberInfo
 
-class TeamMembersListAdapter : ListAdapter<TeamMemberInfo, TeamMembersListAdapter.ViewHolder>(
+class TeamMembersListAdapter : ListAdapter<User, TeamMembersListAdapter.ViewHolder>(
     TeamMemberDiffUtil()
 ) {
 
@@ -26,18 +26,18 @@ class TeamMembersListAdapter : ListAdapter<TeamMemberInfo, TeamMembersListAdapte
        holder.bind(getItem(position))
     }
 
-    class TeamMemberDiffUtil : DiffUtil.ItemCallback<TeamMemberInfo>() {
-        override fun areItemsTheSame(oldItem: TeamMemberInfo, newItem: TeamMemberInfo): Boolean =
+    class TeamMemberDiffUtil : DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
             oldItem.name == newItem.name
 
-        override fun areContentsTheSame(oldItem: TeamMemberInfo, newItem: TeamMemberInfo): Boolean =
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
             oldItem == newItem
 
     }
 
     class ViewHolder(val binding: TeamMemberItemBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(teamMemberInfo: TeamMemberInfo) {
+        fun bind(teamMemberInfo: User) {
             binding.memberInfo.text = "${teamMemberInfo.name }, ${teamMemberInfo.position}"
         }
     }
