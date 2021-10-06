@@ -8,9 +8,6 @@ data class User(
     val email : String,
     val team_id: Long,
     val position : String,
-    val role : String
-//    val ratings: List<Estimation>,
-//    val strongSkills: List<String>,
-//    val weakSkills : List<String>,
-//    val awards: List<String>
+    val role : String,
+    val companyName : String
 )
