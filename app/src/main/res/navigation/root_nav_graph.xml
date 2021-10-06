@@ -6,7 +6,11 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.company.metrix.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <argument
+            android:name="position"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentAuth"
         android:name="com.company.metrix.auth.FragmentAuth"

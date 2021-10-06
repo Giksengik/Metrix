@@ -7,6 +7,7 @@ import com.company.metrix.db.entity.UserEntity
 import javax.inject.Inject
 
 class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUserDataProvider {
+
     override suspend fun insertUser(item: User) = dao.insertUser(
         UserEntity(
             id = item.id,

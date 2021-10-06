@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/service_fragment"
-        android:name="com.company.metrix.ui.services.ServicesFragment"
+        android:name="com.company.metrix.ui.servicesEmployee.ServicesFragment"
         android:label="ServiceFragment" >
         <action
             android:id="@+id/action_service_fragment_to_fragmentAwards"
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAwards"
-        android:name="com.company.metrix.ui.services.awards.FragmentAwards"
+        android:name="com.company.metrix.ui.servicesEmployee.awards.FragmentAwards"
         android:label="FragmentAwards" >
         <action
             android:id="@+id/action_fragmentAwards_to_service_fragment"
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentDiagnostic"
-        android:name="com.company.metrix.ui.services.diagnostic.FragmentDiagnostic"
+        android:name="com.company.metrix.ui.servicesEmployee.diagnostic.FragmentDiagnostic"
         android:label="FragmentDiagnostic" >
         <action
             android:id="@+id/action_fragmentDiagnostic_to_service_fragment"
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentRating"
-        android:name="com.company.metrix.ui.services.rating.FragmentRating"
+        android:name="com.company.metrix.ui.servicesEmployee.rating.FragmentRating"
         android:label="FragmentRating" >
         <action
             android:id="@+id/action_fragmentRating_to_service_fragment"
@@ -89,7 +89,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentRecomendations"
-        android:name="com.company.metrix.ui.services.recomendations.FragmentRecomendations"
+        android:name="com.company.metrix.ui.servicesEmployee.recomendations.FragmentRecomendations"
         android:label="FragmentRecomendations" >
         <action
             android:id="@+id/action_fragmentRecomendations_to_service_fragment"
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentStrengths"
-        android:name="com.company.metrix.ui.services.strenghts.FragmentStrengths"
+        android:name="com.company.metrix.ui.servicesEmployee.strenghts.FragmentStrengths"
         android:label="FragmentStrengths" >
         <action
             android:id="@+id/action_fragmentStrengths_to_service_fragment"
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentTeam"
-        android:name="com.company.metrix.ui.services.team.FragmentTeam"
+        android:name="com.company.metrix.ui.servicesEmployee.team.FragmentTeam"
         android:label="FragmentTeam" >
         <action
             android:id="@+id/action_fragmentTeam_to_service_fragment"

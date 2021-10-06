@@ -1,5 +1,6 @@
 package com.company.metrix.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.company.metrix.data.model.Estimation
@@ -17,10 +18,10 @@ class ProfileViewModel @Inject constructor(val userRepo: UserRepository) :
     val user: MutableLiveData<User> = MutableLiveData<User>()
 
 
-    suspend fun getEmployeeInfo(id: Long) {
+    suspend fun getEmployeeInfo(id: String) {
         //Stub!
-        user.value = userRepo.getUserById(id)
-
+        user.value = userRepo.getUserByEmail(id)
+        Log.d("test_test", "getEmployeeInfo: ${userRepo.getUserByEmail(id)}")
     }
 
 }

@@ -19,6 +19,7 @@
     <string name="confirm_text">Подтвердить</string>
     <string name="diagnostic_text">Диагностика</string>
     <string name="rating_text">Рейтинг</string>
+    <string name="employees">Сотрудники</string>
     <string name="strengths_text">Сильные стороны</string>
     <string name="strengths_question">За что похвалить сотрудника?</string>
     <string name="sent_thanks">Отправлено, спасибо!</string>
@@ -74,6 +75,7 @@
     <string name="soft_skills_text">Soft Skills</string>
     <string name="hard_skills_text">Hard skills</string>
     <string name="pulse_description">Пульс-опрос состояния</string>
+    <string name="pulse_poll">Пульс-опрос</string>
     <string name="conplete_text">Завершить</string>
     <string name="pulse_data_sended">Информация отправлена, спасибо за уделенное время!</string>
     <string name="diagnostic_send_text">Диагностика отправлена, спасибо за уделенное время!</string>
@@ -90,4 +92,6 @@
         <item>Оценка</item>
         <item>Авторизация</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

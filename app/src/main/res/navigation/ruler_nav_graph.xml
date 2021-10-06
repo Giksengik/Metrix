@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ruler_nav_graph"
+    app:startDestination="@+id/ruler_services_nav_graph">
+
+    <include android:id="@+id/ruler_services_nav_graph"
+        app:graph="@navigation/ruler_services_nav_graph"
+        />
+
+    <include android:id="@+id/profile_nav_graph"
+        app:graph="@navigation/profile_nav_graph"
+        />
+
+    <include android:id="@+id/pulse_nav_graph"
+        app:graph="@navigation/pulse_nav_graph"
+        />
+
+</navigation>

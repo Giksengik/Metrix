@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         profileViewModel.viewModelScope.launch {
-            profileViewModel.getEmployeeInfo(1)
+            profileViewModel.getEmployeeInfo("monsterglad12@gmail.com")
         }
         return binding.root
     }
@@ -39,13 +39,14 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         profileViewModel.user.observe(viewLifecycleOwner, {
+            Log.d("test_test", "onViewCreated CHANGES IN USER :  ${ profileViewModel.user.value}")
             setupDummyData()
             setupList()
         })
 
 
         profileViewModel.viewModelScope.launch {
-            profileViewModel.getEmployeeInfo(1)
+            profileViewModel.getEmployeeInfo("monsterglad12@gmail.com")
         }
 
 
@@ -65,7 +66,6 @@ class ProfileFragment : Fragment() {
         binding.position.subtitle.text = profileViewModel.user.value?.position
 
         val url = user.photoUrl
-        Log.d("test_test", "onCreate2222: ${user.photoUrl} ")
         view?.context?.let {
             loadImage(
                 it,
