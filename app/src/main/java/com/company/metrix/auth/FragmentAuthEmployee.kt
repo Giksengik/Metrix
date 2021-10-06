@@ -118,14 +118,14 @@ class FragmentAuthEmployee() : Fragment() {
 
     private fun onSignedIn() {
         authHandler?.handleSuccessAuth()
-        binding.authProgressBar.visibility = View.VISIBLE
-        binding.buttonEmployeeAuth.visibility = View.INVISIBLE
+        binding.authProgressBar.visibility = View.INVISIBLE
+        binding.buttonEmployeeAuth.visibility = View.VISIBLE
     }
 
     private fun showError() {
         Toast.makeText(requireContext(), getString(R.string.auth_error), Toast.LENGTH_SHORT).show()
-        binding.authProgressBar.visibility = View.VISIBLE
-        binding.buttonEmployeeAuth.visibility = View.INVISIBLE
+        binding.authProgressBar.visibility = View.INVISIBLE
+        binding.buttonEmployeeAuth.visibility = View.VISIBLE
     }
 
 }
