@@ -1,6 +1,7 @@
 package com.company.metrix.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.company.metrix.databinding.FragmentProfileBinding
+import com.company.metrix.ui.support.loadImage
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +31,6 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         profileViewModel.viewModelScope.launch {
-            profileViewModel.initial();
             profileViewModel.getEmployeeInfo(1)
         }
         return binding.root
@@ -47,9 +48,6 @@ class ProfileFragment : Fragment() {
             profileViewModel.getEmployeeInfo(1)
         }
 
-        profileViewModel.viewModelScope.launch {
-            profileViewModel.initial();
-        }
 
         setupDummyData()
     }
@@ -65,6 +63,16 @@ class ProfileFragment : Fragment() {
 
         binding.position.titleUser.text = "Должность: "
         binding.position.subtitle.text = profileViewModel.user.value?.position
+
+        val url = user.photoUrl
+        Log.d("test_test", "onCreate2222: ${user.photoUrl} ")
+        view?.context?.let {
+            loadImage(
+                it,
+                url,
+                binding.employeeProfileIcon
+            )
+        }
 
         softSkillAdapter.submitList(
             listOf(
