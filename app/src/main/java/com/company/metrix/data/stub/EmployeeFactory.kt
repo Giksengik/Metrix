@@ -11,7 +11,8 @@ fun getAllEmployees(): List<User> = listOf(
         email = "egor@mail.ru",
         team_id = 3,
         position = "Сотрудник" ,
-        role = "Бэкенд"
+        role = "Бэкенд",
+        companyName = "Tinkoff"
     ),
 
     User(
@@ -20,7 +21,8 @@ fun getAllEmployees(): List<User> = listOf(
         email = "fedya@mail.ru",
         team_id = 1,
         position = "Сотрудник" ,
-        role = "Android разработчик"
+        role = "Android разработчик",
+        companyName = "Tinkoff"
     ),
 
     User(
@@ -29,7 +31,8 @@ fun getAllEmployees(): List<User> = listOf(
         email = "vanya@mail.ru",
         team_id = 2,
         position = "Сотрудник" ,
-        role = "Главный аналитик"
+        role = "Главный аналитик",
+        companyName = "Google"
     ),
 
 
@@ -39,7 +42,8 @@ fun getAllEmployees(): List<User> = listOf(
         name = "Степан Иванов",
         team_id = 1,
         position = "Сотрудник",
-        role = "Менеждер"
+        role = "Менеждер",
+        companyName = "Tinkoff"
     ),
 
     User(
@@ -48,7 +52,8 @@ fun getAllEmployees(): List<User> = listOf(
         email = "valnstepya@mail.ru",
         team_id = 1,
         position = "Сотрудник",
-        role = "Бэкенд"
+        role = "Бэкенд",
+        companyName = "Google"
     ),
 )
 

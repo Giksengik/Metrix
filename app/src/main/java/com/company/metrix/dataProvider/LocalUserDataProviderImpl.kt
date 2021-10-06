@@ -15,7 +15,8 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             email = item.email,
             team_id = item.team_id,
             position = item.position,
-            role = item.role
+            role = item.role,
+            companyName = item.companyName
         )
     )
 
@@ -27,7 +28,8 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
                 email = it.email,
                 team_id = it.team_id,
                 position = it.position,
-                role = it.role
+                role = it.role,
+                companyName = it.companyName
             )
         }
 
@@ -40,7 +42,8 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             email = userEntity.email,
             team_id = userEntity.team_id,
             position = userEntity.position,
-            role = userEntity.role
+            role = userEntity.role,
+            companyName = userEntity.companyName
         )
     }
 
@@ -52,7 +55,8 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             email = item.email,
             team_id = item.team_id,
             position = item.position,
-            role = item.role
+            role = item.role,
+            companyName = item.companyName
         )
     )
 
@@ -65,7 +69,8 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             email = userEntity.email,
             team_id = userEntity.team_id,
             position = userEntity.position,
-            role = userEntity.role
+            role = userEntity.role,
+            companyName = userEntity.companyName
         )
     }
 
@@ -78,7 +83,8 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
                     email = it.email,
                     team_id = it.team_id,
                     position = it.position,
-                    role = it.role
+                    role = it.role,
+                    companyName = it.companyName
                 )
             }
 
