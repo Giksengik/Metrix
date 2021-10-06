@@ -1,6 +1,7 @@
 package com.company.metrix.ui.services
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.databinding.FragmentServicesBinding
+import com.company.metrix.ui.support.loadImage
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,8 +28,11 @@ class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
         super.onCreate(savedInstanceState)
         viewModel.apply {
             viewModelScope.launch {
-                initial()
-            }
+                val user = Firebase.auth.currentUser!!
+                Log.d("test_test", "onCreate2222: ${user.photoUrl} ")
+                initial(user.displayName, user.phoneNumber)
+                Log.d("test_test", "onCreate: ${user.displayName} ${user.phoneNumber}")
+             }
         }
     }
 
