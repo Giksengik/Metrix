@@ -1,5 +1,6 @@
 package com.company.metrix.ui.services
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.company.metrix.data.model.User
@@ -16,11 +17,11 @@ class ServiceViewModel @Inject constructor(
     private val estimationRepo: EstimationRepository
 ) : ViewModel() {
 
-    suspend fun initial() {
+    suspend fun initial(userName: String?, userEmail: String? ) { //TODO user : User <- server
         val user1 = User(
             id = 1,
-            name = "Yana",
-            email = "monsterglad12@gmail.com",
+            name = userName ?: "Yana",
+            email = userEmail ?: "monsterglad12@gmail.com",
             team_id = 1,
             position = "Руководитель",
             role = "Тим лид гений босс"

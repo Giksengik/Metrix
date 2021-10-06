@@ -58,15 +58,17 @@ class FragmentRecomendations : Fragment(), BackButtonHandler {
     }
 
     private fun observeViewModel() {
-        viewModel.estimations.observe(viewLifecycleOwner, {
-            if (viewModel.estimations.value!!.isEmpty()) {
-                binding.emptyView.visibility = View.VISIBLE
-            } else {
-                weaknessAdapter?.submitList(viewModel.estimations.value)
-            }
-            binding.loadingBar.visibility = View.INVISIBLE
-            binding.recommendationContent.visibility = View.VISIBLE
-        })
+        viewModel.apply {
+            estimations.observe(viewLifecycleOwner, {
+                if (estimations.value!!.isEmpty()) {
+                    binding.emptyView.visibility = View.VISIBLE
+                } else {
+                    weaknessAdapter?.submitList(estimations.value)
+                }
+                binding.loadingBar.visibility = View.INVISIBLE
+                binding.recommendationContent.visibility = View.VISIBLE
+            })
+        }
     }
 
     private fun setupStrengthsList() {
