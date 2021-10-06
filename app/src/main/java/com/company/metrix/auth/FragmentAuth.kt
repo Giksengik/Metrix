@@ -13,34 +13,36 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentAuth : Fragment() , AuthHandler {
+class FragmentAuth : Fragment(), AuthHandler {
 
-    val viewModel : AuthViewModel by viewModels()
+    val viewModel: AuthViewModel by viewModels()
 
-    var binding : FragmentAuthBinding? = null
-    private lateinit var authPagesAdapter : AuthPagerAdapter
+    lateinit var binding: FragmentAuthBinding
+    private lateinit var authPagesAdapter: AuthPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAuthBinding.inflate(inflater)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewPager()
     }
 
-    private fun setupViewPager(){
+    private fun setupViewPager() {
         activity?.let {
             val tabNames = resources.getStringArray(R.array.auth_pages)
             authPagesAdapter = AuthPagerAdapter(it, this)
-            binding?.authViewPager?.let{ viewPager ->
+
+            binding.authViewPager.let { viewPager ->
                 viewPager.adapter = authPagesAdapter
+
                 // если пэйджер не нулл, то и табс не должны быть нулл
-                TabLayoutMediator(binding!!.authTabs,viewPager){ tab, position ->
+                TabLayoutMediator(binding.authTabs, viewPager) { tab, position ->
                     tab.text = tabNames[position]
                 }.attach()
             }

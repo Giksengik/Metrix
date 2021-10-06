@@ -5,16 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.databinding.FragmentServicesBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
-    private lateinit var binding : FragmentServicesBinding
-    private var serviceAdapter : ServiceListAdapter? = null
+    private val viewModel: ServiceViewModel by viewModels()
+    private lateinit var binding: FragmentServicesBinding
+    private var serviceAdapter: ServiceListAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.apply {
+            viewModelScope.launch {
+                initial()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,22 +42,24 @@ class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
         setupServicesList()
     }
 
-    private fun setupServicesList(){
+    private fun setupServicesList() {
         serviceAdapter = ServiceListAdapter(this)
-        binding.servicesList.apply{
+        binding.servicesList.apply {
             adapter = serviceAdapter
-            layoutManager = GridLayoutManager(context,2,
-                LinearLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(
+                context, 2,
+                LinearLayoutManager.VERTICAL, false
+            )
         }
         setupAdapterItems()
     }
 
-    private fun setupAdapterItems(){
+    private fun setupAdapterItems() {
         serviceAdapter?.submitList(ServiceType.values().toList())
     }
 
     override fun onServiceClick(serviceType: ServiceType) =
-        when(serviceType){
+        when (serviceType) {
             ServiceType.AWARDS -> showAwardsService()
             ServiceType.DIAGNOSTIC -> showDiagnosticService()
             ServiceType.RATING -> showRatingsService()
