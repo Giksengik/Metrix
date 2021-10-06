@@ -14,7 +14,7 @@ import com.company.metrix.R
 import com.company.metrix.auth.AuthHandler
 import com.company.metrix.databinding.FragmentEstimateBinding
 import com.company.metrix.data.model.CharacteristicInfo
-import com.company.metrix.ui.services.CharacteristicAdapter
+import com.company.metrix.ui.servicesEmployee.CharacteristicAdapter
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

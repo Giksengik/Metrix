@@ -11,7 +11,7 @@ class EstimationFactory {
                 user_id = 1,
                 reviewer_id = 2,
                 comment = "Грубиян!",
-                rate = 4.0,
+                rate = 2.0,
                 skillName = "Вежливость"
             ),
             Estimation(

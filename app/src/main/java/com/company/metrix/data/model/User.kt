@@ -1,5 +1,7 @@
 package com.company.metrix.data.model
 
+import android.net.Uri
+
 data class User(
     val id: Long,
     val name : String,
