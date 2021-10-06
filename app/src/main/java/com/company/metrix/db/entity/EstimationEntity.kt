@@ -12,8 +12,4 @@ data class EstimationEntity(
     val reviewer_id : Long,
     val rate : Double,
     val skillName : String
-//    val mobile : Double,
-//    val professional : Double,
-//    val speed : Double,
-//    val friendly : Double,
  )
