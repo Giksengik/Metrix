@@ -8,5 +8,22 @@
         android:id="@+id/rulerServicesFragment"
         android:name="com.company.metrix.ui.servicesEmployer.RulerServicesFragment"
         android:label="fragment_ruler_services"
-        tools:layout="@layout/fragment_ruler_services" />
+        tools:layout="@layout/fragment_ruler_services" >
+        <action
+            android:id="@+id/action_rulerServicesFragment_to_pulseResultChoiceFragment"
+            app:destination="@id/pulseResultChoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pulseResultChoiceFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.pulseResults.PulseResultChoiceFragment"
+        android:label="fragment_pulse_result_choice"
+        tools:layout="@layout/fragment_pulse_result_choice" >
+        <action
+            android:id="@+id/action_pulseResultChoiceFragment_to_pulseResultFragment"
+            app:destination="@id/pulseResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pulseResultFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.pulseResults.PulseResultFragment"
+        android:label="PulseResultFragment" />
 </navigation>

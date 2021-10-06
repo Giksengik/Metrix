@@ -12,15 +12,9 @@ data class UserEntity (
     val id: Long,
     val name : String,
     val email : String,
+    val companyName : String,
     val team_id: Long,
     val position : String,
     val role : String
-
-//    @Embedded
-//    val ratings: Array<Estimation>,
-//    @Embedded
-//    val strongSkills: Array<String>,
-//    @Embedded
-//    val weakSkills : Array<String>
 )
 

@@ -67,7 +67,7 @@ class FragmentAuth : Fragment(), AuthHandler {
                 val user = Firebase.auth.currentUser!!
                 Log.d("test_test", "onCreate2222: ${user.photoUrl} ")
                 initial(user.displayName, user.phoneNumber)
-                Log.d("test_test", "onCreate: ${user.displayName} ${user.phoneNumber}")
+                Log.d("test_test", "onCreate--------: ${user.displayName} ${user.phoneNumber}")
             }
         }
 
