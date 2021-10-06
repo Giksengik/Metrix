@@ -38,7 +38,6 @@ class FragmentRecomendations : Fragment(), BackButtonHandler {
         super.onCreate(savedInstanceState)
 
         viewModel.viewModelScope.launch {
-            viewModel.initial()
             viewModel.getNegativeFeedback(1)
         }
     }

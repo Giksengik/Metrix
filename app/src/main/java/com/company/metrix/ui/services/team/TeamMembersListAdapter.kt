@@ -32,13 +32,12 @@ class TeamMembersListAdapter : ListAdapter<User, TeamMembersListAdapter.ViewHold
 
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
             oldItem == newItem
-
     }
 
     class ViewHolder(val binding: TeamMemberItemBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(teamMemberInfo: User) {
-            binding.memberInfo.text = "${teamMemberInfo.name }, ${teamMemberInfo.position}"
+            binding.memberInfo.text = "${teamMemberInfo.name }, ${teamMemberInfo.role}"
         }
     }
 

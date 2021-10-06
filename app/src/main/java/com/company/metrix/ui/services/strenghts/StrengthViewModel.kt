@@ -14,16 +14,6 @@ class StrengthViewModel @Inject constructor(val estimationRepo: EstimationReposi
     ViewModel() {
     val estimations: MutableLiveData<List<Estimation>> = MutableLiveData<List<Estimation>>()
 
-    suspend fun initial() {
-        //Stub!
-        val v = EstimationFactory().getAllEstimations()
-        for (i in v) {
-            estimationRepo.addEstimation(i)
-        }
-        Log.d("test_test", "initial!: ${estimationRepo.getAllEstimations()}")
-
-    }
-
 
     suspend fun getPositiveFeedback(id: Long) {
         estimations.value = estimationRepo.getEstimationsByUserId(id).filter { it.rate >= 4.0 }
