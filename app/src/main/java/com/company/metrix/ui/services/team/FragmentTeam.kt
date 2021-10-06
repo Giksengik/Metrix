@@ -16,14 +16,17 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FragmentTeam : Fragment(), BackButtonHandler {
-    private val viewModel : TeamViewModel by viewModels()
-    private lateinit var binding : FragmentTeamBinding
-    private var teamMembersListAdapter : TeamMembersListAdapter? = null
+    private val viewModel: TeamViewModel by viewModels()
+    private lateinit var binding: FragmentTeamBinding
+    private lateinit var teamMembersListAdapter: TeamMembersListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.viewModelScope.launch {
-            viewModel.getMembersOfTeam(1)
+
+        viewModel.apply {
+            viewModelScope.launch {
+                getMembersOfTeam(1)
+            }
         }
     }
 
@@ -38,7 +41,7 @@ class FragmentTeam : Fragment(), BackButtonHandler {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.team.observe(viewLifecycleOwner, {
-            teamMembersListAdapter?.submitList(viewModel.team.value)
+            teamMembersListAdapter.submitList(viewModel.team.value)
         })
 
         setupOnBackButtonPressed()
@@ -55,7 +58,7 @@ class FragmentTeam : Fragment(), BackButtonHandler {
 
 
     override fun setupOnBackButtonPressed() {
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             activity?.onBackPressed()
         }
     }

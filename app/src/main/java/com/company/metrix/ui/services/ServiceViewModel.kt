@@ -1,20 +1,20 @@
-package com.company.metrix.ui.profile
+package com.company.metrix.ui.services
 
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.company.metrix.data.model.Estimation
 import com.company.metrix.data.model.User
 import com.company.metrix.data.repository.EstimationRepository
 import com.company.metrix.data.repository.UserRepository
 import com.company.metrix.data.stub.EmployeeFactory
+import com.company.metrix.data.stub.EstimationFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(val userRepo: UserRepository) :
-    ViewModel() { // TODO UserInteractor -> UserRepo ->
-
-    val user: MutableLiveData<User> = MutableLiveData<User>()
+class ServiceViewModel @Inject constructor(
+    private val userRepo: UserRepository,
+    private val estimationRepo: EstimationRepository
+) : ViewModel() {
 
     suspend fun initial() {
         val user1 = User(
@@ -25,7 +25,7 @@ class ProfileViewModel @Inject constructor(val userRepo: UserRepository) :
             position = "Руководитель",
             role = "Тим лид гений босс"
         )
-        //  repository.deleteUser(user1)
+
         userRepo.addUser(user1)
 
         val usrs = EmployeeFactory().getAllEmployees()
@@ -33,12 +33,11 @@ class ProfileViewModel @Inject constructor(val userRepo: UserRepository) :
         for (i in usrs)
             userRepo.addUser(i)
 
-    }
-
-    suspend fun getEmployeeInfo(id: Long) {
         //Stub!
-        user.value = userRepo.getUserById(id)
-
+        val v = EstimationFactory().getAllEstimations()
+        for (i in v) {
+            estimationRepo.addEstimation(i)
+        }
+        Log.d("test_test", "initial!: ${estimationRepo.getAllEstimations()}")
     }
-
 }
