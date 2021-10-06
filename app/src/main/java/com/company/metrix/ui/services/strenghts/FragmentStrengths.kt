@@ -39,7 +39,6 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
         super.onCreate(savedInstanceState)
 
         viewModel.viewModelScope.launch {
-            viewModel.initial()
             viewModel.getPositiveFeedback(1)
         }
     }
