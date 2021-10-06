@@ -17,7 +17,7 @@ interface UserDao {
     suspend fun getUserById(id : Long) : UserEntity
 
 
-    @Query(value = "Select * from `users` where name = :email " )
+    @Query(value = "Select * from `users` where email = :email " )
     suspend fun getUserByEmail(email : String) : UserEntity
 
     @Query(value = "Select * from `users` where team_id = :team_id " )
