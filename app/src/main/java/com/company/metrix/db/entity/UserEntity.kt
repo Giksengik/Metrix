@@ -1,5 +1,6 @@
 package com.company.metrix.db.entity
 
+import android.net.Uri
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,6 +15,7 @@ data class UserEntity (
     val team_id: Long,
     val position : String,
     val role : String
+
 //    @Embedded
 //    val ratings: Array<Estimation>,
 //    @Embedded

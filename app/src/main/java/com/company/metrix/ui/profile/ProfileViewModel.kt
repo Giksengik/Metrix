@@ -16,24 +16,6 @@ class ProfileViewModel @Inject constructor(val userRepo: UserRepository) :
 
     val user: MutableLiveData<User> = MutableLiveData<User>()
 
-    suspend fun initial() {
-        val user1 = User(
-            id = 1,
-            name = "Yana",
-            email = "monsterglad12@gmail.com",
-            team_id = 1,
-            position = "Руководитель",
-            role = "Тим лид гений босс"
-        )
-        //  repository.deleteUser(user1)
-        userRepo.addUser(user1)
-
-        val usrs = EmployeeFactory().getAllEmployees()
-
-        for (i in usrs)
-            userRepo.addUser(i)
-
-    }
 
     suspend fun getEmployeeInfo(id: Long) {
         //Stub!
