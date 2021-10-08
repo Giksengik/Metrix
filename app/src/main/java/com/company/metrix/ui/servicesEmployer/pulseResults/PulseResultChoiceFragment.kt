@@ -27,4 +27,11 @@ class PulseResultChoiceFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.strengthsContent.visibility = View.VISIBLE
+        binding.loadingBar.visibility = View.GONE
+    }
+
 }

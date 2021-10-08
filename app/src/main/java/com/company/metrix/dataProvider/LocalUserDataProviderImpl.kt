@@ -120,4 +120,21 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             item.team_name
         ))
 
+    override suspend fun getAllUsersByTeamAndCompany(
+        team_id: Long,
+        companyName: String
+    ): List<User>  =
+        dao.getAllUsersByTeamAndCompany(team_id, companyName)
+            .map {
+                User(
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
+                    team_id = it.team_id,
+                    position = it.position,
+                    role = it.role,
+                    companyName = it.companyName
+                )
+            }
+
 }

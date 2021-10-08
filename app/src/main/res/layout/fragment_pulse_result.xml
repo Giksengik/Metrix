@@ -65,6 +65,8 @@
                 android:text="@string/choose_team"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:layout_margin="20dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

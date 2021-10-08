@@ -26,6 +26,9 @@ interface UserDao {
     @Query(value = "Select * from `users` where team_id = :team_id " )
     suspend fun getAllUsersByTeam(team_id : Long) :  List<UserEntity>
 
+    @Query(value = "Select * from `users` where team_id = :team_id and companyName = :companyName" )
+    suspend fun getAllUsersByTeamAndCompany(team_id : Long, companyName: String) :  List<UserEntity>
+
     @Query(value = "Select * from `teams` where team_id = :team_id and companyName = :companyName" )
     suspend fun getTeamByTeamAndCompany(team_id : Long, companyName : String) :  TeamEntity
 
