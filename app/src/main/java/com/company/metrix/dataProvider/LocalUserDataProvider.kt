@@ -18,4 +18,5 @@ interface LocalUserDataProvider {
     suspend fun getTeamByTeamAndCompany(team_id : Long, companyName : String) :  Team
     suspend fun getAllTeamsByCompany(companyName : String) :  List<Team>
     suspend fun insertTeam(item : Team)
+    suspend fun getAllUsersByTeamAndCompany(team_id : Long, companyName: String) :  List<User>
 }
