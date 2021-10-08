@@ -25,7 +25,7 @@ class AuthViewModel @Inject constructor(
             email = userEmail ?: "monsterglad12@gmail.com",
             team_id = 1,
             position = "Руководитель",
-            role = "Тим лид гений босс",
+            role = "Помощник помощника стажера",
             companyName = "Tinkoff"
         )
 
@@ -33,10 +33,15 @@ class AuthViewModel @Inject constructor(
         userRepo.addUser(user1)
         Log.d("test_test", "getEmployeeInfo hhey: ${userRepo.getUserByEmail("monsterglad12@gmail.com")}")
 
-        val usrs = EmployeeFactory().getAllEmployees()
+        val factory = EmployeeFactory()
+        val usrs = factory.getAllEmployees()
+        val temas = factory.getAllTeams()
 
         for (i in usrs)
             userRepo.addUser(i)
+
+        for (i in temas)
+            userRepo.addTeam(i)
 
         //Stub!
         val v = EstimationFactory().getAllEstimations()

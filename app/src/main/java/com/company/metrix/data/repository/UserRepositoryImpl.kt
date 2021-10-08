@@ -1,5 +1,6 @@
 package com.company.metrix.data.repository
 
+import com.company.metrix.data.model.Team
 import com.company.metrix.data.model.User
 import com.company.metrix.db.LocalUserDataProvider
 import javax.inject.Inject
@@ -24,5 +25,13 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getUsersByTeam(team_id: Long): List<User> =
         localUserProvider.getUsersByTeam(team_id)
+
+    override suspend fun getTeamByTeamAndCompany(team_id: Long, companyName: String): Team =
+        localUserProvider.getTeamByTeamAndCompany(team_id, companyName)
+
+    override suspend fun getAllTeamsByCompany(companyName: String): List<Team> =
+        localUserProvider.getAllTeamsByCompany(companyName)
+
+    override suspend fun addTeam(item: Team)  = localUserProvider.insertTeam(item)
 
 }
