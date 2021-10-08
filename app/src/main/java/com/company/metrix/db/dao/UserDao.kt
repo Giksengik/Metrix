@@ -35,6 +35,7 @@ interface UserDao {
     @Query(value = "Select * from `teams` where companyName = :companyName " )
     suspend fun getAllTeamsByCompany(companyName : String) :  List<TeamEntity>
 
+
     @Delete()
     suspend fun deleteUser(item : UserEntity)
 
