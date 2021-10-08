@@ -40,10 +40,6 @@ class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        viewModel.mainUser.observe(viewLifecycleOwner, {
-//
-//        })
-
         setupServicesList()
     }
 
