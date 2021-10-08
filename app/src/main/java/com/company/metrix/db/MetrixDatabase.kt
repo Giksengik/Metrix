@@ -6,8 +6,9 @@ import com.company.metrix.db.dao.EstimationDao
 import com.company.metrix.db.dao.UserDao
 import com.company.metrix.db.entity.EstimationEntity
 import com.company.metrix.db.entity.StatsEntity
+import com.company.metrix.db.entity.TeamEntity
 import com.company.metrix.db.entity.UserEntity
-@Database(entities = [EstimationEntity::class, UserEntity::class] , version = 8,
+@Database(entities = [EstimationEntity::class, UserEntity::class, TeamEntity::class] , version = 9,
     exportSchema = false)
 abstract class MetrixDatabase : RoomDatabase(){
     abstract fun userDao() : UserDao

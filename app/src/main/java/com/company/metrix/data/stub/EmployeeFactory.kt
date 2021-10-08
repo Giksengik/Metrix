@@ -2,6 +2,7 @@ package com.company.metrix.data.stub
 
 import com.company.metrix.data.model.User
 import com.company.metrix.data.model.Estimation
+import com.company.metrix.data.model.Team
 
 class EmployeeFactory{
 fun getAllEmployees(): List<User> = listOf(
@@ -21,7 +22,7 @@ fun getAllEmployees(): List<User> = listOf(
         email = "fedya@mail.ru",
         team_id = 1,
         position = "Сотрудник" ,
-        role = "Android разработчик",
+        role = "Старший разработчик",
         companyName = "Tinkoff"
     ),
 
@@ -40,7 +41,7 @@ fun getAllEmployees(): List<User> = listOf(
         id = 6,
         email = "stepvanya@mail.ru",
         name = "Степан Иванов",
-        team_id = 1,
+        team_id = 2,
         position = "Сотрудник",
         role = "Менеждер",
         companyName = "Tinkoff"
@@ -57,4 +58,45 @@ fun getAllEmployees(): List<User> = listOf(
     ),
 )
 
+fun getAllTeams( ) : List<Team> = listOf(
+    Team(
+        1,
+        "Tinkoff",
+        1,
+        "Android"
+    ),
+    Team(
+        2,
+        "Tinkoff",
+        2,
+        "Персонал"
+    ),
+    Team(
+        3,
+        "Tinkoff",
+        3,
+        "Бэкенд"
+    ),
+
+    Team(
+        4,
+        "Tinkoff",
+        4,
+        "Аналитика"
+    ),
+
+    Team(
+        5,
+        "Google",
+        1,
+        "Бэкендеры"
+    ),
+
+    Team(
+        6,
+        "Google",
+        2,
+        "Аналитика"
+    ),
+)
 }
