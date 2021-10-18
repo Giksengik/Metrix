@@ -56,7 +56,7 @@ class RulerServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListe
         //serviceAdapter.submitList(ServiceType.values().toList())
         serviceAdapter.submitList(
             arrayListOf(
-                ServiceType.TEAM, ServiceType.DIAGNOSTIC, ServiceType.RATING, ServiceType.STRENGTHS,
+                ServiceType.TEAM, ServiceType.DIAGNOSTIC,
                 ServiceType.USER, ServiceType.PULSE
             )
         )
@@ -82,17 +82,15 @@ class RulerServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListe
     }
 
     private fun showEmployeeService() {
-        //TODO
-//        findNavController().navigate(
-//            ServicesFragmentDirections.actionServiceFragmentToFragmentStrengths()
-//        )
+        findNavController().navigate(
+            RulerServicesFragmentDirections.actionRulerServicesFragmentToEmployeeListFragment()
+        )
     }
 
     private fun showTeamService() {
-        //TODO
-//        findNavController().navigate(
-//            ServicesFragmentDirections.actionServiceFragmentToFragmentTeam()
-//        )
+        findNavController().navigate(
+            RulerServicesFragmentDirections.actionRulerServicesFragmentToEmployeeTeamChoiceFragment()
+        )
     }
 
     private fun showStrengthsService() {

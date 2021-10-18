@@ -14,4 +14,8 @@ interface UserRepository {
     suspend fun getAllTeamsByCompany(companyName : String) :  List<Team>
     suspend fun addTeam(item : Team)
     suspend fun getAllUsersByTeamAndCompany(team_id : Long, companyName: String) :  List<User>
+    suspend fun updateUser(item: User)
+    suspend fun getTeamByNameAndCompany(name : String, companyName : String) :  Team
+    suspend fun getAllUsersByCompany(companyName: String): List<User>
+
 }
