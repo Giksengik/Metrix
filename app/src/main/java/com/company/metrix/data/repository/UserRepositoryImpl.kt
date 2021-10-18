@@ -32,11 +32,20 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun getAllTeamsByCompany(companyName: String): List<Team> =
         localUserProvider.getAllTeamsByCompany(companyName)
 
-    override suspend fun addTeam(item: Team)  = localUserProvider.insertTeam(item)
+    override suspend fun addTeam(item: Team) = localUserProvider.insertTeam(item)
     override suspend fun getAllUsersByTeamAndCompany(
         team_id: Long,
         companyName: String
     ): List<User> =
         localUserProvider.getAllUsersByTeamAndCompany(team_id, companyName)
+
+    override suspend fun updateUser(item: User) =
+        localUserProvider.updateUser(item)
+
+    override suspend fun getTeamByNameAndCompany(name: String, companyName: String): Team =
+        localUserProvider.getTeamByNameAndCompany(name, companyName)
+
+    override suspend fun getAllUsersByCompany(companyName: String): List<User> =
+        localUserProvider.getAllUsersByCompany(companyName)
 
 }

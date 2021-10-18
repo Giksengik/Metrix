@@ -11,19 +11,71 @@
         tools:layout="@layout/fragment_ruler_services" >
         <action
             android:id="@+id/action_rulerServicesFragment_to_pulseResultChoiceFragment"
-            app:destination="@id/pulseResultChoiceFragment" />
+            app:destination="@id/pulseChoiceFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_rulerServicesFragment_to_employeeTeamChoiceFragment"
+            app:destination="@id/employeeTeamChoiceFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_rulerServicesFragment_to_employeeListFragment"
+            app:destination="@id/employeeListFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/pulseResultChoiceFragment"
-        android:name="com.company.metrix.ui.servicesEmployer.pulseResults.PulseResultChoiceFragment"
+        android:id="@+id/pulseChoiceFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.pulseResults.PulseChoiceFragment"
         android:label="fragment_pulse_result_choice"
         tools:layout="@layout/fragment_pulse_result_choice" >
         <action
             android:id="@+id/action_pulseResultChoiceFragment_to_pulseResultFragment"
-            app:destination="@id/pulseResultFragment" />
+            app:destination="@id/pulseResultFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+
     </fragment>
     <fragment
         android:id="@+id/pulseResultFragment"
         android:name="com.company.metrix.ui.servicesEmployer.pulseResults.PulseResultFragment"
-        android:label="PulseResultFragment" />
+        android:label="PulseResultFragment" >
+        <argument
+            android:name="team"
+            app:argType="com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/employeeTeamFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.teams.EmployeeTeamFragment"
+        android:label="EmployeeTeamFragment" >
+        <argument
+            android:name="team"
+            app:argType="com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/employeeTeamChoiceFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.teams.recyclerEmployee.EmployeeTeamChoiceFragment"
+        android:label="EmployeeTeamChoiceFragment" >
+        <action
+            android:id="@+id/action_employeeTeamChoiceFragment_to_employeeTeamFragment"
+            app:destination="@id/employeeTeamFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/employeeListFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.listEmployee.EmployeeListFragment"
+        android:label="fragment_employee_list"
+        tools:layout="@layout/fragment_employee_list" />
 </navigation>
