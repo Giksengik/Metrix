@@ -37,6 +37,14 @@ class EstimationFactory {
                 rate = 1.0,
                 skillName = "Мобильность",
                 comment = "УЖАС"
+            ),
+            Estimation(
+                id = 231234,
+                user_id = 4,
+                reviewer_id = 1,
+                rate = 1.0,
+                skillName = "Мобильность",
+                comment = "УЖАС"
             )
         )
 }

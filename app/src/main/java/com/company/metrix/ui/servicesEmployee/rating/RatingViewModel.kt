@@ -13,10 +13,11 @@ class RatingViewModel @Inject constructor(val repository: EstimationRepository) 
 
     suspend fun calculateRating() {
         val list = repository.getAllEstimations()
-        var rate: MutableList<Double> = arrayListOf()
-        for (est in list) {
+        val rate: MutableList<Double> = arrayListOf()
+
+        for (est in list)
             rate.add(est.rate)
-        }
+
         rating.value = rate
     }
 }
