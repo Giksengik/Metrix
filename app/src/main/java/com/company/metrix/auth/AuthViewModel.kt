@@ -23,8 +23,8 @@ class AuthViewModel @Inject constructor(
             id = 1,
             name = userName ?: "Yana",
             email = userEmail ?: "monsterglad12@gmail.com",
-            team_id = 1,
-            position = "Руководитель",
+            teamId = 1,
+            position = "Сотрудник",
             role = "Помощник помощника стажера",
             companyName = "Tinkoff"
         )
