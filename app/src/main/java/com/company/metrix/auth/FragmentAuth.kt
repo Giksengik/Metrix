@@ -20,17 +20,10 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FragmentAuth : Fragment(), AuthHandler {
-
     val viewModel: AuthViewModel by viewModels()
 
     lateinit var binding: FragmentAuthBinding
     private lateinit var authPagesAdapter: AuthPagerAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("test_test", "onCreate: AUTH")
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,9 +58,7 @@ class FragmentAuth : Fragment(), AuthHandler {
         viewModel.apply {
             viewModelScope.launch {
                 val user = Firebase.auth.currentUser!!
-                Log.d("test_test", "onCreate2222: ${user.photoUrl} ")
                 initial(user.displayName, user.phoneNumber)
-                Log.d("test_test", "onCreate--------: ${user.displayName} ${user.phoneNumber}")
             }
         }
 
@@ -75,18 +66,12 @@ class FragmentAuth : Fragment(), AuthHandler {
     }
 
     private fun navigateToMain() {
-        Log.d("test_test", "onCreate: THERE")
 
         viewModel.viewModelScope.launch {
-            Log.d("test_test", "onCreate: !!!!")
-
             viewModel.getCurrentUser(Firebase.auth.currentUser?.email!!)
-            Log.d("test_test", "navigateToMain: ${viewModel.currentUser.value!!}")
             findNavController().navigate(
                 FragmentAuthDirections.actionFragmentAuthToMainFragment(viewModel.currentUser.value!!.position)
             )
         }
-        Log.d("test_test", "onCreate: :(")
-
     }
 }
