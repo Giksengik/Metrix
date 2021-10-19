@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentRatingBinding
 import com.company.metrix.databinding.FragmentStrengthsBinding
+import com.company.metrix.ui.servicesEmployee.strenghts.FragmentStrengthsDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,6 +34,19 @@ class FragmentRating : Fragment(), BackButtonHandler {
                 calculateRating()
             }
         }
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (isEnabled) {
+                        isEnabled = false
+                        val action = FragmentRatingDirections.actionFragmentRatingToServiceFragment()
+                        findNavController().navigate(action)
+                    }
+                }
+            }
+            )
     }
 
     override fun onCreateView(
@@ -53,7 +69,8 @@ class FragmentRating : Fragment(), BackButtonHandler {
 
     override fun setupOnBackButtonPressed() {
         binding.backButton.setOnClickListener {
-            activity?.onBackPressed()
+            val action = FragmentRatingDirections.actionFragmentRatingToServiceFragment()
+            findNavController().navigate(action)
         }
     }
 
