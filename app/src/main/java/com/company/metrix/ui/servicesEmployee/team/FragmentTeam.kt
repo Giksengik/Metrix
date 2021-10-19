@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.databinding.FragmentTeamBinding
@@ -27,6 +29,19 @@ class FragmentTeam : Fragment(), BackButtonHandler {
                 getMembersOfTeam(1)
             }
         }
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (isEnabled) {
+                        isEnabled = false
+                        val action = FragmentTeamDirections.actionFragmentTeamToServiceFragment()
+                        findNavController().navigate(action)
+                    }
+                }
+            }
+            )
     }
 
     override fun onCreateView(
@@ -47,6 +62,7 @@ class FragmentTeam : Fragment(), BackButtonHandler {
         setupTeamMembersList()
     }
 
+
     private fun setupTeamMembersList() {
         teamMembersListAdapter = TeamMembersListAdapter()
         binding.teamList.apply {
@@ -55,10 +71,10 @@ class FragmentTeam : Fragment(), BackButtonHandler {
         }
     }
 
-
     override fun setupOnBackButtonPressed() {
         binding.backButton.setOnClickListener {
-            activity?.onBackPressed()
+            val action = FragmentTeamDirections.actionFragmentTeamToServiceFragment()
+            findNavController().navigate(action)
         }
     }
 }

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
@@ -14,6 +16,7 @@ import com.company.metrix.data.model.AwardInfo
 import com.company.metrix.data.model.AwardNomination
 import com.company.metrix.data.model.AwardType
 import com.company.metrix.databinding.FragmentDiagnosticBinding
+import com.company.metrix.ui.servicesEmployee.diagnostic.FragmentDiagnosticDirections
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,6 +33,23 @@ class FragmentAwards : Fragment(), BackButtonHandler {
     private val binding get() = _binding!!
 
     private var awardsAdapter: AwardsListAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (isEnabled) {
+                        isEnabled = false
+                        val action = FragmentAwardsDirections.actionFragmentAwardsToServiceFragment()
+                        findNavController().navigate(action)
+                    }
+                }
+            }
+            )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +68,8 @@ class FragmentAwards : Fragment(), BackButtonHandler {
 
     override fun setupOnBackButtonPressed() {
         binding.backButton.setOnClickListener {
-            activity?.onBackPressed()
+            val action = FragmentAwardsDirections.actionFragmentAwardsToServiceFragment()
+            findNavController().navigate(action)
         }
     }
 
