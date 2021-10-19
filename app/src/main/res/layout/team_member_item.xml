@@ -14,13 +14,13 @@
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_profile" />
+        app:srcCompat="@drawable/avatar_stab_round" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/memberInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="TextView"
