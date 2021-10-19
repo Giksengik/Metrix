@@ -33,7 +33,7 @@ class PulseTeamAdapter : ListAdapter<PulseTeamModel, PulseTeamAdapter.ViewHolder
     class ViewHolder(val binding: TeamItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(name: PulseTeamModel) {
             binding.teamName.text = "${name.teamName} ,"
-            binding.peopleCount.text = " число человек : ${name.peopleCount}"
+            // binding.peopleCount.text = " число человек : ${name.peopleCount}"
         }
     }
 }
