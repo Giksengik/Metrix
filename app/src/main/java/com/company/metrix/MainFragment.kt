@@ -30,8 +30,6 @@ class MainFragment : Fragment() {
             position = it
         }
 
-
-        Log.d("test_test", "onCreate: $position")
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
