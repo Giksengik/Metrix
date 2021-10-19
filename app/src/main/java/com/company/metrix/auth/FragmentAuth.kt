@@ -58,7 +58,7 @@ class FragmentAuth : Fragment(), AuthHandler {
         viewModel.apply {
             viewModelScope.launch {
                 val user = Firebase.auth.currentUser!!
-                initial(user.displayName, user.phoneNumber)
+                initial(user.displayName, user.email)
             }
         }
 

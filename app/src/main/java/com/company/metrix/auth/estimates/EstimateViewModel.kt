@@ -11,10 +11,10 @@ import javax.inject.Inject
 class EstimateViewModel @Inject constructor(val estimateRepository : EstimationRepository) : ViewModel(){
     private var stubId : Any = Any();
 
-    suspend fun sendFeedback(id : Long, list : MutableList<String>, comment : String, rate : Double){
+    suspend fun sendFeedback(id : String, list : MutableList<String>, comment : String, rate : Double){
         for (est in list){
             stubId = Any();
-            estimateRepository.addEstimation(Estimation(stubId.hashCode().toLong(), comment,id,2, rate, est))
+            estimateRepository.addEstimation(Estimation(stubId.hashCode().toLong(), comment, id,2, rate, est))
         }
     }
 }

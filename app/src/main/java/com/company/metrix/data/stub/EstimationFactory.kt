@@ -8,7 +8,7 @@ class EstimationFactory {
         listOf(
             Estimation(
                 id = 121,
-                user_id = 1,
+                user_id = "feds.msc@gmail.com",
                 reviewer_id = 2,
                 comment = "Грубиян!",
                 rate = 2.0,
@@ -16,7 +16,7 @@ class EstimationFactory {
             ),
             Estimation(
                 id = 22,
-                user_id = 1,
+                user_id = "feds.msc@gmail.com",
                 reviewer_id = 2,
                 comment = "So slooow",
                 rate = 2.0,
@@ -24,7 +24,7 @@ class EstimationFactory {
             ),
             Estimation(
                 id = 1211,
-                user_id = 1,
+                user_id = "feds.msc@gmail.com",
                 reviewer_id = 3,
                 rate = 3.0,
                 skillName = "Профессионализм",
@@ -32,7 +32,7 @@ class EstimationFactory {
             ),
             Estimation(
                 id = 234,
-                user_id = 3,
+                user_id = "feds.msc@gmail.com",
                 reviewer_id = 1,
                 rate = 1.0,
                 skillName = "Мобильность",
@@ -40,7 +40,7 @@ class EstimationFactory {
             ),
             Estimation(
                 id = 231234,
-                user_id = 4,
+                user_id = "feds.msc@gmail.com",
                 reviewer_id = 1,
                 rate = 1.0,
                 skillName = "Мобильность",
