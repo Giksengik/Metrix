@@ -120,7 +120,7 @@ class FragmentEstimate() : Fragment() {
     }
 
     private fun onSubmit() {
-        val userId = binding.employeeIdField.text.toString().trim().toLong()
+        val userId = binding.employeeIdField.text.toString().trim()
         userRating = binding.ratingBar.rating.toDouble()
         userComment = binding.employeeCommentField.text.toString().trim()
         viewModel.viewModelScope.launch {
