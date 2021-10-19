@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
@@ -14,6 +16,7 @@ import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.data.model.Question
 import com.company.metrix.data.model.TeamMemberInfo
 import com.company.metrix.databinding.FragmentServicesBinding
+import com.company.metrix.ui.servicesEmployee.rating.FragmentRatingDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +26,23 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
     private val binding get() = _binding!!
 
     private var questionAdapter: DiagnosticQuestionListAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (isEnabled) {
+                        isEnabled = false
+                        val action = FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment()
+                        findNavController().navigate(action)
+                    }
+                }
+            }
+            )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -96,7 +116,8 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
 
     override fun setupOnBackButtonPressed() {
         binding.backButton.setOnClickListener {
-            activity?.onBackPressed()
+            val action = FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment()
+            findNavController().navigate(action)
         }
     }
 
