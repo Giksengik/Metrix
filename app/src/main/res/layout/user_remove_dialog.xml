@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@+id/remove_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/remove_icon"
-        tools:text="Yana Glad" />
+        tools:text="Theo Jedi" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/role_remove"

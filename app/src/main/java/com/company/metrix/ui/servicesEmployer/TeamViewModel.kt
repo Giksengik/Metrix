@@ -19,7 +19,7 @@ class TeamViewModel @Inject constructor(val userRepo: UserRepository) : ViewMode
 
     suspend fun getTeamsOfUser() {
         currentUser.value =
-            userRepo.getUserByEmail(Firebase.auth.currentUser?.email ?: "monsterglad12@gmail.com")
+            userRepo.getUserByEmail(Firebase.auth.currentUser?.email ?: "feds.msc@gmail.com")
         val list = ArrayList<TeamModel>()
         val allTeams: List<Team> = userRepo.getAllTeamsByCompany(currentUser.value!!.companyName)
 
