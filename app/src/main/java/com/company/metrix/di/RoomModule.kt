@@ -28,4 +28,8 @@ class RoomModule {
     @Provides
     @Singleton
     fun provideEstimationDao(database: MetrixDatabase) = database.estimationDao()
+
+    @Provides
+    @Singleton
+    fun providePulseDao(database: MetrixDatabase) = database.pulseDao()
 }
