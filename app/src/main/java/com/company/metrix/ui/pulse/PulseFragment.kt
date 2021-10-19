@@ -10,12 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentPulseBinding
 import com.company.metrix.data.model.PulseQuestion
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PulseFragment : Fragment() {
 
-    private lateinit var binding : FragmentPulseBinding
+    private lateinit var binding: FragmentPulseBinding
     private var questionListAdapter: PulseQuestionsListAdapter? = null
+
+    var question1 = ""
+    var question2 = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +37,7 @@ class PulseFragment : Fragment() {
     }
 
     private fun setupButton() {
-        binding.pulseConfirmButton.setOnClickListener{
+        binding.pulseConfirmButton.setOnClickListener {
             Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
         }
     }
@@ -63,8 +67,19 @@ class PulseFragment : Fragment() {
         )
     }
 
-    private fun setupQuestionsAdapter(){
-        questionListAdapter = PulseQuestionsListAdapter()
+    private fun setupQuestionsAdapter() {
+        val onClick = object : PulseQuestionsListAdapter.OnPulseQuestionsListener {
+            override fun onPulseClick(value: String, position: Int) {
+                if (position == 0) {
+                    question1 = value
+                } else if (position == 1) {
+                    question2 = value
+                }
+                Toast.makeText(context, value + " " + position, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        questionListAdapter = PulseQuestionsListAdapter(onClick)
         binding.pulseList.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = questionListAdapter
