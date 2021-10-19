@@ -1,9 +1,6 @@
 package com.company.metrix.di
 
-import com.company.metrix.data.repository.EstimationRepository
-import com.company.metrix.data.repository.EstimationRepositoryImpl
-import com.company.metrix.data.repository.UserRepository
-import com.company.metrix.data.repository.UserRepositoryImpl
+import com.company.metrix.data.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,5 +19,9 @@ interface RepositoryModule {
     @Binds
     fun bindEstimationRepository(estimationRepositoryImpl: EstimationRepositoryImpl): EstimationRepository
 
+
+    @Singleton
+    @Binds
+    fun bindPulseRepository(pulseRepositoryImpl: PulseRepositoryImpl): PulseRepository
 
 }
