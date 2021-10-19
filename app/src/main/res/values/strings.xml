@@ -103,4 +103,5 @@
     <string name="remove">Удалить</string>
     <string name="add_employee">Добавить сотрудника</string>
     <string name="thank_you_emoji">🤗</string>
+    <string name="all_pulse_done">Вы молодец, все доступные тесты пройдены!</string>
 </resources>
