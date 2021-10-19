@@ -14,7 +14,7 @@ class TeamViewModel @Inject constructor(val userRepo: UserRepository): ViewModel
     val team : MutableLiveData<List<User>> =  MutableLiveData<List<User>>()
 
     suspend fun getMembersOfTeam(bossId : Long){
-        val teamId = userRepo.getUserById(bossId).team_id
+        val teamId = userRepo.getUserById(bossId).teamId
         team.value = userRepo.getUsersByTeam(teamId)
         Log.d("test_test", "getMembersOfTeam: team id : ${teamId} team : ${userRepo.getUserById(teamId)} ")
     }
