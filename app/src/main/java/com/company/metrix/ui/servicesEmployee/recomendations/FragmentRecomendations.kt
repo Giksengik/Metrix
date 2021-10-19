@@ -17,6 +17,8 @@ import com.company.metrix.databinding.FragmentAwardsBinding
 import com.company.metrix.databinding.FragmentRecomendationsBinding
 import com.company.metrix.ui.servicesEmployee.strenghts.CharacteristicListAdapter
 import com.company.metrix.ui.servicesEmployee.strenghts.StrengthViewModel
+import com.company.metrix.ui.servicesEmployee.team.FragmentTeamDirections
+import com.company.metrix.ui.support.setupNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -37,18 +39,7 @@ class FragmentRecomendations : Fragment(), BackButtonHandler {
             viewModel.getNegativeFeedback(1)
         }
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(this, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (isEnabled) {
-                        isEnabled = false
-                        val action = FragmentRecomendationsDirections.actionFragmentRecomendationsToServiceFragment()
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-            )
+        requireActivity().setupNavigation(this, FragmentRecomendationsDirections.actionFragmentRecomendationsToServiceFragment())
     }
 
     override fun onCreateView(

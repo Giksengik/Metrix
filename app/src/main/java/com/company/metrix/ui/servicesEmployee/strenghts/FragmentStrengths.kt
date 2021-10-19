@@ -18,6 +18,7 @@ import com.company.metrix.databinding.FragmentStrengthsBinding
 import com.company.metrix.data.model.CharacteristicInfo
 import com.company.metrix.databinding.FragmentServicesBinding
 import com.company.metrix.ui.servicesEmployee.team.FragmentTeamDirections
+import com.company.metrix.ui.support.setupNavigation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -47,18 +48,7 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
             viewModel.getPositiveFeedback(1)
         }
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(this, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (isEnabled) {
-                        isEnabled = false
-                        val action = FragmentStrengthsDirections.actionFragmentStrengthsToServiceFragment()
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-            )
+        requireActivity().setupNavigation(this, FragmentStrengthsDirections.actionFragmentStrengthsToServiceFragment())
     }
 
     override fun onCreateView(
@@ -83,7 +73,7 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
                 binding.loadingBar.visibility = View.INVISIBLE
             } else {
                 Log.d("test_test", "onViewCreated: ${viewModel.estimations.value}")
-                 strengthsAdapter?.submitList(viewModel.estimations.value)
+                strengthsAdapter?.submitList(viewModel.estimations.value)
                 binding.strengthsContent.visibility = View.VISIBLE
                 binding.loadingBar.visibility = View.INVISIBLE
             }
@@ -102,7 +92,7 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
                     if (characteristic != null) list.add(characteristic)
                 }
                 strengthsList = list
-              //  loadUserData()
+                //  loadUserData()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
