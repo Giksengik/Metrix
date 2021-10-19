@@ -1,8 +1,6 @@
 package com.company.metrix.di
 
-import com.company.metrix.dataProvider.LocalEstimationDataProvider
-import com.company.metrix.dataProvider.LocalEstimationDataProviderImpl
-import com.company.metrix.dataProvider.LocalUserDataProviderImpl
+import com.company.metrix.dataProvider.*
 import com.company.metrix.db.LocalUserDataProvider
 import dagger.Binds
 import dagger.Module
@@ -24,5 +22,10 @@ interface LocalDataModule {
     fun bindEstimationDataProvider(estimationProvider: LocalEstimationDataProviderImpl)
             : LocalEstimationDataProvider
 
+
+    @Binds
+    @Singleton
+    fun bindPulseDataProvider(pulseProvider: LocalPulseDataProviderImpl)
+            : LocalPulseDataProvider
 
 }
