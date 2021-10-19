@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_background"
     android:padding="16dp"
-    android:translationZ="1dp"
     app:layout_constraintEnd_toStartOf="@+id/endGuideline"
     app:layout_constraintStart_toStartOf="@+id/startGuideline"
     app:layout_constraintTop_toTopOf="@+id/layoutBackground"
