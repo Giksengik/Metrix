@@ -15,7 +15,9 @@ import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentRatingBinding
 import com.company.metrix.databinding.FragmentStrengthsBinding
+import com.company.metrix.ui.servicesEmployee.recomendations.FragmentRecomendationsDirections
 import com.company.metrix.ui.servicesEmployee.strenghts.FragmentStrengthsDirections
+import com.company.metrix.ui.support.setupNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -35,18 +37,7 @@ class FragmentRating : Fragment(), BackButtonHandler {
             }
         }
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(this, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (isEnabled) {
-                        isEnabled = false
-                        val action = FragmentRatingDirections.actionFragmentRatingToServiceFragment()
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-            )
+        requireActivity().setupNavigation(this, FragmentRatingDirections.actionFragmentRatingToServiceFragment())
     }
 
     override fun onCreateView(
@@ -109,7 +100,7 @@ class FragmentRating : Fragment(), BackButtonHandler {
         val average = ratings.average()
         binding.ratingBar.rating = average.toFloat()
         binding.averageRating.text = if (average.isNaN()) "" else String.format("%.02f", average)
-        binding.ratingCount.text = getString(R.string.estimates_count) + " " + (ratings.size-1)
+        binding.ratingCount.text = getString(R.string.estimates_count) + " " + (ratings.size - 1)
         binding.loadingBar.visibility = View.INVISIBLE
         binding.ratingContent.visibility = View.VISIBLE
     }

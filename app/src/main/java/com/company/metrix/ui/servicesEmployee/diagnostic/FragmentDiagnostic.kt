@@ -17,6 +17,7 @@ import com.company.metrix.data.model.Question
 import com.company.metrix.data.model.TeamMemberInfo
 import com.company.metrix.databinding.FragmentServicesBinding
 import com.company.metrix.ui.servicesEmployee.rating.FragmentRatingDirections
+import com.company.metrix.ui.support.setupNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,18 +31,7 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(this, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (isEnabled) {
-                        isEnabled = false
-                        val action = FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment()
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-            )
+        requireActivity().setupNavigation(this, FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment())
     }
 
     override fun onCreateView(

@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.databinding.FragmentTeamBinding
+import com.company.metrix.ui.servicesEmployee.strenghts.FragmentStrengthsDirections
+import com.company.metrix.ui.support.setupNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -30,18 +32,7 @@ class FragmentTeam : Fragment(), BackButtonHandler {
             }
         }
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(this, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (isEnabled) {
-                        isEnabled = false
-                        val action = FragmentTeamDirections.actionFragmentTeamToServiceFragment()
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-            )
+        requireActivity().setupNavigation(this, FragmentTeamDirections.actionFragmentTeamToServiceFragment())
     }
 
     override fun onCreateView(
