@@ -94,5 +94,12 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="choose_team">Выбери команду</string>
+    <string name="choose_team">Выберите команду</string>
+    <string name="add_team">Добавить команду</string>
+    <string name="team_name">Название команды</string>
+    <string name="done">Готово</string>
+    <string name="move_user">Переместить</string>
+    <string name="team">Команда :</string>
+    <string name="remove">Удалить</string>
+    <string name="add_employee">Добавить сотрудника</string>
 </resources>
