@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -61,7 +62,7 @@ class FragmentEstimate() : Fragment() {
     ): View {
         binding = FragmentEstimateBinding.inflate(inflater)
 
-        val adapter = CharacteristicAdapter(mutableListOf()) { id, isSelected, ->
+        val adapter = CharacteristicAdapter(mutableListOf()) { id, isSelected ->
             if (isSelected) {
 
                 if (id in characteristicsList) characteristicsList.remove(id)
@@ -110,7 +111,7 @@ class FragmentEstimate() : Fragment() {
 
         binding.sentButton.setOnClickListener {
             binding.sentButton.visibility = View.INVISIBLE
-            binding.sentImage.visibility = View.INVISIBLE
+            binding.sentEmoji.visibility = View.INVISIBLE
             binding.sentTitle.visibility = View.INVISIBLE
             binding.loadingBackground.visibility = View.INVISIBLE
             binding.buttonConfirmEstimate.visibility = View.VISIBLE
@@ -120,12 +121,61 @@ class FragmentEstimate() : Fragment() {
     }
 
     private fun onSubmit() {
+        showLoading()
+        hideError()
+
         val userId = binding.employeeIdField.text.toString().trim()
         userRating = binding.ratingBar.rating.toDouble()
         userComment = binding.employeeCommentField.text.toString().trim()
+        usersDatabase.orderByChild("id").equalTo(userId).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.children.iterator().hasNext()) {
+                    sendFeedback(userId)
+                    onSent()
+                } else {
+                    setError()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                setError()
+            }
+        })
+    }
+
+    private fun onSent() {
+        binding.sentButton.visibility = View.VISIBLE
+        binding.sentEmoji.visibility = View.VISIBLE
+        binding.sentTitle.visibility = View.VISIBLE
+        binding.loadingBar.visibility = View.INVISIBLE
+    }
+
+    private fun hideError() {
+        binding.employeeIdBlock.error = ""
+    }
+
+    private fun setError() {
+        binding.employeeIdBlock.error = getString(R.string.id_not_found)
+        hideLoading()
+    }
+
+    private fun sendFeedback(userId: String) {
         viewModel.viewModelScope.launch {
             viewModel.sendFeedback(userId, characteristicsList, userComment, userRating)
         }
+    }
+
+    private fun showLoading() {
+        binding.loadingBackground.visibility = View.VISIBLE
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.buttonConfirmEstimate.visibility = View.INVISIBLE
+    }
+
+    private fun hideLoading() {
+        binding.loadingBackground.visibility = View.INVISIBLE
+        binding.loadingBar.visibility = View.INVISIBLE
+        binding.buttonConfirmEstimate.visibility = View.VISIBLE
     }
 
 //    private fun onSubmit() {
