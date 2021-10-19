@@ -17,6 +17,7 @@ import com.company.metrix.data.model.AwardNomination
 import com.company.metrix.data.model.AwardType
 import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.ui.servicesEmployee.diagnostic.FragmentDiagnosticDirections
+import com.company.metrix.ui.support.setupNavigation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -37,18 +38,7 @@ class FragmentAwards : Fragment(), BackButtonHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(this, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (isEnabled) {
-                        isEnabled = false
-                        val action = FragmentAwardsDirections.actionFragmentAwardsToServiceFragment()
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-            )
+        requireActivity().setupNavigation(this, FragmentAwardsDirections.actionFragmentAwardsToServiceFragment())
     }
 
     override fun onCreateView(
