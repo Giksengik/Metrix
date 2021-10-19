@@ -8,7 +8,7 @@ data class EstimationEntity(
     @PrimaryKey(autoGenerate = true)
     val estimate_id : Long,
     val comment: String,
-    val user_id : Long,
+    val user_id : String,
     val reviewer_id : Long,
     val rate : Double,
     val skillName : String

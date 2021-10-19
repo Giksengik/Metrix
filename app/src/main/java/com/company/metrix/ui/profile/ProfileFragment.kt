@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         profileViewModel.viewModelScope.launch {
-            profileViewModel.getEmployeeInfo("monsterglad12@gmail.com")
+            profileViewModel.getEmployeeInfo("feds.msc@gmail.com")
         }
         return binding.root
     }
@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
 
 
         profileViewModel.viewModelScope.launch {
-            profileViewModel.getEmployeeInfo("monsterglad12@gmail.com")
+            profileViewModel.getEmployeeInfo("feds.msc@gmail.com")
         }
 
 
