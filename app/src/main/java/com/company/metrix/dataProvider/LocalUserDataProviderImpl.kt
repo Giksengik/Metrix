@@ -15,7 +15,7 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             id = item.id,
             name = item.name,
             email = item.email,
-            team_id = item.team_id,
+            team_id = item.teamId,
             position = item.position,
             role = item.role,
             companyName = item.companyName
@@ -28,7 +28,7 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
                 id = it.id,
                 name = it.name,
                 email = it.email,
-                team_id = it.team_id,
+                teamId = it.team_id,
                 position = it.position,
                 role = it.role,
                 companyName = it.companyName
@@ -42,7 +42,7 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             id = userEntity.id,
             name = userEntity.name,
             email = userEntity.email,
-            team_id = userEntity.team_id,
+            teamId = userEntity.team_id,
             position = userEntity.position,
             role = userEntity.role,
             companyName = userEntity.companyName
@@ -55,7 +55,7 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             id = item.id,
             name = item.name,
             email = item.email,
-            team_id = item.team_id,
+            team_id = item.teamId,
             position = item.position,
             role = item.role,
             companyName = item.companyName
@@ -69,7 +69,7 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             id = userEntity.id,
             name = userEntity.name,
             email = userEntity.email,
-            team_id = userEntity.team_id,
+            teamId = userEntity.team_id,
             position = userEntity.position,
             role = userEntity.role,
             companyName = userEntity.companyName
@@ -83,7 +83,7 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
                     id = it.id,
                     name = it.name,
                     email = it.email,
-                    team_id = it.team_id,
+                    teamId = it.team_id,
                     position = it.position,
                     role = it.role,
                     companyName = it.companyName
@@ -113,28 +113,68 @@ class LocalUserDataProviderImpl @Inject constructor(val dao: UserDao) : LocalUse
             }
 
     override suspend fun insertTeam(item: Team) =
-        dao.insertTeam(TeamEntity(
-            item.id,
-            item.companyName,
-            item.team_id,
-            item.team_name
-        ))
+        dao.insertTeam(
+            TeamEntity(
+                item.id,
+                item.companyName,
+                item.team_id,
+                item.team_name
+            )
+        )
 
     override suspend fun getAllUsersByTeamAndCompany(
         team_id: Long,
         companyName: String
-    ): List<User>  =
+    ): List<User> =
         dao.getAllUsersByTeamAndCompany(team_id, companyName)
             .map {
                 User(
                     id = it.id,
                     name = it.name,
                     email = it.email,
-                    team_id = it.team_id,
+                    teamId = it.team_id,
                     position = it.position,
                     role = it.role,
                     companyName = it.companyName
                 )
             }
 
+    override suspend fun updateUser(item: User) {
+        dao.updateUser(
+            UserEntity(
+                id = item.id,
+                name = item.name,
+                email = item.email,
+                team_id = item.teamId,
+                position = item.position,
+                role = item.role,
+                companyName = item.companyName
+            )
+        )
+    }
+
+
+    override suspend fun getTeamByNameAndCompany(name: String, companyName: String): Team {
+        val item = dao.getTeamByNameAndCompany(name, companyName)
+
+        return Team(
+            item.id,
+            item.companyName,
+            item.team_id,
+            item.team_name
+        )
+    }
+
+    override suspend fun getAllUsersByCompany(companyName: String): List<User> =
+        dao.getAllUsersByCompany(companyName).map {
+            User(
+                id = it.id,
+                name = it.name,
+                email = it.email,
+                teamId = it.team_id,
+                position = it.position,
+                role = it.role,
+                companyName = it.companyName
+            )
+        }
 }
