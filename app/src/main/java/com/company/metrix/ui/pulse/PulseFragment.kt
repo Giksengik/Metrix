@@ -68,7 +68,7 @@ class PulseFragment : Fragment() {
     }
 
     private fun setupQuestionsAdapter() {
-        val onClick = object : PulseQuestionsListAdapter.OnPulseQuestionsListener {
+        /*val onClick = object : PulseQuestionsListAdapter.OnPulseQuestionsListener {
             override fun onPulseClick(value: String, position: Int) {
                 if (position == 0) {
                     question1 = value
@@ -77,9 +77,9 @@ class PulseFragment : Fragment() {
                 }
                 Toast.makeText(context, value + " " + position, Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
 
-        questionListAdapter = PulseQuestionsListAdapter(onClick)
+        //questionListAdapter = PulseQuestionsListAdapter(onClick)
         binding.pulseList.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = questionListAdapter
