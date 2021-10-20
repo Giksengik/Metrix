@@ -21,8 +21,8 @@ class AuthViewModel @Inject constructor(
     suspend fun initial(userName: String?, userEmail: String?) { //TODO user : User <- server
         val user1 = User(
             id = 1,
-            name = userName ?: "Yana",
-            email = userEmail ?: "monsterglad12@gmail.com",
+            name = userName ?: "Theo",
+            email = userEmail ?: "feds.msc@gmail.com",
             teamId = 1,
             position = "Сотрудник",
             role = "Помощник помощника стажера",
@@ -31,7 +31,7 @@ class AuthViewModel @Inject constructor(
 
         currentUser.value = user1
         userRepo.addUser(user1)
-        Log.d("test_test", "getEmployeeInfo hhey: ${userRepo.getUserByEmail("monsterglad12@gmail.com")}")
+        Log.d("test_test", "getEmployeeInfo hhey: ${userRepo.getUserByEmail("feds.msc@gmail.com")}")
 
         val factory = EmployeeFactory()
         val usrs = factory.getAllEmployees()

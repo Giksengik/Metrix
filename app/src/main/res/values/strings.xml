@@ -102,4 +102,5 @@
     <string name="team">Команда :</string>
     <string name="remove">Удалить</string>
     <string name="add_employee">Добавить сотрудника</string>
+    <string name="thank_you_emoji">🤗</string>
 </resources>

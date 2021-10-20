@@ -2,15 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    >
+    android:layout_height="50dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
         android:layout_margin="8dp"
-        >
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/enter_field"
@@ -19,6 +18,7 @@
             android:layout_margin="8dp"
             android:background="@color/white"
             android:textColorHint="@color/black"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </com.google.android.material.card.MaterialCardView>
