@@ -13,7 +13,7 @@ class PulseRepositoryImpl @Inject constructor(
 
     override suspend fun getAllPulse(): List<Pulse> = localPulseProvider.getAllPulse()
 
-    override suspend fun getPulseByTeamId(team_id: Long): List<Pulse> = localPulseProvider.getPulseByTeamId(team_id)
+    override suspend fun getPulseByTeamId(team_id: Long): List<Pulse> = listOf() // localPulseProvider.getPulseByTeamId(team_id)
 
     override suspend fun deletePulse(item: Pulse) = localPulseProvider.deletePulse(item)
 

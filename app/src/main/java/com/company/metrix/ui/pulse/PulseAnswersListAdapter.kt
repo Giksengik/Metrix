@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.R
+import com.company.metrix.data.model.User
 import com.company.metrix.databinding.AnswerItemBinding
 import java.lang.IllegalArgumentException
 
-class PulseAnswersListAdapter :
+class PulseAnswersListAdapter(val onClickListener: OnPulseAnswersListener) :
     ListAdapter<String, PulseAnswersListAdapter.ViewHolder>(PulseAnswerDiffUtil()) {
+
+    interface OnPulseAnswersListener {
+        fun onPulseClick(value: String, position: Int)
+    }
 
     private var selected: Int = -1
 
@@ -21,7 +26,8 @@ class PulseAnswersListAdapter :
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onClickListener
         )
         holder.binding.root.setOnClickListener {
             if (holder.adapterPosition != RecyclerView.NO_POSITION) {
@@ -57,10 +63,11 @@ class PulseAnswersListAdapter :
 
     }
 
-    class ViewHolder(val binding: AnswerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: AnswerItemBinding, val onClickListener: OnPulseAnswersListener) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(question: String, position: Int, selected: Int?) {
             binding.answerValue.text = question
-            if(position != selected)
+            if (position != selected) {
                 binding.answerPositionIcon.setImageDrawable(
                     when (position) {
                         0 -> ResourcesCompat.getDrawable(
@@ -86,14 +93,18 @@ class PulseAnswersListAdapter :
                         else -> throw IllegalArgumentException("Illegal num of questions")
                     }
                 )
-            else{
+            } else {
+                onClickListener.onPulseClick(question, position)
+
                 binding.answerPositionIcon.setImageDrawable(
                     when (position) {
-                        0 -> ResourcesCompat.getDrawable(
-                            binding.root.resources,
-                            R.drawable.ic_first_selected_choice,
-                            binding.root.context.theme
-                        )
+                        0 -> {
+                            ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.drawable.ic_first_selected_choice,
+                                binding.root.context.theme
+                            )
+                        }
                         1 -> ResourcesCompat.getDrawable(
                             binding.root.resources,
                             R.drawable.ic_second_selected_choice,
@@ -113,6 +124,7 @@ class PulseAnswersListAdapter :
                     }
                 )
             }
+
         }
     }
 }
