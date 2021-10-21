@@ -30,13 +30,13 @@
             android:layout_marginTop="30dp"
             android:ellipsize="end"
             android:maxLines="1"
-            tools:text="@string/name_surname"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/name_surname" />
 
         <TextView
             android:id="@+id/employeeProfileCompany"
@@ -45,12 +45,12 @@
             android:layout_marginTop="32dp"
             android:ellipsize="end"
             android:maxLines="1"
-            tools:text="@string/company"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/employeeProfileName"
-            app:layout_constraintTop_toBottomOf="@+id/employeeProfileName" />
+            app:layout_constraintTop_toBottomOf="@+id/employeeProfileName"
+            tools:text="@string/company" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/employeeProfileIcon"
@@ -66,16 +66,16 @@
 
         <include
             android:id="@+id/authorized"
-            android:layout_width="0dp"
             layout="@layout/user_info_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_background"
             android:padding="16dp"
-            android:translationZ="1dp"
+
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toTopOf="@+id/layoutBackground"/>
+            app:layout_constraintTop_toTopOf="@+id/layoutBackground" />
 
         <View
             android:id="@+id/separator"
@@ -91,16 +91,15 @@
 
         <include
             android:id="@+id/position"
+            layout="@layout/user_info_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            layout="@layout/user_info_layout"
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_background"
             android:padding="16dp"
-            android:translationZ="1dp"
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/authorized"/>
+            app:layout_constraintTop_toBottomOf="@+id/authorized" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -109,13 +108,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_background"
-            android:padding="16dp"
-            android:translationZ="1dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
+            android:padding="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/position"/>
+            app:layout_constraintTop_toBottomOf="@+id/position" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -124,14 +122,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_background"
+            android:orientation="vertical"
             android:padding="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            android:translationZ="1dp"
             app:layout_constraintEnd_toStartOf="@+id/endGuideline"
             app:layout_constraintStart_toStartOf="@+id/startGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/soft_skills"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/soft_skills" />
 
 
         <androidx.constraintlayout.widget.Guideline

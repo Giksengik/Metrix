@@ -1,3 +1,4 @@
+/*
 package com.company.metrix.ui.servicesEmployer.teams.recyclerEmployee
 
 import android.view.LayoutInflater
@@ -99,4 +100,4 @@ class EmployeeAdapter(
             binding.swipeToAction.close()
         }
     }
-}
+}*/

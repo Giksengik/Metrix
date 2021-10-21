@@ -91,10 +91,10 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:minHeight="80dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/sentImage"
+        app:layout_constraintBottom_toTopOf="@id/commentDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/strengthsTitle"
@@ -109,19 +109,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/divider_gray"
-        app:layout_constraintTop_toBottomOf="@+id/strengthsView" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sentImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/background_guys1"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/sentButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/employeeCommentBlock" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/employeeCommentBlock"
@@ -129,16 +119,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:hint="@string/add_comment"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmEstimate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentDivider">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/employeeCommentField"
@@ -152,15 +142,15 @@
         android:id="@+id/buttonConfirmEstimate"
         android:layout_width="297dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/send"
         android:textAllCaps="false"
         app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employeeCommentBlock" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/loadingBackground"
@@ -168,6 +158,19 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:visibility="invisible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sentEmoji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="@string/thank_you_emoji"
+        android:textSize="120sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sentTitle"
@@ -178,28 +181,25 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/sentImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sentEmoji" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sentButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="@string/retry"
         android:textAllCaps="false"
         android:visibility="invisible"
         app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sentTitle" />
 
     <ProgressBar
         android:id="@+id/loadingBar"
