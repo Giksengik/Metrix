@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentPulseBinding
 import com.company.metrix.data.model.PulseQuestion
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PulseFragment : Fragment() {
-
+    private val viewModel: PulseViewModel by viewModels()
     private lateinit var binding: FragmentPulseBinding
     private var questionListAdapter: PulseQuestionsListAdapter? = null
 
@@ -36,9 +39,22 @@ class PulseFragment : Fragment() {
         setupButton()
     }
 
+    var position: Long = 0L
+    var positionIn: Int = 0
+
+    var position2: Long = 0L
+    var positionIn2: Int = 0
+
     private fun setupButton() {
         binding.pulseConfirmButton.setOnClickListener {
-            Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
+            viewModel.apply {
+                viewModelScope.launch {
+                    updateVotes(1, positionIn)
+                    updateVotes(2, positionIn2)
+
+                    Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -68,18 +84,23 @@ class PulseFragment : Fragment() {
     }
 
     private fun setupQuestionsAdapter() {
-        /*val onClick = object : PulseQuestionsListAdapter.OnPulseQuestionsListener {
-            override fun onPulseClick(value: String, position: Int) {
-                if (position == 0) {
+        val onClick = object : PulseQuestionsListAdapter.OnPulseQuestionsListener {
+            override fun onPulseClick(value: String, _position: Int, _positionIn: Int) {
+                if (_position == 0) {
                     question1 = value
-                } else if (position == 1) {
+                } else if (_position == 1) {
                     question2 = value
                 }
-                Toast.makeText(context, value + " " + position, Toast.LENGTH_SHORT).show()
-            }
-        }*/
 
-        //questionListAdapter = PulseQuestionsListAdapter(onClick)
+                if (_position == 0) {
+                    positionIn = (_positionIn+1)
+                } else if (_position == 1) {
+                    positionIn2 = (_positionIn+1)
+                }
+            }
+        }
+
+        questionListAdapter = PulseQuestionsListAdapter(onClick)
         binding.pulseList.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = questionListAdapter
