@@ -45,70 +45,88 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="30dp"
         android:visibility="invisible"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <com.company.metrix.pulseCustom.PulseCustomLayout
-                android:id="@+id/pulse_one"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:percent="20"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Как за последнее время изменились отношения между членами команды?"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.company.metrix.pulseCustom.PulseCustomLayout
-                android:id="@+id/pulse_two"
+                android:id="@+id/pulse_one"
                 android:layout_width="0dp"
-                app:percent="40"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pulse_one" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+                app:percent="20" />
+
+            <com.company.metrix.pulseCustom.PulseCustomLayout
+                android:id="@+id/pulse_two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pulse_one"
+                app:percent="40" />
 
             <com.company.metrix.pulseCustom.PulseCustomLayout
                 android:id="@+id/pulse_three"
                 android:layout_width="0dp"
-                app:percent="30"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pulse_two" />
+                app:layout_constraintTop_toBottomOf="@+id/pulse_two"
+                app:percent="30" />
 
             <com.company.metrix.pulseCustom.PulseCustomLayout
                 android:id="@+id/pulse_four"
                 android:layout_width="0dp"
-                app:percent="30"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pulse_three" />
+                app:layout_constraintTop_toBottomOf="@+id/pulse_three"
+                app:percent="30" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/default_questions"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pulse_four" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginEnd="-50dp"
-        android:layout_marginBottom="26dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/team_choice" />
 
     <ProgressBar
         android:id="@+id/loadingBar"

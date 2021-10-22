@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import com.company.metrix.R
 
 class PulseCustomLayout @JvmOverloads constructor(
@@ -16,15 +17,21 @@ class PulseCustomLayout @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : ViewGroup(context, attrs, defStyleAttrs, defStyleRes) {
 
-    private val numQuestion: TextView // TODO rounded img view
+    private val numQuestion: RoundedImageView
     private var lenBar: TextView //TODO ?
     private val numRect = Rect()
     private val messageRect = Rect()
 
     var percent = 0
+    var icon = R.drawable.ic_first_choice
+    set(value) {
+        numQuestion.setImageDrawable(
+            AppCompatResources.getDrawable(context, value))
+
+        field = value
+    }
 
     init {
-
         val typedArray: TypedArray = context.obtainStyledAttributes(
             attrs,
             R.styleable.PulseCustomLayout,
@@ -32,11 +39,16 @@ class PulseCustomLayout @JvmOverloads constructor(
             defStyleRes
         )
 
-        percent = typedArray.getInteger(R.styleable.PulseCustomLayout_percent, percent)
 
         LayoutInflater.from(context).inflate(R.layout.pulse_custom_view, this, true)
-        numQuestion = findViewById(R.id.bar)
-        lenBar = findViewById(R.id.num)
+
+        percent = typedArray.getInteger(R.styleable.PulseCustomLayout_percent, percent)
+
+        numQuestion = findViewById(R.id.num)
+        numQuestion.setImageDrawable(
+            AppCompatResources.getDrawable(context, icon))
+
+        lenBar = findViewById(R.id.bar)
         lenBar.setTextColor(resources.getColor(R.color.white))
         //  background = resources.getDrawable(R.drawable.bg_pulse_rect)
     }
@@ -59,7 +71,7 @@ class PulseCustomLayout @JvmOverloads constructor(
         )
 
         val totalWidth = numQuestion.width() + 200
-        val totalHeight = lenBar.height() + numQuestion.height() + 50
+        val totalHeight = lenBar.height()
 
         setMeasuredDimension(
             resolveSize(totalWidth, widthMeasureSpec),
@@ -72,8 +84,8 @@ class PulseCustomLayout @JvmOverloads constructor(
 
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        val rect = lenBar.rect(messageRect, 0, 0, r * percent / 100 * 2)
         numQuestion.layout(numQuestion.rect(numRect, 0, 20))
-        val rect = lenBar.rect(messageRect, numQuestion.right, 0, r*percent/100)
         lenBar.layout(
             rect
         )

@@ -26,5 +26,6 @@
 
     <declare-styleable name="PulseCustomLayout">
         <attr name="percent" format="integer" />
+        <attr name="image" format="integer" />
     </declare-styleable>
 </resources>

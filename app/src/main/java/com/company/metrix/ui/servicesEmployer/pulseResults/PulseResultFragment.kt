@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
+import com.company.metrix.R
 import com.company.metrix.databinding.FragmentPulseResultBinding
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,9 +34,6 @@ class PulseResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPulseResultBinding.inflate(layoutInflater)
-
-
-
         return binding.root
     }
 
@@ -43,6 +41,11 @@ class PulseResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.loadingBar.visibility = View.GONE
         binding.content.visibility = View.VISIBLE
+
+        binding.pulseOne.icon = R.drawable.ic_first_choice
+        binding.pulseTwo.icon = R.drawable.ic_second_choice
+        binding.pulseThree.icon = R.drawable.ic_third_choice
+        binding.pulseFour.icon = R.drawable.ic_fourth_choice
 
         viewModel.viewModelScope.launch {
             team?.let { viewModel.getTeamPulseResults(it.teamId) }
