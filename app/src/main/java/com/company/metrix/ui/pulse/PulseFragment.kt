@@ -6,15 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentPulseBinding
 import com.company.metrix.data.model.PulseQuestion
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PulseFragment : Fragment() {
-
+    private val viewModel: PulseViewModel by viewModels()
     private lateinit var binding: FragmentPulseBinding
     private var questionListAdapter: PulseQuestionsListAdapter? = null
 
@@ -33,12 +38,16 @@ class PulseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupQuestionsAdapter()
         setupDummyData()
-        setupButton()
     }
 
-    private fun setupButton() {
+    private fun setupButton(position: Long, value : String) {
         binding.pulseConfirmButton.setOnClickListener {
-            Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
+            viewModel.apply {
+                viewModelScope.launch {
+                    updateVotes(Firebase.auth.currentUser?.email!!, position)
+                    Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -75,6 +84,7 @@ class PulseFragment : Fragment() {
                 } else if (position == 1) {
                     question2 = value
                 }
+                setupButton(position.toLong(), value)
                 Toast.makeText(context, "$value $position", Toast.LENGTH_SHORT).show()
             }
         }

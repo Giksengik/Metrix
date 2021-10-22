@@ -8,4 +8,5 @@ interface PulseRepository {
     suspend fun getPulseByCompany(companyName: String): Pulse
     suspend fun deletePulse(item: Pulse)
     suspend fun updatePulse(item: Pulse)
+    suspend fun getPulseByCompanyAndIdQuestion(companyName : String, question_id : Long): Pulse
 }

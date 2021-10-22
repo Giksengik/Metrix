@@ -9,9 +9,13 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class PulseViewModel @Inject constructor(private val pulseRepository: PulseRepository) : ViewModel() {
+class PulseViewModel @Inject constructor(
+    private val pulseRepository: PulseRepository,
+    private val userRepository: UserRepository
+) : ViewModel() {
 
-    suspend fun updateVotes(companyName: String, number: Long) {
+    suspend fun updateVotes(email: String, number: Long) {
+        val companyName = userRepository.getUserByEmail(email).companyName
         when (number) {
             1L -> {
                 val currentPulse = pulseRepository.getPulseByCompany(companyName)

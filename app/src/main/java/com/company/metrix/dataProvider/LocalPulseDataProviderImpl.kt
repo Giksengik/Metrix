@@ -32,7 +32,7 @@ class LocalPulseDataProviderImpl @Inject constructor(val dao: PulseDao) : LocalP
         )
     }
 
-    override suspend fun getPulseByCompany(companyName: String, questionId : Long): Pulse {
+    override suspend fun getPulseByCompany(companyName: String, questionId: Long): Pulse {
         val item = dao.getPulseByCompany(companyName)
 
         return Pulse(
@@ -71,5 +71,18 @@ class LocalPulseDataProviderImpl @Inject constructor(val dao: PulseDao) : LocalP
             )
         )
 
+    override suspend fun getPulseByCompanyAndIdQuestion(companyName: String, question_id: Long): Pulse {
+        val item = dao.getPulseByCompanyAndIdQuestion(companyName, question_id)
+
+        return Pulse(
+            question_id = item.question_id,
+            team_id = item.team_id,
+            companyName = item.companyName,
+            votesOne = item.votesOne,
+            votesTwo = item.votesTwo,
+            votesThree = item.votesThree,
+            votesFour = item.votesFour
+        )
+    }
 
 }

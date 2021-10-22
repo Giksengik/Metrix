@@ -17,7 +17,7 @@ class PulseQuestionsListAdapter(val onClick: OnPulseQuestionsListener) :
         (PulseQuestionDiffUtil()) {
 
     interface OnPulseQuestionsListener {
-        fun onPulseClick(value: String, position: Int)
+        fun onPulseClick(value: String, position: Int, positionIn: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -55,8 +55,8 @@ class PulseQuestionsListAdapter(val onClick: OnPulseQuestionsListener) :
             val pos = position
 
              val onClick = object : PulseAnswersListAdapter.OnPulseAnswersListener {
-                override fun onPulseClick(value: String, position: Int) {
-                    onClickQuestion.onPulseClick(value, pos)
+                override fun onPulseClick(value: String, positionIn: Int) {
+                    onClickQuestion.onPulseClick(value, pos, positionIn)
                 }
             }
             val answersListAdapter = PulseAnswersListAdapter(onClick)
