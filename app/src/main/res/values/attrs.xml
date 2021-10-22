@@ -23,4 +23,8 @@
         <attr name="android:background" format="reference" />
         <attr name="android:iconTint" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="PulseCustomLayout">
+        <attr name="percent" format="integer" />
+    </declare-styleable>
 </resources>

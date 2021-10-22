@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_pulse_rect"
-        android:text="AAAAAAAAAAAAAAAAAAAAAA"
+        android:text=" "
         android:textSize="20sp" />
 
 </merge>

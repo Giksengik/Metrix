@@ -1,6 +1,7 @@
 package com.company.metrix.pulseCustom
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -20,7 +21,19 @@ class PulseCustomLayout @JvmOverloads constructor(
     private val numRect = Rect()
     private val messageRect = Rect()
 
+    var percent = 0
+
     init {
+
+        val typedArray: TypedArray = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.PulseCustomLayout,
+            defStyleAttrs,
+            defStyleRes
+        )
+
+        percent = typedArray.getInteger(R.styleable.PulseCustomLayout_percent, percent)
+
         LayoutInflater.from(context).inflate(R.layout.pulse_custom_view, this, true)
         numQuestion = findViewById(R.id.bar)
         lenBar = findViewById(R.id.num)
@@ -45,9 +58,9 @@ class PulseCustomLayout @JvmOverloads constructor(
             0
         )
 
-        val totalWidth = numQuestion.width() + lenBar.width()
+        val totalWidth = numQuestion.width() + 200
         val totalHeight = lenBar.height() + numQuestion.height() + 50
-        
+
         setMeasuredDimension(
             resolveSize(totalWidth, widthMeasureSpec),
             resolveSize(
@@ -59,8 +72,8 @@ class PulseCustomLayout @JvmOverloads constructor(
 
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        numQuestion.layout(numQuestion.rect(numRect, 20, 20))
-        val rect = lenBar.rect(messageRect, 20, numQuestion.bottom, r)
+        numQuestion.layout(numQuestion.rect(numRect, 0, 20))
+        val rect = lenBar.rect(messageRect, numQuestion.right, 0, r*percent/100)
         lenBar.layout(
             rect
         )

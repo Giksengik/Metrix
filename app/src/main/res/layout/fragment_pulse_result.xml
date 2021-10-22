@@ -62,24 +62,39 @@
                 android:id="@+id/pulse_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/emptyView"
+                app:percent="20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/emptyView"
-                android:layout_width="wrap_content"
+            <com.company.metrix.pulseCustom.PulseCustomLayout
+                android:id="@+id/pulse_two"
+                android:layout_width="0dp"
+                app:percent="40"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:text="@string/estimate_empty"
-                android:textSize="20sp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pulse_one" />
+
+            <com.company.metrix.pulseCustom.PulseCustomLayout
+                android:id="@+id/pulse_three"
+                android:layout_width="0dp"
+                app:percent="30"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pulse_two" />
+
+            <com.company.metrix.pulseCustom.PulseCustomLayout
+                android:id="@+id/pulse_four"
+                android:layout_width="0dp"
+                app:percent="30"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pulse_three" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
