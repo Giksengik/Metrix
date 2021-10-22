@@ -93,9 +93,9 @@ class PulseFragment : Fragment() {
                 }
 
                 if (_position == 0) {
-                    positionIn = _positionIn+1
+                    positionIn = (_positionIn+1)
                 } else if (_position == 1) {
-                    positionIn2 = _positionIn+1
+                    positionIn2 = (_positionIn+1)
                 }
                 positionIn = _positionIn
 

@@ -51,10 +51,12 @@ class AuthViewModel @Inject constructor(
         for (i in v) {
             estimationRepo.addEstimation(i)
         }
+        var cnt = 1L
 
         for (team in temas) {
             pulseRepo.insertPulse(
                 Pulse(
+                    cnt,
                     1,
                     team.team_id,
                     team.companyName,
@@ -67,6 +69,7 @@ class AuthViewModel @Inject constructor(
 
             pulseRepo.insertPulse(
                 Pulse(
+                    cnt*10,
                     2,
                     team.team_id,
                     team.companyName,
@@ -76,6 +79,7 @@ class AuthViewModel @Inject constructor(
                     0
                 )
             )
+            cnt++
         }
     }
 

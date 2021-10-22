@@ -23,6 +23,7 @@ class PulseViewModel @Inject constructor(
                 //TODO спиннер с выбором команды из существующих
                 val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 val newPulse = Pulse(
+                    id = currentPulse.id,
                     question_id = number,
                     team_id = currentPulse.team_id,
                     companyName = currentPulse.companyName,
@@ -42,6 +43,7 @@ class PulseViewModel @Inject constructor(
                 val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 pulseRepository.updatePulse(
                     Pulse(
+                        id = currentPulse.id,
                         question_id = number,
                         team_id = currentPulse.team_id,
                         companyName = currentPulse.companyName,
@@ -57,6 +59,7 @@ class PulseViewModel @Inject constructor(
                 val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 pulseRepository.updatePulse(
                     Pulse(
+                        id = currentPulse.id,
                         question_id = number,
                         team_id = currentPulse.team_id,
                         companyName = currentPulse.companyName,
@@ -72,6 +75,7 @@ class PulseViewModel @Inject constructor(
                 val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 pulseRepository.updatePulse(
                     Pulse(
+                        id = currentPulse.id,
                         question_id = number,
                         team_id = currentPulse.team_id,
                         companyName = currentPulse.companyName,
