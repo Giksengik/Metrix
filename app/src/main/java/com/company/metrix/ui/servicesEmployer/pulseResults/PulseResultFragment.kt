@@ -46,11 +46,11 @@ class PulseResultFragment : Fragment() {
 
         viewModel.viewModelScope.launch {
             team?.let { viewModel.getTeamPulseResults(it.teamId) }
-            binding.teamDescription.text =
-                "${viewModel.currenTeamPulse.value!!.votesOne}  ${viewModel.currenTeamPulse.value!!.votesTwo} ${viewModel.currenTeamPulse.value!!.votesThree} ${viewModel.currenTeamPulse.value!!.votesFour} "
+            // binding.teamDescription.text =
+            //    "${viewModel.currenTeamPulse.value!!.votesOne}  ${viewModel.currenTeamPulse.value!!.votesTwo} ${viewModel.currenTeamPulse.value!!.votesThree} ${viewModel.currenTeamPulse.value!!.votesFour} "
         }
 
-        binding.teamDescription.text = "TEST TEST TEST"
+        //binding.teamDescription.text = "TEST TEST TEST"
 
     }
 
