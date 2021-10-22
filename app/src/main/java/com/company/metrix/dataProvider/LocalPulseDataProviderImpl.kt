@@ -9,6 +9,7 @@ class LocalPulseDataProviderImpl @Inject constructor(val dao: PulseDao) : LocalP
     override suspend fun insertPulse(item: Pulse) {
         dao.insertPulse(
             PulseEntity(
+                question_id = item.question_id,
                 team_id = item.team_id,
                 companyName = item.companyName,
                 votesOne = item.votesOne,
@@ -21,6 +22,7 @@ class LocalPulseDataProviderImpl @Inject constructor(val dao: PulseDao) : LocalP
 
     override suspend fun getAllPulse(): List<Pulse> = dao.getAllPulse().map {
         Pulse(
+            question_id = it.question_id,
             team_id = it.team_id,
             companyName = it.companyName,
             votesOne = it.votesOne,
@@ -30,10 +32,11 @@ class LocalPulseDataProviderImpl @Inject constructor(val dao: PulseDao) : LocalP
         )
     }
 
-    override suspend fun getPulseByCompany(companyName: String): Pulse {
+    override suspend fun getPulseByCompany(companyName: String, questionId : Long): Pulse {
         val item = dao.getPulseByCompany(companyName)
 
         return Pulse(
+            question_id = questionId,
             team_id = item.team_id,
             companyName = item.companyName,
             votesOne = item.votesOne,
@@ -45,6 +48,7 @@ class LocalPulseDataProviderImpl @Inject constructor(val dao: PulseDao) : LocalP
 
     override suspend fun deletePulse(item: Pulse) = dao.deletePulse(
         PulseEntity(
+            question_id = item.question_id,
             team_id = item.team_id,
             companyName = item.companyName,
             votesOne = item.votesOne,
@@ -57,6 +61,7 @@ class LocalPulseDataProviderImpl @Inject constructor(val dao: PulseDao) : LocalP
     override suspend fun updatePulse(item: Pulse) =
         dao.updatePulse(
             PulseEntity(
+                question_id = item.question_id,
                 team_id = item.team_id,
                 companyName = item.companyName,
                 votesOne = item.votesOne,

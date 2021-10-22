@@ -9,16 +9,72 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class PulseViewModel @Inject constructor(val pulseRepository: PulseRepository) : ViewModel() {
+class PulseViewModel @Inject constructor(private val pulseRepository: PulseRepository) : ViewModel() {
 
-    suspend fun updateVotes(companyName: String, number: Int) {
-        when(number){
-            1-> pulseRepository.updatePulse(
-                pulseRepository.getPulseByTeamId()
-            )
+    suspend fun updateVotes(companyName: String, number: Long) {
+        when (number) {
+            1L -> {
+                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+                pulseRepository.updatePulse(
+                    Pulse(
+                        question_id = number,
+                        team_id = currentPulse.team_id,
+                        companyName = currentPulse.companyName,
+                        votesOne = (currentPulse.votesOne + 1),
+                        votesTwo = currentPulse.votesTwo,
+                        votesThree = currentPulse.votesThree,
+                        votesFour = currentPulse.votesFour
+                    )
+                )
+            }
+
+            2L -> {
+                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+                pulseRepository.updatePulse(
+                    Pulse(
+                        question_id = number,
+                        team_id = currentPulse.team_id,
+                        companyName = currentPulse.companyName,
+                        votesOne = currentPulse.votesOne,
+                        votesTwo = (currentPulse.votesTwo + 1),
+                        votesThree = currentPulse.votesThree,
+                        votesFour = currentPulse.votesFour
+                    )
+                )
+            }
+
+            3L -> {
+                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+                pulseRepository.updatePulse(
+                    Pulse(
+                        question_id = number,
+                        team_id = currentPulse.team_id,
+                        companyName = currentPulse.companyName,
+                        votesOne = currentPulse.votesOne,
+                        votesTwo = currentPulse.votesTwo,
+                        votesThree = (currentPulse.votesThree + 1),
+                        votesFour = currentPulse.votesFour
+                    )
+                )
+            }
+
+            4L -> {
+                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+                pulseRepository.updatePulse(
+                    Pulse(
+                        question_id = number,
+                        team_id = currentPulse.team_id,
+                        companyName = currentPulse.companyName,
+                        votesOne = currentPulse.votesOne,
+                        votesTwo = currentPulse.votesTwo,
+                        votesThree = currentPulse.votesThree,
+                        votesFour = (currentPulse.votesFour + 1)
+                    )
+                )
+            }
 
         }
-     }
+    }
 
     //TODO to initial stub
     suspend fun addPulseStatistics(pulse: Pulse) {

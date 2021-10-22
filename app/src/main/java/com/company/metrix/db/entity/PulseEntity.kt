@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "pulse")
 data class PulseEntity(
+    val question_id : Long,
     val team_id : Long,
     @PrimaryKey(autoGenerate = false)
     val companyName : String,
