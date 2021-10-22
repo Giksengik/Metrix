@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -14,18 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
-import com.company.metrix.databinding.FragmentStrengthsBinding
 import com.company.metrix.data.model.CharacteristicInfo
-import com.company.metrix.databinding.FragmentServicesBinding
-import com.company.metrix.ui.servicesEmployee.team.FragmentTeamDirections
+import com.company.metrix.data.model.LoadingState
+import com.company.metrix.databinding.FragmentStrengthsBinding
 import com.company.metrix.ui.support.setupNavigation
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -44,10 +36,6 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.viewModelScope.launch {
-            viewModel.getPositiveFeedback(1)
-        }
-
         requireActivity().setupNavigation(this, FragmentStrengthsDirections.actionFragmentStrengthsToServiceFragment())
     }
 
@@ -61,27 +49,40 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val user = Firebase.auth.currentUser!!
-
         //binding.employeeProfileName.text = user.displayName
         setupOnBackButtonPressed()
         setupStrengthsList()
+        observeViewModel()
+
+        viewModel.loadSkills()
+    }
+
+    private fun observeViewModel() {
+        viewModel.loadingState.observe(viewLifecycleOwner) {
+            when (it) {
+                LoadingState.RECEIVING_SUCCESS -> viewModel.viewModelScope.launch {
+                    viewModel.getPositiveFeedback()
+                }
+                else -> binding.emptyView.visibility = View.VISIBLE
+            }
+        }
 
         viewModel.estimations.observe(viewLifecycleOwner, {
-            if (viewModel.estimations.value!!.isEmpty()) {
-                binding.strengthsContent.visibility = View.VISIBLE
+            if (it.isEmpty()) {
+                binding.emptyView.visibility = View.VISIBLE
                 binding.loadingBar.visibility = View.INVISIBLE
             } else {
                 Log.d("test_test", "onViewCreated: ${viewModel.estimations.value}")
                 strengthsAdapter?.submitList(viewModel.estimations.value)
                 binding.strengthsContent.visibility = View.VISIBLE
                 binding.loadingBar.visibility = View.INVISIBLE
+                binding.emptyView.visibility = View.INVISIBLE
             }
 
         })
     }
 
-    private fun loadSkills() {
+    /*private fun loadSkills() {
         characteristicsDatabase = Firebase.database.reference.child("characteristics")
         val characteristicsValueListener: ValueEventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -104,7 +105,7 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
             }
         }
         characteristicsDatabase.addListenerForSingleValueEvent(characteristicsValueListener)
-    }
+    }*/
 
 //    private fun loadUserData() {
 //        val user = Firebase.auth.currentUser!!
@@ -161,7 +162,6 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
             adapter = strengthsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
-        loadSkills()
     }
 
     override fun setupOnBackButtonPressed() {

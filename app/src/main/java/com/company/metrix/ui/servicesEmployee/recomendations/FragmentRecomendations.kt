@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -13,11 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
-import com.company.metrix.databinding.FragmentAwardsBinding
 import com.company.metrix.databinding.FragmentRecomendationsBinding
 import com.company.metrix.ui.servicesEmployee.strenghts.CharacteristicListAdapter
 import com.company.metrix.ui.servicesEmployee.strenghts.StrengthViewModel
-import com.company.metrix.ui.servicesEmployee.team.FragmentTeamDirections
 import com.company.metrix.ui.support.setupNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -36,7 +33,7 @@ class FragmentRecomendations : Fragment(), BackButtonHandler {
         super.onCreate(savedInstanceState)
 
         viewModel.viewModelScope.launch {
-            viewModel.getNegativeFeedback(1)
+            viewModel.getNegativeFeedback()
         }
 
         requireActivity().setupNavigation(this, FragmentRecomendationsDirections.actionFragmentRecomendationsToServiceFragment())
@@ -60,9 +57,10 @@ class FragmentRecomendations : Fragment(), BackButtonHandler {
     private fun observeViewModel() {
         viewModel.apply {
             estimations.observe(viewLifecycleOwner, {
-                if (estimations.value!!.isEmpty()) {
+                if (it.isEmpty()) {
                     binding.emptyView.visibility = View.VISIBLE
                 } else {
+                    binding.emptyView.visibility = View.INVISIBLE
                     weaknessAdapter?.submitList(estimations.value)
                 }
                 binding.loadingBar.visibility = View.INVISIBLE
