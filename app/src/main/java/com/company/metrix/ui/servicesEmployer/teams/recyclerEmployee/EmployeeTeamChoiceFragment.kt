@@ -64,7 +64,7 @@ class EmployeeTeamChoiceFragment : Fragment() {
     }
 
     private fun init() {
-        binding.strengthsContent.visibility = View.VISIBLE
+        binding.content.visibility = View.VISIBLE
         binding.loadingBar.visibility = View.GONE
 
         val clickListener = object : TeamAdapter.OnTeamClickListener {

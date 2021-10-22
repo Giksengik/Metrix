@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentPulseBinding
 import com.company.metrix.data.model.PulseQuestion
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -38,13 +36,22 @@ class PulseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupQuestionsAdapter()
         setupDummyData()
+        setupButton()
     }
 
-    private fun setupButton(position: Long, positionIn : Int) {
+    var position: Long = 0L
+    var positionIn: Int = 0
+
+    var position2: Long = 0L
+    var positionIn2: Int = 0
+
+    private fun setupButton() {
         binding.pulseConfirmButton.setOnClickListener {
             viewModel.apply {
                 viewModelScope.launch {
-                    updateVotes(Firebase.auth.currentUser?.email!!, position, positionIn)
+                    updateVotes(1, positionIn)
+                    updateVotes(2, positionIn2)
+
                     Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -78,14 +85,21 @@ class PulseFragment : Fragment() {
 
     private fun setupQuestionsAdapter() {
         val onClick = object : PulseQuestionsListAdapter.OnPulseQuestionsListener {
-            override fun onPulseClick(value: String, position: Int, positionIn: Int) {
-                if (position == 0) {
+            override fun onPulseClick(value: String, _position: Int, _positionIn: Int) {
+                if (_position == 0) {
                     question1 = value
-                } else if (position == 1) {
+                } else if (_position == 1) {
                     question2 = value
                 }
-                setupButton(position.toLong(), positionIn)
-                Toast.makeText(context, "$value $position $positionIn", Toast.LENGTH_SHORT).show()
+
+                if (_position == 0) {
+                    positionIn = _positionIn+1
+                } else if (_position == 1) {
+                    positionIn2 = _positionIn+1
+                }
+                positionIn = _positionIn
+
+//                Toast.makeText(context, "$value $_position $_positionIn", Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.company.metrix.data.model.Pulse
 import com.company.metrix.data.repository.PulseRepository
 import com.company.metrix.data.repository.UserRepository
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -14,22 +16,25 @@ class PulseViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    suspend fun updateVotes(email: String, number: Long, positionIn: Int) {
-        val user = userRepository.getUserByEmail(email)
+    suspend fun updateVotes(number: Long, positionIn: Int) {
+        val user = userRepository.getUserByEmail(Firebase.auth.currentUser?.email!!)
         when (positionIn) {
             1 -> {
                 //TODO спиннер с выбором команды из существующих
                 val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
+                val newPulse = Pulse(
+                    question_id = number,
+                    team_id = currentPulse.team_id,
+                    companyName = currentPulse.companyName,
+                    votesOne = (currentPulse.votesOne + 1),
+                    votesTwo = currentPulse.votesTwo,
+                    votesThree = currentPulse.votesThree,
+                    votesFour = currentPulse.votesFour
+                )
+
+                val pulss = newPulse
                 pulseRepository.updatePulse(
-                    Pulse(
-                        question_id = number,
-                        team_id = currentPulse.team_id,
-                        companyName = currentPulse.companyName,
-                        votesOne = (currentPulse.votesOne + 1),
-                        votesTwo = currentPulse.votesTwo,
-                        votesThree = currentPulse.votesThree,
-                        votesFour = currentPulse.votesFour
-                    )
+                    newPulse
                 )
             }
 

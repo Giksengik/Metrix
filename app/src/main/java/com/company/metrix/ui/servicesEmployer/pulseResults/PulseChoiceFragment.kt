@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.company.metrix.databinding.FragmentPulseResultBinding
+import com.company.metrix.databinding.FragmentPulseResultChoiceBinding
 import com.company.metrix.ui.servicesEmployer.TeamViewModel
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamAdapter
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel
@@ -23,7 +24,7 @@ class PulseChoiceFragment : Fragment() {
     private lateinit var adapter: TeamAdapter
     private val viewModel: TeamViewModel by viewModels()
 
-    private var _binding: FragmentPulseResultBinding? = null
+    private var _binding: FragmentPulseResultChoiceBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class PulseChoiceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPulseResultBinding.inflate(layoutInflater)
+        _binding = FragmentPulseResultChoiceBinding.inflate(layoutInflater)
         return binding.root
     }
 

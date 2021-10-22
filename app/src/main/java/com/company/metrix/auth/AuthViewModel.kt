@@ -3,8 +3,10 @@ package com.company.metrix.auth
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.company.metrix.data.model.Pulse
 import com.company.metrix.data.model.User
 import com.company.metrix.data.repository.EstimationRepository
+import com.company.metrix.data.repository.PulseRepository
 import com.company.metrix.data.repository.UserRepository
 import com.company.metrix.data.stub.EmployeeFactory
 import com.company.metrix.data.stub.EstimationFactory
@@ -14,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val userRepo: UserRepository,
-    private val estimationRepo: EstimationRepository
+    private val estimationRepo: EstimationRepository,
+    private val pulseRepo: PulseRepository
 ) : ViewModel() {
     val currentUser: MutableLiveData<User> = MutableLiveData<User>()
 
@@ -47,6 +50,32 @@ class AuthViewModel @Inject constructor(
         val v = EstimationFactory().getAllEstimations()
         for (i in v) {
             estimationRepo.addEstimation(i)
+        }
+
+        for (team in temas) {
+            pulseRepo.insertPulse(
+                Pulse(
+                    1,
+                    team.team_id,
+                    team.companyName,
+                    0,
+                    0,
+                    0,
+                    0
+                )
+            )
+
+            pulseRepo.insertPulse(
+                Pulse(
+                    2,
+                    team.team_id,
+                    team.companyName,
+                    0,
+                    0,
+                    0,
+                    0
+                )
+            )
         }
     }
 
