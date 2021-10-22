@@ -12,21 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.company.metrix.R
 import com.company.metrix.auth.AuthHandler
+import com.company.metrix.data.model.LoadingState
 import com.company.metrix.databinding.FragmentEstimateBinding
-import com.company.metrix.data.model.CharacteristicInfo
 import com.company.metrix.ui.servicesEmployee.CharacteristicAdapter
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 enum class Skills(val skillName: String) {
-    POLITE("Вежливость "), MOBILE("Мобильность"), PROF("Профессионализм"),
+    POLITE("Вежливость"), MOBILE("Мобильность"), PROF("Профессионализм"),
     SPEED("Скорость"), FRIENDLY("Дружелюбность")
 }
 
@@ -34,12 +27,6 @@ enum class Skills(val skillName: String) {
 class FragmentEstimate() : Fragment() {
 
     private val viewModel: EstimateViewModel by viewModels()
-
-    private lateinit var characteristicsDatabase: DatabaseReference
-    private lateinit var usersDatabase: DatabaseReference
-
-    private var userRating: Double = 5.0
-    private var userComment: String = ""
     private val characteristicsList = mutableListOf<String>()
 
     companion object {
@@ -64,7 +51,6 @@ class FragmentEstimate() : Fragment() {
 
         val adapter = CharacteristicAdapter(mutableListOf()) { id, isSelected ->
             if (isSelected) {
-
                 if (id in characteristicsList) characteristicsList.remove(id)
             } else {
                 Log.d("test_test", "onCreateView: ${id}")
@@ -72,33 +58,6 @@ class FragmentEstimate() : Fragment() {
             }
         }
         binding.strengthsView.adapter = adapter
-
-        usersDatabase = Firebase.database.reference.child("users")
-        characteristicsDatabase = Firebase.database.reference.child("characteristics")
-
-        val characteristicsValueListener: ValueEventListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val list: MutableList<CharacteristicInfo> = ArrayList()
-                for (ds in dataSnapshot.children) {
-                    val characteristic: CharacteristicInfo? =
-                        ds.getValue(CharacteristicInfo::class.java)
-                    if (characteristic != null) {
-                        list.add(characteristic)
-                    }
-                }
-                binding.loadingBar.visibility = View.INVISIBLE
-                adapter.setData(list)
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.database_error),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-        characteristicsDatabase.addListenerForSingleValueEvent(characteristicsValueListener)
 
         binding.buttonConfirmEstimate.setOnClickListener { onSubmit() }
 
@@ -117,31 +76,48 @@ class FragmentEstimate() : Fragment() {
             binding.buttonConfirmEstimate.visibility = View.VISIBLE
         }
 
+        viewModel.loadingState.observe(viewLifecycleOwner) { loadingState ->
+            when (loadingState) {
+                LoadingState.LOADING -> showLoading()
+                LoadingState.RECEIVING_SUCCESS -> {
+                    binding.buttonConfirmEstimate.visibility = View.VISIBLE
+                    hideLoading()
+                }
+                LoadingState.RECEIVING_ERROR -> {
+                    hideLoading()
+                    showErrorToast()
+                }
+                LoadingState.SENDING_SUCCESS -> {
+                    binding.loadingBar.visibility = View.INVISIBLE
+                    onSent()
+                }
+                LoadingState.SENDING_ERROR -> {
+                    hideLoading()
+                    showError()
+                }
+                else -> {
+                    hideLoading()
+                    showErrorToast()
+                }
+            }
+        }
+
+        viewModel.allData.observe(viewLifecycleOwner) { list ->
+            adapter.setData(list)
+        }
+
+        viewModel.loadData()
+
         return binding.root
     }
 
     private fun onSubmit() {
-        showLoading()
         hideError()
 
         val userId = binding.employeeIdField.text.toString().trim()
-        userRating = binding.ratingBar.rating.toDouble()
-        userComment = binding.employeeCommentField.text.toString().trim()
-        usersDatabase.orderByChild("id").equalTo(userId).addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.children.iterator().hasNext()) {
-                    sendFeedback(userId)
-                    onSent()
-                } else {
-                    setError()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                setError()
-            }
-        })
+        val userRating = binding.ratingBar.rating.toDouble()
+        val userComment = binding.employeeCommentField.text.toString().trim()
+        sendFeedback(userId, userComment, userRating)
     }
 
     private fun onSent() {
@@ -155,12 +131,20 @@ class FragmentEstimate() : Fragment() {
         binding.employeeIdBlock.error = ""
     }
 
-    private fun setError() {
+    private fun showError() {
         binding.employeeIdBlock.error = getString(R.string.id_not_found)
         hideLoading()
     }
 
-    private fun sendFeedback(userId: String) {
+    private fun showErrorToast() {
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.database_error),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun sendFeedback(userId: String, userComment: String, userRating: Double) {
         viewModel.viewModelScope.launch {
             viewModel.sendFeedback(userId, characteristicsList, userComment, userRating)
         }
@@ -177,56 +161,5 @@ class FragmentEstimate() : Fragment() {
         binding.loadingBar.visibility = View.INVISIBLE
         binding.buttonConfirmEstimate.visibility = View.VISIBLE
     }
-
-//    private fun onSubmit() {
-//        val userId = binding.employeeIdField.text.toString().trim()
-//        userRating = binding.ratingBar.rating.toDouble()
-//        userComment = binding.employeeCommentField.text.toString().trim()
-//        usersDatabase.orderByChild("id").equalTo(userId).addListenerForSingleValueEvent(object :
-//            ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (snapshot.children.iterator().hasNext()) {
-//                    sendFeedback(snapshot.children.iterator().next())
-//                } else {
-//                    setError()
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                setError()
-//            }
-//        })
-//    }
-//
-//    private fun setError() {
-//        binding.employeeIdBlock.error = getString(R.string.id_not_found)
-//    }
-//
-//    private fun sendFeedback(userSnapshot: DataSnapshot) {
-//        binding.loadingBackground.visibility = View.VISIBLE
-//        binding.buttonConfirmEstimate.visibility = View.INVISIBLE
-//
-//        val userDatabase = usersDatabase.child(userSnapshot.key!!)
-//        val ratings: MutableList<Double> =
-//            userSnapshot.child("ratings").getValue<MutableList<Double>>() ?: mutableListOf()
-//        val strongSkills: MutableList<String> =
-//            userSnapshot.child("strongSkills").getValue<MutableList<String>>() ?: mutableListOf()
-//        val comments: MutableList<String> =
-//            userSnapshot.child("comments").getValue<MutableList<String>>() ?: mutableListOf()
-//        ratings.add(userRating)
-//        if (characteristicsList.size > 0) {
-//            strongSkills.addAll(characteristicsList)
-//            userDatabase.child("strongSkills").setValue(strongSkills)
-//        }
-//        if (userComment != "") {
-//            comments.add(userComment)
-//            userDatabase.child("comments").setValue(comments)
-//        }
-//        userDatabase.child("ratings").setValue(ratings)
-//
-//        binding.sentButton.visibility = View.VISIBLE
-//        binding.sentImage.visibility = View.VISIBLE
-//        binding.sentTitle.visibility = View.VISIBLE
-//    }
 
 }
