@@ -18,6 +18,6 @@ class PulseRepositoryImpl @Inject constructor(
     override suspend fun deletePulse(item: Pulse) = localPulseProvider.deletePulse(item)
 
     override suspend fun updatePulse(item: Pulse) = localPulseProvider.updatePulse(item)
-    override suspend fun getPulseByCompanyAndIdQuestion(companyName: String, question_id: Long): Pulse =
-        localPulseProvider.getPulseByCompanyAndIdQuestion(companyName, question_id)
+    override suspend fun getPulseByCompanyAndIdQuestion(companyName: String, question_id: Long, team_id : Long): Pulse =
+        localPulseProvider.getPulseByCompanyAndIdQuestion(companyName, question_id, team_id )
 }
