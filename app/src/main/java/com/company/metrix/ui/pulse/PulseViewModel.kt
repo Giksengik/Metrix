@@ -14,11 +14,12 @@ class PulseViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    suspend fun updateVotes(email: String, number: Long) {
-        val companyName = userRepository.getUserByEmail(email).companyName
-        when (number) {
-            1L -> {
-                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+    suspend fun updateVotes(email: String, number: Long, positionIn: Int) {
+        val user = userRepository.getUserByEmail(email)
+        when (positionIn) {
+            1 -> {
+                //TODO спиннер с выбором команды из существующих
+                val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 pulseRepository.updatePulse(
                     Pulse(
                         question_id = number,
@@ -32,8 +33,8 @@ class PulseViewModel @Inject constructor(
                 )
             }
 
-            2L -> {
-                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+            2 -> {
+                val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 pulseRepository.updatePulse(
                     Pulse(
                         question_id = number,
@@ -47,8 +48,8 @@ class PulseViewModel @Inject constructor(
                 )
             }
 
-            3L -> {
-                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+            3 -> {
+                val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 pulseRepository.updatePulse(
                     Pulse(
                         question_id = number,
@@ -62,8 +63,8 @@ class PulseViewModel @Inject constructor(
                 )
             }
 
-            4L -> {
-                val currentPulse = pulseRepository.getPulseByCompany(companyName)
+            4 -> {
+                val currentPulse = pulseRepository.getPulseByCompanyAndIdQuestion(user.companyName, number, 1)
                 pulseRepository.updatePulse(
                     Pulse(
                         question_id = number,

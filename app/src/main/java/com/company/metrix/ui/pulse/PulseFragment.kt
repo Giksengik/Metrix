@@ -78,14 +78,14 @@ class PulseFragment : Fragment() {
 
     private fun setupQuestionsAdapter() {
         val onClick = object : PulseQuestionsListAdapter.OnPulseQuestionsListener {
-            override fun onPulseClick(value: String, position: Int) {
+            override fun onPulseClick(value: String, position: Int, positionIn: Int) {
                 if (position == 0) {
                     question1 = value
                 } else if (position == 1) {
                     question2 = value
                 }
                 setupButton(position.toLong(), value)
-                Toast.makeText(context, "$value $position", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "$value $position $positionIn", Toast.LENGTH_SHORT).show()
             }
         }
 
