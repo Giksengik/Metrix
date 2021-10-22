@@ -40,11 +40,11 @@ class PulseFragment : Fragment() {
         setupDummyData()
     }
 
-    private fun setupButton(position: Long, value : String) {
+    private fun setupButton(position: Long, positionIn : Int) {
         binding.pulseConfirmButton.setOnClickListener {
             viewModel.apply {
                 viewModelScope.launch {
-                    updateVotes(Firebase.auth.currentUser?.email!!, position)
+                    updateVotes(Firebase.auth.currentUser?.email!!, position, positionIn)
                     Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -84,7 +84,7 @@ class PulseFragment : Fragment() {
                 } else if (position == 1) {
                     question2 = value
                 }
-                setupButton(position.toLong(), value)
+                setupButton(position.toLong(), positionIn)
                 Toast.makeText(context, "$value $position $positionIn", Toast.LENGTH_SHORT).show()
             }
         }

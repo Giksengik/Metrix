@@ -11,7 +11,7 @@ import com.company.metrix.db.entity.TeamEntity
 import com.company.metrix.db.entity.UserEntity
 
 @Database(
-    entities = [EstimationEntity::class, UserEntity::class, TeamEntity::class, PulseEntity::class], version = 11,
+    entities = [EstimationEntity::class, UserEntity::class, TeamEntity::class, PulseEntity::class], version = 12,
     exportSchema = false
 )
 abstract class MetrixDatabase : RoomDatabase() {
