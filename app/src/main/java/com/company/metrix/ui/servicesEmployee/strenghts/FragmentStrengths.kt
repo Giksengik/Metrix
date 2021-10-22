@@ -71,6 +71,7 @@ class FragmentStrengths : Fragment(), BackButtonHandler {
             if (it.isEmpty()) {
                 binding.emptyView.visibility = View.VISIBLE
                 binding.loadingBar.visibility = View.INVISIBLE
+                binding.strengthsContent.visibility = View.VISIBLE
             } else {
                 Log.d("test_test", "onViewCreated: ${viewModel.estimations.value}")
                 strengthsAdapter?.submitList(viewModel.estimations.value)
