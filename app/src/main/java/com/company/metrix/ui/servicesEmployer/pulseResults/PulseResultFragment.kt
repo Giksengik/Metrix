@@ -22,6 +22,7 @@ class PulseResultFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var team: TeamModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         team = args.team
@@ -44,7 +45,7 @@ class PulseResultFragment : Fragment() {
         binding.content.visibility = View.VISIBLE
 
         viewModel.viewModelScope.launch {
-            viewModel.getTeamPulseResults(1)
+            team?.let { viewModel.getTeamPulseResults(it.teamId) }
             binding.teamDescription.text =
                 "${viewModel.currenTeamPulse.value!!.votesOne}  ${viewModel.currenTeamPulse.value!!.votesTwo} ${viewModel.currenTeamPulse.value!!.votesThree} ${viewModel.currenTeamPulse.value!!.votesFour} "
         }

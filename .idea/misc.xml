@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/drawable/bg_pulse_rect.xml" value="0.290625" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/drawable/bottom_navigation_icon_tint.xml" value="0.290625" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/drawable/checkbox_color_selector.xml" value="0.290625" />
+        <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/drawable/circle.xml" value="0.290625" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/drawable/divider.xml" value="0.290625" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/drawable/ic_baseline_action_24.xml" value="0.290625" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.290625" />

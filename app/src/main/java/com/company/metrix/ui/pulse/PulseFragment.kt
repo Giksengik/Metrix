@@ -97,9 +97,6 @@ class PulseFragment : Fragment() {
                 } else if (_position == 1) {
                     positionIn2 = (_positionIn+1)
                 }
-                positionIn = _positionIn
-
-//                Toast.makeText(context, "$value $_position $_positionIn", Toast.LENGTH_SHORT).show()
             }
         }
 
