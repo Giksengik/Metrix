@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 enum class Skills(val skillName: String) {
-    POLITE("Вежливость "), MOBILE("Мобильность"), PROF("Профессионализм"),
+    POLITE("Вежливость"), MOBILE("Мобильность"), PROF("Профессионализм"),
     SPEED("Скорость"), FRIENDLY("Дружелюбность")
 }
 
@@ -79,7 +79,10 @@ class FragmentEstimate() : Fragment() {
         viewModel.loadingState.observe(viewLifecycleOwner) { loadingState ->
             when (loadingState) {
                 LoadingState.LOADING -> showLoading()
-                LoadingState.RECEIVING_SUCCESS -> hideLoading()
+                LoadingState.RECEIVING_SUCCESS -> {
+                    binding.buttonConfirmEstimate.visibility = View.VISIBLE
+                    hideLoading()
+                }
                 LoadingState.RECEIVING_ERROR -> {
                     hideLoading()
                     showErrorToast()
