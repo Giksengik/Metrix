@@ -102,5 +102,9 @@
         android:id="@+id/diagnosticResultFragment"
         android:name="com.company.metrix.ui.servicesEmployer.diagnosticResult.DiagnosticResultFragment"
         android:label="fragment_diagnostic_result"
-        tools:layout="@layout/fragment_diagnostic_result" />
+        tools:layout="@layout/fragment_diagnostic_result" >
+        <argument
+            android:name="team"
+            app:argType="com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel" />
+    </fragment>
 </navigation>

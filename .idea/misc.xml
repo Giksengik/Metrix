@@ -30,6 +30,7 @@
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/characteristic_item_layout.xml" value="0.25" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/create_team_dialog.xml" value="0.2462962962962963" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/diagnostic_questions_item.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/diagnostic_result_item.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/dialog_add_employee.xml" value="0.2" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/dialog_add_layout.xml" value="0.2" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/employee_item.xml" value="0.264" />
@@ -38,6 +39,8 @@
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_auth.xml" value="0.2324074074074074" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_awards.xml" value="0.2324074074074074" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_diagnostic.xml" value="0.2324074074074074" />
+        <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_diagnostic_result.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_diagnostic_team_choice.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_employee_auth.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_employee_list.xml" value="0.176" />
         <entry key="..\:/Users/glad/AndroidStudioProjects/Metrix/app/src/main/res/layout/fragment_employee_team.xml" value="0.264" />
