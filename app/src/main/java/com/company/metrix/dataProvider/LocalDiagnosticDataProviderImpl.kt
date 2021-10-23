@@ -64,7 +64,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun insertAnswer(item: DiagnosticAnswer) =
         daoDiagnosticAnswer.insertAnswer(
             AnswerDiagnosticEntity(
-                id = item.id,
+                value = item.value,
+                team_id = item.team_id,
                 question_id = item.question_id,
                 chosen_check_box_number = item.chosen_check_box_number
             )
@@ -73,7 +74,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun getAllAnswers(): List<DiagnosticAnswer> =
         daoDiagnosticAnswer.getAllAnswers().map {
             DiagnosticAnswer(
-                id = it.id,
+                value = it.value,
+                team_id = it.team_id,
                 question_id = it.question_id,
                 chosen_check_box_number = it.chosen_check_box_number
             )
@@ -83,7 +85,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
         val entity = daoDiagnosticAnswer.getAnswersByQuestionId(question_id)
 
         return DiagnosticAnswer(
-            id = entity.id,
+            value = entity.value,
+            team_id = entity.team_id,
             question_id = entity.question_id,
             chosen_check_box_number = entity.chosen_check_box_number
         )
@@ -92,7 +95,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun deleteAnswer(item: DiagnosticAnswer) =
         daoDiagnosticAnswer.updateAnswer(
             AnswerDiagnosticEntity(
-                id = item.id,
+                value = item.value,
+                team_id = item.team_id,
                 question_id = item.question_id,
                 chosen_check_box_number = item.chosen_check_box_number
             )
@@ -101,7 +105,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun updateAnswer(item: DiagnosticAnswer) =
         daoDiagnosticAnswer.updateAnswer(
             AnswerDiagnosticEntity(
-                id = item.id,
+                value = item.value,
+                team_id = item.team_id,
                 question_id = item.question_id,
                 chosen_check_box_number = item.chosen_check_box_number
             )

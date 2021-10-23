@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
 import com.company.metrix.data.model.Diagnostic
-import com.company.metrix.data.model.TeamMemberInfo
+import com.company.metrix.data.model.DiagnosticAnswer
 import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.ui.support.setupNavigation
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,15 +67,30 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
         setupButton()
     }
 
-    var questionOne = false
+    var questionOne: DiagnosticAnswer? = null
+    var questionTwo: DiagnosticAnswer? = null
+    var questionThree: DiagnosticAnswer? = null
+    var questionFour: DiagnosticAnswer? = null
+    var questionFive: DiagnosticAnswer? = null
 
     private fun setupQuestionsAdapter() {
         questionAdapter =
             DiagnosticQuestionListAdapter(object : DiagnosticQuestionListAdapter.OnDiagnosticQuestionClickListener {
                 override fun onDiagnosticClick(model: Diagnostic, position: Int, isYes: Boolean) {
-                    Toast.makeText(
-                        context, model.value, Toast.LENGTH_SHORT
-                    ).show()
+
+                    val ans = DiagnosticAnswer(
+                        team_id = model.team_id,
+                        value = model.value,
+                        question_id = position,
+                        chosen_check_box_number = if (isYes) 1 else 2
+                    )
+                    when (position) {
+                        1 -> questionOne = ans
+                        2 -> questionTwo = ans
+                        3 -> questionThree = ans
+                        4 -> questionFour = ans
+                        5 -> questionFive = ans
+                    }
                 }
 
             })
@@ -89,6 +104,16 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
     private fun setupButton() {
         binding.confirmDiagnosticButton.setOnClickListener {
 
+            viewModel.apply {
+                viewModelScope.launch {
+                    questionOne?.let { addAnswer(it) }
+                    questionTwo?.let { addAnswer(it) }
+                    questionThree?.let { addAnswer(it) }
+                    questionFour?.let { addAnswer(it) }
+                    questionFive?.let { addAnswer(it) }
+
+                }
+            }
             Toast.makeText(
                 context, getString(R.string.diagnostic_send_text), Toast.LENGTH_SHORT
             ).show()

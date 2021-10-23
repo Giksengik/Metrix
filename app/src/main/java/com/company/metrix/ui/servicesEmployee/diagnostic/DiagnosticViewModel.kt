@@ -3,6 +3,7 @@ package com.company.metrix.ui.servicesEmployee.diagnostic
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.company.metrix.data.model.Diagnostic
+import com.company.metrix.data.model.DiagnosticAnswer
 import com.company.metrix.data.model.User
 import com.company.metrix.data.repository.DiagnosticRepository
 import com.company.metrix.data.repository.UserRepository
@@ -23,6 +24,13 @@ class DiagnosticViewModel @Inject constructor(
     suspend fun getTeamMembers() {
         currentUser.value = userRepo.getUserByEmail(Firebase.auth.currentUser?.email!!)
         users.value = userRepo.getUsersByTeam(currentUser.value!!.teamId)
+    }
+
+    suspend fun addAnswer(answer: DiagnosticAnswer){
+        currentUser.value = userRepo.getUserByEmail(Firebase.auth.currentUser?.email!!)
+        diagnosticRepo.addAnswer(
+           answer
+        )
     }
 
     suspend fun addDiagnostic(diag: Diagnostic) {
