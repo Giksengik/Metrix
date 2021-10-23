@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.company.metrix.databinding.CharacteristicItemLayoutBinding
 import com.company.metrix.data.model.Estimation
+import com.company.metrix.databinding.CharacteristicItemLayoutBinding
 
 class CharacteristicListAdapter :
     ListAdapter<Estimation, CharacteristicListAdapter.ViewHolder>(StrengthDiffUtil()) {
@@ -60,6 +60,10 @@ class CharacteristicListAdapter :
                 "Дружелюбность" -> {
                     binding.characteristicEmoji.text = "\uD83E\uDD17"
                     binding.strengthText.text = "Дружелюбность. " + strength.comment
+                }
+                "Рекомендация" -> {
+                    binding.characteristicEmoji.text = "\uD83D\uDCAC"
+                    binding.strengthText.text = strength.comment
                 }
             }
 //            binding.characteristicEmoji.text = strenth.emoji

@@ -6,6 +6,7 @@ import com.company.metrix.data.repository.PulseRepository
 import com.company.metrix.data.repository.UserRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,6 +16,7 @@ class PulseViewModel @Inject constructor(
     private val pulseRepository: PulseRepository,
     private val userRepository: UserRepository
 ) : ViewModel() {
+
 
     suspend fun updateVotes(number: Long, positionIn: Int) {
         val user = userRepository.getUserByEmail(Firebase.auth.currentUser?.email!!)
@@ -89,6 +91,7 @@ class PulseViewModel @Inject constructor(
 
         }
     }
+
 
     //TODO to initial stub
     suspend fun addPulseStatistics(pulse: Pulse) {
