@@ -30,6 +30,13 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_rulerServicesFragment_to_diagnosticTeamChoiceFragment"
+            app:destination="@id/diagnosticTeamChoiceFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/pulseChoiceFragment"
@@ -78,4 +85,22 @@
         android:name="com.company.metrix.ui.servicesEmployer.listEmployee.EmployeeListFragment"
         android:label="fragment_employee_list"
         tools:layout="@layout/fragment_employee_list" />
+    <fragment
+        android:id="@+id/diagnosticTeamChoiceFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.diagnosticResult.DiagnosticTeamChoiceFragment"
+        android:label="fragment_diagnostic_team_choice"
+        tools:layout="@layout/fragment_diagnostic_team_choice" >
+        <action
+            android:id="@+id/action_diagnosticTeamChoiceFragment_to_diagnosticResultFragment"
+            app:destination="@id/diagnosticResultFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/diagnosticResultFragment"
+        android:name="com.company.metrix.ui.servicesEmployer.diagnosticResult.DiagnosticResultFragment"
+        android:label="fragment_diagnostic_result"
+        tools:layout="@layout/fragment_diagnostic_result" />
 </navigation>

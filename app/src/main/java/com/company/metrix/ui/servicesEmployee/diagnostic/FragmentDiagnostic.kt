@@ -32,7 +32,6 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         requireActivity().setupNavigation(
             this,
             FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment()
