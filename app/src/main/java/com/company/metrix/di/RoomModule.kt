@@ -31,6 +31,10 @@ class RoomModule {
 
     @Provides
     @Singleton
+    fun providePulseDao(database: MetrixDatabase) = database.pulseDao()
+
+    @Provides
+    @Singleton
     fun provideDiagnosticDao(database: MetrixDatabase) = database.diagnosticDao()
 
     @Provides

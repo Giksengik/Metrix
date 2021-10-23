@@ -8,7 +8,7 @@ import com.company.metrix.db.entity.*
 @Database(
     entities = [EstimationEntity::class, UserEntity::class, TeamEntity::class,
         PulseEntity::class, DiagnosticEntity::class, AnswerDiagnosticEntity::class],
-    version = 15,
+    version = 16,
     exportSchema = false
 )
 abstract class MetrixDatabase : RoomDatabase() {

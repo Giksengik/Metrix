@@ -16,7 +16,6 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun insertDiagnostic(item: Diagnostic) =
         daoDiagnostic.insertDiagnostic(
             DiagnosticEntity(
-                id = item.id,
                 team_id = item.team_id,
                 question_id = item.question_id,
                 value = item.value
@@ -26,7 +25,6 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun getAllDiagnostic(): List<Diagnostic> =
         daoDiagnostic.getAllDiagnostic().map {
             Diagnostic(
-                id = it.id,
                 team_id = it.team_id,
                 question_id = it.question_id,
                 value = it.value
@@ -37,7 +35,6 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
         val entity = daoDiagnostic.getDiagnosticByTeamId(team_id)
 
         return Diagnostic(
-            id = entity.id,
             team_id = entity.team_id,
             question_id = entity.question_id,
             value = entity.value
@@ -48,7 +45,6 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun deleteDiagnostic(item: Diagnostic) =
         daoDiagnostic.deleteDiagnostic(
             DiagnosticEntity(
-                id = item.id,
                 team_id = item.team_id,
                 question_id = item.question_id,
                 value = item.value
@@ -59,7 +55,6 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun updateDiagnostic(item: Diagnostic) =
         daoDiagnostic.updateDiagnostic(
             DiagnosticEntity(
-                id = item.id,
                 team_id = item.team_id,
                 question_id = item.question_id,
                 value = item.value
@@ -69,7 +64,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun insertAnswer(item: DiagnosticAnswer) =
         daoDiagnosticAnswer.insertAnswer(
             AnswerDiagnosticEntity(
-                id = item.id,
+                value = item.value,
+                team_id = item.team_id,
                 question_id = item.question_id,
                 chosen_check_box_number = item.chosen_check_box_number
             )
@@ -78,7 +74,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun getAllAnswers(): List<DiagnosticAnswer> =
         daoDiagnosticAnswer.getAllAnswers().map {
             DiagnosticAnswer(
-                id = it.id,
+                value = it.value,
+                team_id = it.team_id,
                 question_id = it.question_id,
                 chosen_check_box_number = it.chosen_check_box_number
             )
@@ -88,7 +85,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
         val entity = daoDiagnosticAnswer.getAnswersByQuestionId(question_id)
 
         return DiagnosticAnswer(
-            id = entity.id,
+            value = entity.value,
+            team_id = entity.team_id,
             question_id = entity.question_id,
             chosen_check_box_number = entity.chosen_check_box_number
         )
@@ -97,7 +95,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun deleteAnswer(item: DiagnosticAnswer) =
         daoDiagnosticAnswer.updateAnswer(
             AnswerDiagnosticEntity(
-                id = item.id,
+                value = item.value,
+                team_id = item.team_id,
                 question_id = item.question_id,
                 chosen_check_box_number = item.chosen_check_box_number
             )
@@ -106,7 +105,8 @@ class LocalDiagnosticDataProviderImpl @Inject constructor(
     override suspend fun updateAnswer(item: DiagnosticAnswer) =
         daoDiagnosticAnswer.updateAnswer(
             AnswerDiagnosticEntity(
-                id = item.id,
+                value = item.value,
+                team_id = item.team_id,
                 question_id = item.question_id,
                 chosen_check_box_number = item.chosen_check_box_number
             )
