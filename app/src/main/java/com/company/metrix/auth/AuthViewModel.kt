@@ -3,8 +3,10 @@ package com.company.metrix.auth
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.company.metrix.data.model.Diagnostic
 import com.company.metrix.data.model.Pulse
 import com.company.metrix.data.model.User
+import com.company.metrix.data.repository.DiagnosticRepository
 import com.company.metrix.data.repository.EstimationRepository
 import com.company.metrix.data.repository.PulseRepository
 import com.company.metrix.data.repository.UserRepository
@@ -17,7 +19,8 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val userRepo: UserRepository,
     private val estimationRepo: EstimationRepository,
-    private val pulseRepo: PulseRepository
+    private val pulseRepo: PulseRepository,
+    private val diagnosticRepo: DiagnosticRepository
 ) : ViewModel() {
     val currentUser: MutableLiveData<User> = MutableLiveData<User>()
 
@@ -69,7 +72,7 @@ class AuthViewModel @Inject constructor(
 
             pulseRepo.insertPulse(
                 Pulse(
-                    cnt*10,
+                    cnt * 10,
                     2,
                     team.team_id,
                     team.companyName,
@@ -79,6 +82,7 @@ class AuthViewModel @Inject constructor(
                     0
                 )
             )
+
             cnt++
         }
     }

@@ -32,11 +32,13 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         requireActivity().setupNavigation(
             this,
             FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment()
         )
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +46,18 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDiagnosticBinding.inflate(inflater)
+
+        viewModel.viewModelScope.launch {
+            viewModel.getTeamMembers()
+
+            val rand = java.util.Random()
+            val teamMember = viewModel.users.value!![rand.nextInt(viewModel.users.value!!.size)]
+
+            binding.diagnosticDescription.text = "${
+                binding.diagnosticDescription.text
+            } ${teamMember.name}"
+        }
+
         return binding.root
     }
 
@@ -52,6 +66,8 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
         setupQuestionsAdapter()
         setupButton()
     }
+
+    var questionOne = false
 
     private fun setupQuestionsAdapter() {
         questionAdapter =
@@ -72,9 +88,7 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
 
     private fun setupButton() {
         binding.confirmDiagnosticButton.setOnClickListener {
-//            viewModel.viewModelScope.launch {
-//                viewModel.addDiagnostic()
-//            }
+
             Toast.makeText(
                 context, getString(R.string.diagnostic_send_text), Toast.LENGTH_SHORT
             ).show()
@@ -83,26 +97,8 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
 
     @SuppressLint("SetTextI18n")
     private fun addDummyQuestions() {
-        val team = listOf(
-            TeamMemberInfo(
-                "Степанов Илья",
-                "руководитель аналитического отдела"
-            ),
-            TeamMemberInfo(
-                "Большиков Степан",
-                "главный аналитик"
-            ),
-            TeamMemberInfo(
-                "Колесников Алексей",
-                "аналитик"
-            ),
-            TeamMemberInfo(
-                "Безбах Анатолий",
-                "аналитик"
-            )
-        )
-        val rand = java.util.Random()
-        val teamMember = team[rand.nextInt(team.size)]
+
+        var count = 0L
         questionAdapter?.submitList(
             listOf(
                 "Точно исполняет поручения",
@@ -111,16 +107,21 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
                 "Развивает навыки и умения",
                 "Повышает имидж компании"
             ).map {
-                Diagnostic(
+                count++
+
+                val diag = Diagnostic(
                     1,
-                    1,
+                    count,
                     it
                 )
+                viewModel.viewModelScope.launch {
+                    viewModel.addDiagnostic(diag)
+                }
+
+                diag
             }
         )
-        binding.diagnosticDescription.text = "${
-            binding.diagnosticDescription.text
-        } ${teamMember.name}"
+
     }
 
     override fun setupOnBackButtonPressed() {
