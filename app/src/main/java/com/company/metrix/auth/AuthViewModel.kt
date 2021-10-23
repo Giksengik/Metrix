@@ -3,8 +3,10 @@ package com.company.metrix.auth
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.company.metrix.data.model.AuthType
 import com.company.metrix.data.model.Pulse
 import com.company.metrix.data.model.User
+import com.company.metrix.data.repository.DiagnosticRepository
 import com.company.metrix.data.repository.EstimationRepository
 import com.company.metrix.data.repository.PulseRepository
 import com.company.metrix.data.repository.UserRepository
