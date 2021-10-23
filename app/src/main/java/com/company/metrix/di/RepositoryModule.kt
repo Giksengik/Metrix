@@ -24,4 +24,9 @@ interface RepositoryModule {
     @Binds
     fun bindPulseRepository(pulseRepositoryImpl: PulseRepositoryImpl): PulseRepository
 
+
+    @Singleton
+    @Binds
+    fun bindDiagnosticRepository(diagnosticRepositoryImpl: DiagnosticRepositoryImpl): DiagnosticRepository
+
 }

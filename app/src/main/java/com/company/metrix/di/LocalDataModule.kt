@@ -28,4 +28,8 @@ interface LocalDataModule {
     fun bindPulseDataProvider(pulseProvider: LocalPulseDataProviderImpl)
             : LocalPulseDataProvider
 
+    @Binds
+    @Singleton
+    fun bindDiagnosticDataProvider(diagnosticProvider: LocalDiagnosticDataProviderImpl)
+            : LocalDiagnosticDataProvider
 }
