@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.data.model.Diagnostic
 import com.company.metrix.databinding.DiagnosticQuestionsItemBinding
-import com.company.metrix.data.model.Question
 
-class DiagnosticQuestionListAdapter :
+class DiagnosticQuestionListAdapter(private val onClickListener: OnDiagnosticQuestionClickListener) :
     ListAdapter<Diagnostic, DiagnosticQuestionListAdapter.ViewHolder>(QuestionDiffUtils()) {
 
-    interface OnDiagnosticQuestionClickListener{
-        fun onDiagnosticClick()
+    interface OnDiagnosticQuestionClickListener {
+        fun onDiagnosticClick(model: Diagnostic, position: Int, isYes: Boolean)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,7 +21,8 @@ class DiagnosticQuestionListAdapter :
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onClickListener
         )
     }
 
@@ -40,10 +40,27 @@ class DiagnosticQuestionListAdapter :
 
     }
 
-    class ViewHolder(val binding: DiagnosticQuestionsItemBinding) :
+    class ViewHolder(
+        val binding: DiagnosticQuestionsItemBinding,
+        private val onClickListener: OnDiagnosticQuestionClickListener
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(question: Diagnostic) {
-            binding.questionText.text = question.value
+            with(binding) {
+                questionText.text = question.value
+
+                yesCheckBox.setOnClickListener {
+                    onClickListener.onDiagnosticClick(question, adapterPosition, true)
+                }
+
+                noCheckBox.setOnClickListener {
+                    onClickListener.onDiagnosticClick(question, adapterPosition, false)
+                }
+
+//            itemView.setOnClickListener {
+//                onClickListener.onDiagnosticClick(question, adapterPosition)
+//            }
+            }
         }
     }
 
