@@ -19,29 +19,71 @@
         android:id="@+id/employeeAuthImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        app:layout_constraintVertical_bias="0.25"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
         app:srcCompat="@drawable/auth_banner" />
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/authModeToggle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="57dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employeeAuthDesctiption"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/employeeAuthButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/employee"
+            android:textAllCaps="false"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/managerAuthButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/manager"
+            android:textAllCaps="false"
+            app:cornerRadius="24dp" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonEmployeeAuth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="57dp"
-        android:layout_marginEnd="57dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="57dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:text="@string/auth_text"
         android:textAllCaps="false"
         app:cornerRadius="50dp"
-        android:text="@string/auth_text"
-        app:layout_constraintTop_toBottomOf="@+id/employeeAuthDesctiption"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authModeToggle" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/employeeAuthTitle"
@@ -50,28 +92,28 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="30dp"
+        android:gravity="center"
         android:text="@string/employee_auth_title"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/employeeAuthImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employeeAuthImage" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/employeeAuthDesctiption"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="@string/employee_auth_description"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/employeeAuthTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employeeAuthTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

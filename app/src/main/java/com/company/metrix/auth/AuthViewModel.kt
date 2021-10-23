@@ -3,6 +3,7 @@ package com.company.metrix.auth
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.company.metrix.data.model.AuthType
 import com.company.metrix.data.model.User
 import com.company.metrix.data.repository.EstimationRepository
 import com.company.metrix.data.repository.UserRepository
@@ -18,13 +19,13 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
     val currentUser: MutableLiveData<User> = MutableLiveData<User>()
 
-    suspend fun initial(userName: String?, userEmail: String?) { //TODO user : User <- server
+    suspend fun initial(userName: String?, userEmail: String?, authType: AuthType) { //TODO user : User <- server
         val user1 = User(
             id = 1,
             name = userName ?: "Theo",
             email = userEmail ?: "feds.msc@gmail.com",
             teamId = 1,
-            position = "Сотрудник",
+            position = authType.uiName,
             role = "Помощник помощника стажера",
             companyName = "Tinkoff"
         )
