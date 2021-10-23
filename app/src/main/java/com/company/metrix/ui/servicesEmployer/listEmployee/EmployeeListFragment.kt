@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,29 +16,34 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.company.metrix.R
+import com.company.metrix.data.model.Team
 import com.company.metrix.data.model.User
 import com.company.metrix.databinding.FragmentEmployeeListBinding
 import com.company.metrix.ui.support.getOnItemSelectListener
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class EmployeeListFragment : Fragment() {
-    private lateinit var adapter: EmployeeListAdapter
 
-    //private val viewModel: EmployeeListViewModel by viewModels()
+    private lateinit var adapter: EmployeeListAdapter
+    private val viewModel: EmployeeListViewModel by viewModels()
+
     private var _binding: FragmentEmployeeListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*viewModel.apply {
+        viewModel.apply {
             viewModelScope.launch {
                 initial()
             }
-        }*/
+        }
     }
 
     override fun onCreateView(
@@ -51,9 +57,9 @@ class EmployeeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*viewModel.teams.observe(viewLifecycleOwner, {
+        viewModel.teams.observe(viewLifecycleOwner, {
             setupRecycler()
-        })*/
+        })
 
         binding.addEmployee.setOnClickListener {
             showAddDialog()
@@ -67,8 +73,8 @@ class EmployeeListFragment : Fragment() {
             }
         }
 
-        //adapter = EmployeeListAdapter(clickListener, viewModel.teams.value!!)
-        //adapter.submitList(viewModel.allUsers.value)
+        adapter = EmployeeListAdapter(clickListener, viewModel.teams.value!!)
+        adapter.submitList(viewModel.allUsers.value)
         binding.employeeRecycle.adapter = adapter
     }
 
@@ -106,8 +112,8 @@ class EmployeeListFragment : Fragment() {
 
 
         val dropDownList = arrayListOf<String>()
-        /*for (item in viewModel.teams.value!!)
-            dropDownList.add(item.team_name)*/
+        for (item in viewModel.teams.value!!)
+            dropDownList.add(item.team_name)
 
         val adapterMain = ArrayAdapter(
             requireContext(),
@@ -160,11 +166,11 @@ class EmployeeListFragment : Fragment() {
 
         val confirm: MaterialButton = dialog.findViewById(R.id.button_confirm_remove)
         confirm.setOnClickListener {
-            /*viewModel.run {
+            viewModel.run {
                 viewModelScope.launch {
                     removeUser(user)
                 }
-            }*/
+            }
             dialog.dismiss()
         }
         exitMove.setOnClickListener {
