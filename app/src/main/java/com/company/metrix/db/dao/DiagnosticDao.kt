@@ -18,5 +18,5 @@ interface DiagnosticDao {
     suspend fun deleteDiagnostic(item: DiagnosticEntity)
 
     @Update
-    suspend fun updateDiagnosti(item: DiagnosticEntity)
+    suspend fun updateDiagnostic(item: DiagnosticEntity)
 }
