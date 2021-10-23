@@ -7,10 +7,10 @@ import javax.inject.Inject
 class EstimationRepositoryImpl @Inject constructor(
     private val localEstimationProvider: LocalEstimationDataProvider
 ) : EstimationRepository {
+
     override suspend fun addEstimation(item: Estimation) {
         localEstimationProvider.insertEstimation(item)
     }
-
     override suspend fun getAllEstimations(): List<Estimation> =
         localEstimationProvider.getAllEstimations()
 

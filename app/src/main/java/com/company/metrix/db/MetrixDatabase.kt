@@ -2,20 +2,20 @@ package com.company.metrix.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.company.metrix.db.dao.EstimationDao
-import com.company.metrix.db.dao.PulseDao
-import com.company.metrix.db.dao.UserDao
-import com.company.metrix.db.entity.EstimationEntity
-import com.company.metrix.db.entity.PulseEntity
-import com.company.metrix.db.entity.TeamEntity
-import com.company.metrix.db.entity.UserEntity
+import com.company.metrix.db.dao.*
+import com.company.metrix.db.entity.*
 
 @Database(
-    entities = [EstimationEntity::class, UserEntity::class, TeamEntity::class, PulseEntity::class], version = 13,
+    entities = [EstimationEntity::class, UserEntity::class, TeamEntity::class,
+        PulseEntity::class, DiagnosticEntity::class, AnswerDiagnosticEntity::class],
+    version = 16,
     exportSchema = false
 )
 abstract class MetrixDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun estimationDao(): EstimationDao
     abstract fun pulseDao(): PulseDao
+    abstract fun diagnosticDao(): DiagnosticDao
+    abstract fun diagnosticAnswersDao(): AnswerDiagnosticDao
+
 }

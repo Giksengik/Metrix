@@ -122,10 +122,9 @@ class RulerServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListe
     }
 
     private fun showAwardsService() {
-        //TODO
-//        findNavController().navigate(
-//            ServicesFragmentDirections.actionServiceFragmentToFragmentAwards()
-//        )
+        findNavController().navigate(
+            RulerServicesFragmentDirections.actionRulerServicesFragmentToDiagnosticTeamChoiceFragment()
+        )
     }
 
 }

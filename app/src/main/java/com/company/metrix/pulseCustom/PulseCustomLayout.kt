@@ -38,8 +38,6 @@ class PulseCustomLayout @JvmOverloads constructor(
             defStyleAttrs,
             defStyleRes
         )
-
-
         LayoutInflater.from(context).inflate(R.layout.pulse_custom_view, this, true)
 
         percent = typedArray.getInteger(R.styleable.PulseCustomLayout_percent, percent)
@@ -50,7 +48,6 @@ class PulseCustomLayout @JvmOverloads constructor(
 
         lenBar = findViewById(R.id.bar)
         lenBar.setTextColor(resources.getColor(R.color.white))
-        //  background = resources.getDrawable(R.drawable.bg_pulse_rect)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -84,7 +81,7 @@ class PulseCustomLayout @JvmOverloads constructor(
 
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        val rect = lenBar.rect(messageRect, 0, 0, r * percent / 100 * 2)
+        val rect = lenBar.rect(messageRect, 0, 0, r * percent / 100)
         numQuestion.layout(numQuestion.rect(numRect, 0, 20))
         lenBar.layout(
             rect
