@@ -5,12 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.company.metrix.data.model.Diagnostic
 import com.company.metrix.databinding.DiagnosticQuestionsItemBinding
 import com.company.metrix.data.model.Question
 
 class DiagnosticQuestionListAdapter :
-    ListAdapter<Question, DiagnosticQuestionListAdapter.ViewHolder>(QuestionDiffUtils()) {
+    ListAdapter<Diagnostic, DiagnosticQuestionListAdapter.ViewHolder>(QuestionDiffUtils()) {
 
+    interface OnDiagnosticQuestionClickListener{
+        fun onDiagnosticClick()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -27,18 +31,18 @@ class DiagnosticQuestionListAdapter :
         holder.bind(getItem(position))
     }
 
-    class QuestionDiffUtils : DiffUtil.ItemCallback<Question>() {
-        override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean =
+    class QuestionDiffUtils : DiffUtil.ItemCallback<Diagnostic>() {
+        override fun areItemsTheSame(oldItem: Diagnostic, newItem: Diagnostic): Boolean =
             oldItem.value == newItem.value
 
-        override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean =
+        override fun areContentsTheSame(oldItem: Diagnostic, newItem: Diagnostic): Boolean =
             oldItem == newItem
 
     }
 
     class ViewHolder(val binding: DiagnosticQuestionsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(question: Question) {
+        fun bind(question: Diagnostic) {
             binding.questionText.text = question.value
         }
     }

@@ -27,7 +27,7 @@ class AuthViewModel @Inject constructor(
             name = userName ?: "Яна Гладких",
             email = userEmail ?: "monsterglad12@gmail.com",
             teamId = 1,
-            position = "Руководитель",
+            position = "Сотрудник",
             role = "Помощник помощника стажера",
             companyName = "Tinkoff"
         )

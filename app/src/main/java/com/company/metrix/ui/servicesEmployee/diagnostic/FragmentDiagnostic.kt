@@ -6,22 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.BackButtonHandler
 import com.company.metrix.R
-import com.company.metrix.databinding.FragmentDiagnosticBinding
-import com.company.metrix.data.model.Question
+import com.company.metrix.data.model.Diagnostic
 import com.company.metrix.data.model.TeamMemberInfo
-import com.company.metrix.databinding.FragmentServicesBinding
-import com.company.metrix.ui.servicesEmployee.rating.FragmentRatingDirections
+import com.company.metrix.databinding.FragmentDiagnosticBinding
 import com.company.metrix.ui.support.setupNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentDiagnostic : Fragment(), BackButtonHandler {
+    private val viewModel: DiagnosticViewModel by viewModels()
 
     private var _binding: FragmentDiagnosticBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +30,10 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requireActivity().setupNavigation(this, FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment())
+        requireActivity().setupNavigation(
+            this,
+            FragmentDiagnosticDirections.actionFragmentDiagnosticToServiceFragment()
+        )
     }
 
     override fun onCreateView(
@@ -96,7 +98,11 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
                 "Развивает навыки и умения",
                 "Повышает имидж компании"
             ).map {
-                Question(it)
+                Diagnostic(
+                    1,
+                    1,
+                    it
+                )
             }
         )
         binding.diagnosticDescription.text = "${
