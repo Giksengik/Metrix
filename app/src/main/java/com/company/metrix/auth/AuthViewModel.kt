@@ -21,13 +21,13 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
     val currentUser: MutableLiveData<User> = MutableLiveData<User>()
 
-    suspend fun initial(userName: String?, userEmail: String?) { //TODO user : User <- server
+    suspend fun initial(userName: String?, userEmail: String?, authType: AuthType) { //TODO user : User <- server
         val user1 = User(
             id = 1,
             name = userName ?: "Яна Гладких",
             email = userEmail ?: "monsterglad12@gmail.com",
             teamId = 1,
-            position = "Руководитель",
+            position = authType.uiName,
             role = "Помощник помощника стажера",
             companyName = "Tinkoff"
         )

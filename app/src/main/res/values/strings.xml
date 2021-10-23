@@ -20,6 +20,8 @@
     <string name="diagnostic_text">Диагностика</string>
     <string name="rating_text">Рейтинг</string>
     <string name="employees">Сотрудники</string>
+    <string name="employee">Сотрудник</string>
+    <string name="manager">Руководитель</string>
     <string name="strengths_text">Сильные стороны</string>
     <string name="strengths_question">За что похвалить сотрудника?</string>
     <string name="sent_thanks">Отправлено, спасибо!</string>
