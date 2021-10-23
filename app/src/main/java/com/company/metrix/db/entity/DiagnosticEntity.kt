@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class DiagnosticEntity(
     @PrimaryKey(autoGenerate = true)
     val id : Long,
+    val team_id : Long,
     val question_id : Long,
     val value : String
 )
