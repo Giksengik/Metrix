@@ -24,11 +24,11 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
     val currentUser: MutableLiveData<User> = MutableLiveData<User>()
 
-    suspend fun initial(userName: String?, userEmail: String?, authType: AuthType) { //TODO user : User <- server
+    suspend fun initial(userName: String, userEmail: String, authType: AuthType) { //TODO user : User <- server
         val user1 = User(
             id = 1,
-            name = userName ?: "Яна Гладких",
-            email = userEmail ?: "monsterglad12@gmail.com",
+            name = userName,
+            email = userEmail,
             teamId = 1,
             position = authType.uiName,
             role = "Помощник помощника стажера",
@@ -37,7 +37,6 @@ class AuthViewModel @Inject constructor(
 
         currentUser.value = user1
         userRepo.addUser(user1)
-        Log.d("test_test", "getEmployeeInfo hhey: ${userRepo.getUserByEmail("monsterglad12@gmail.com")}")
 
         val factory = EmployeeFactory()
         val usrs = factory.getAllEmployees()

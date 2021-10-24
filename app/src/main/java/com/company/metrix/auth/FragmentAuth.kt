@@ -58,8 +58,10 @@ class FragmentAuth : Fragment(), AuthHandler {
     override fun handleSuccessAuth(authType: AuthType) {
         viewModel.apply {
             viewModelScope.launch {
-                val user = Firebase.auth.currentUser!!
-                initial(user.displayName, user.email, authType)
+                val user = Firebase.auth.currentUser
+                if (user?.displayName != null && user.email != null) {
+                    initial(user.displayName!!, user.email!!, authType)
+                }
             }
         }
 

@@ -31,7 +31,10 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         profileViewModel.viewModelScope.launch {
-            profileViewModel.getEmployeeInfo("monsterglad12@gmail.com")
+            val email = Firebase.auth.currentUser?.email
+            if (email != null) {
+                profileViewModel.getEmployeeInfo(email)
+            }
         }
         return binding.root
     }
@@ -46,7 +49,10 @@ class ProfileFragment : Fragment() {
 
 
         profileViewModel.viewModelScope.launch {
-            profileViewModel.getEmployeeInfo("monsterglad12@gmail.com")
+            val email = Firebase.auth.currentUser?.email
+            if (email != null) {
+                profileViewModel.getEmployeeInfo(email)
+            }
         }
 
 
