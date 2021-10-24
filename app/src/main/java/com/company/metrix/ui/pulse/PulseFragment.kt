@@ -12,8 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentPulseBinding
 import com.company.metrix.data.model.PulseQuestion
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class PulseFragment : Fragment() {
@@ -49,10 +53,30 @@ class PulseFragment : Fragment() {
                     updateVotes(1, positionIn)
                     updateVotes(2, positionIn2)
 
-                    Toast.makeText(context, getString(R.string.pulse_data_sended), Toast.LENGTH_SHORT).show()
+                    val uid = Firebase.auth.currentUser?.uid
+                    if (uid != null) {
+                        val pulseDatabaseReference = Firebase.database.reference.child("pulse")
+                            .child("$uid").child(UUID.randomUUID().toString())
+                        pulseDatabaseReference.child(formatQuestionDatabase(question1)).setValue(positionIn)
+                        pulseDatabaseReference.child(formatQuestionDatabase(question2)).setValue(positionIn2)
+                        Toast.makeText(
+                            context,
+                            getString(R.string.pulse_data_sended),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }
+    }
+
+    private fun formatQuestionDatabase(question: String): String {
+        return question.replace(".", "_")
+            .replace(".", "_")
+            .replace("#", "_")
+            .replace("$", "_")
+            .replace("[", "_")
+            .replace("]", "_")
     }
 
     private fun setupDummyData() {
