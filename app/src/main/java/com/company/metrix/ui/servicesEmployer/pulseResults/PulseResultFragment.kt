@@ -54,11 +54,43 @@ class PulseResultFragment : Fragment() {
             q2PulseThird.icon = R.drawable.ic_third_choice
             q2PulseFourth.icon = R.drawable.ic_fourth_choice
 
+            viewModel.percent1Q1.observe(viewLifecycleOwner)  {
+                pulseOne.percent = it
+            }
+
+            viewModel.percent2Q1.observe(viewLifecycleOwner)  {
+                pulseTwo.percent = it
+            }
+
+            viewModel.percent3Q1.observe(viewLifecycleOwner)  {
+                pulseThree.percent = it
+            }
+
+            viewModel.percent4Q1.observe(viewLifecycleOwner)  {
+                pulseFour.percent = it
+            }
+
+            viewModel.percent1Q2.observe(viewLifecycleOwner)  {
+                q2PulseFirst.percent = it
+            }
+
+            viewModel.percent2Q2.observe(viewLifecycleOwner)  {
+                q2PulseSecond.percent = it
+            }
+
+            viewModel.percent3Q2.observe(viewLifecycleOwner)  {
+                q2PulseThird.percent = it
+            }
+
+            viewModel.percent4Q2.observe(viewLifecycleOwner)  {
+                q2PulseFourth.percent = it
+            }
+
             viewModel.apply {
                 viewModelScope.launch {
                     team?.let { getTeamPulseResults(it.teamId) }
 
-                    pulseOne.percent = percent1Q1.value ?: 0
+                    /*pulseOne.percent = percent1Q1.value ?: 0
                     pulseTwo.percent = percent2Q1.value ?: 0
                     pulseThree.percent = percent3Q1.value ?: 0
                     pulseFour.percent = percent4Q1.value ?: 0
@@ -66,7 +98,7 @@ class PulseResultFragment : Fragment() {
                     q2PulseFirst.percent = percent1Q2.value ?: 0
                     q2PulseSecond.percent = percent2Q2.value ?: 0
                     q2PulseThird.percent = percent3Q2.value ?: 0
-                    q2PulseFourth.percent = percent4Q2.value ?: 0
+                    q2PulseFourth.percent = percent4Q2.value ?: 0*/
                 }
             }
         }

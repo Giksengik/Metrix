@@ -12,8 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.R
 import com.company.metrix.databinding.FragmentPulseBinding
 import com.company.metrix.data.model.PulseQuestion
+import com.company.metrix.swipe.utils.TextUtils
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,30 +58,53 @@ class PulseFragment : Fragment() {
                     updateVotes(1, positionIn)
                     updateVotes(2, positionIn2)
 
-                    val uid = Firebase.auth.currentUser?.uid
-                    if (uid != null) {
-                        val pulseDatabaseReference = Firebase.database.reference.child("pulse")
-                            .child("$uid").child(UUID.randomUUID().toString())
-                        pulseDatabaseReference.child(formatQuestionDatabase(question1)).setValue(positionIn)
-                        pulseDatabaseReference.child(formatQuestionDatabase(question2)).setValue(positionIn2)
-                        Toast.makeText(
-                            context,
-                            getString(R.string.pulse_data_sended),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    Firebase.database.reference.child("pulse")
+                        .addListenerForSingleValueEvent(object :
+                            ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val pos1List = if (snapshot.children.iterator()
+                                        .hasNext()
+                                ) snapshot.children.iterator().next().getValue<MutableList<Int>>()
+                                    ?: mutableListOf() else mutableListOf()
+                                pos1List.add(positionIn)
+
+                                val pos2List = if (snapshot.children.iterator()
+                                        .hasNext()
+                                ) snapshot.children.iterator().next().getValue<MutableList<Int>>()
+                                    ?: mutableListOf() else mutableListOf()
+                                pos2List.add(positionIn2)
+
+                                val pulseDatabaseReference =
+                                    Firebase.database.reference.child("pulse")
+                                pulseDatabaseReference.child(
+                                    TextUtils.formatQuestionDatabase(
+                                        question1
+                                    )
+                                ).setValue(pos1List)
+                                pulseDatabaseReference.child(
+                                    TextUtils.formatQuestionDatabase(
+                                        question2
+                                    )
+                                ).setValue(pos2List)
+
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.pulse_data_sended),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.database_error),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        })
                 }
             }
         }
-    }
-
-    private fun formatQuestionDatabase(question: String): String {
-        return question.replace(".", "_")
-            .replace(".", "_")
-            .replace("#", "_")
-            .replace("$", "_")
-            .replace("[", "_")
-            .replace("]", "_")
     }
 
     private fun setupDummyData() {
