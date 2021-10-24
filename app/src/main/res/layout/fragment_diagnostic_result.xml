@@ -38,7 +38,7 @@
         app:tint="@color/red" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/strengthsContent"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -116,8 +116,8 @@
         android:id="@+id/loadingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/strengthsContent"
+        app:layout_constraintBottom_toBottomOf="@+id/content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/strengthsContent" />
+        app:layout_constraintTop_toTopOf="@+id/content" />
 </androidx.constraintlayout.widget.ConstraintLayout>

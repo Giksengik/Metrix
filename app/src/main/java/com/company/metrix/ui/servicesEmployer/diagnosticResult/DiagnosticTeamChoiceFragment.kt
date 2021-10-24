@@ -12,9 +12,10 @@ import com.company.metrix.databinding.FragmentDiagnosticTeamChoiceBinding
 import com.company.metrix.ui.servicesEmployer.TeamViewModel
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamAdapter
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class DiagnosticTeamChoiceFragment : Fragment() {
     private var _binding: FragmentDiagnosticTeamChoiceBinding? = null
     private val binding get() = _binding!!

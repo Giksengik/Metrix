@@ -80,9 +80,10 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
                     val ans = DiagnosticAnswer(
                         team_id = model.team_id,
                         value = model.value,
-                        question_id = position,
+                        question_id = position.toLong(),
                         chosen_check_box_number = if (isYes) 1 else 2
                     )
+
                     when (position) {
                         1 -> questionOne = ans
                         2 -> questionTwo = ans

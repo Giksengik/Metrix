@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.databinding.DiagnosticResultItemBinding
 
 class ResultsAdapter(
-) : ListAdapter<String, ResultsAdapter.ViewHolder>(
+) : ListAdapter<String, ResultsAdapter.ViewHolder>( //TODO model
     SkillDiffUtil()
 ) {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -39,8 +38,9 @@ class ResultsAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
+        //TODO
         fun bind(value: String) {
-
+            binding.content.text = value
 
         }
     }

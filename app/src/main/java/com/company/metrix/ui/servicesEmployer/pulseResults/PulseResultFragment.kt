@@ -47,13 +47,24 @@ class PulseResultFragment : Fragment() {
         binding.pulseThree.icon = R.drawable.ic_third_choice
         binding.pulseFour.icon = R.drawable.ic_fourth_choice
 
+        binding.q2PulseFirst.icon = R.drawable.ic_first_choice
+        binding.q2PulseSecond.icon = R.drawable.ic_second_choice
+        binding.q2PulseThird.icon = R.drawable.ic_third_choice
+        binding.q2PulseFourth.icon = R.drawable.ic_fourth_choice
+
         viewModel.viewModelScope.launch {
             team?.let { viewModel.getTeamPulseResults(it.teamId) }
-            // binding.teamDescription.text =
-            //    "${viewModel.currenTeamPulse.value!!.votesOne}  ${viewModel.currenTeamPulse.value!!.votesTwo} ${viewModel.currenTeamPulse.value!!.votesThree} ${viewModel.currenTeamPulse.value!!.votesFour} "
-        }
 
-        //binding.teamDescription.text = "TEST TEST TEST"
+            binding.pulseOne.percent = viewModel.percent1Q1.value!!
+            binding.pulseTwo.percent =  viewModel.percent2Q1.value!!
+            binding.pulseThree.percent =  viewModel.percent3Q1.value!!
+            binding.pulseFour.percent =  viewModel.percent4Q1.value!!
+
+            binding.q2PulseFirst.percent = viewModel.percent1Q2.value!!
+            binding.q2PulseSecond.percent = viewModel.percent2Q2.value!!
+            binding.q2PulseThird.percent = viewModel.percent3Q2.value!!
+            binding.q2PulseFourth.percent = viewModel.percent4Q2.value!!
+         }
 
     }
 

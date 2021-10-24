@@ -23,7 +23,6 @@ class CharacteristicAdapter(private val data: MutableList<CharacteristicInfo>, p
 
     override fun getItemCount(): Int = data.size
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<CharacteristicInfo>) {
         val size = itemCount
         this.data.clear()
