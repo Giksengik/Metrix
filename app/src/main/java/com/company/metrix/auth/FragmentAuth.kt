@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.company.metrix.R
+import com.company.metrix.data.model.AuthType
 import com.company.metrix.data.model.User
 import com.company.metrix.databinding.FragmentAuthBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -54,11 +55,11 @@ class FragmentAuth : Fragment(), AuthHandler {
         }
     }
 
-    override fun handleSuccessAuth() {
+    override fun handleSuccessAuth(authType: AuthType) {
         viewModel.apply {
             viewModelScope.launch {
                 val user = Firebase.auth.currentUser!!
-                initial(user.displayName, user.email)
+                initial(user.displayName, user.email, authType)
             }
         }
 

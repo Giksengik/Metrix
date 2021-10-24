@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.company.metrix.R
+import com.company.metrix.data.model.AuthType
 import com.company.metrix.databinding.FragmentEmployeeAuthBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -28,19 +29,20 @@ class FragmentAuthEmployee() : Fragment() {
 
     private lateinit var database: DatabaseReference
 
-    companion object{
+    companion object {
         fun newInstance(authHandler: AuthHandler): Fragment {
             return FragmentAuthEmployee(authHandler)
         }
     }
 
-    private constructor(authHandler: AuthHandler) : this(){
+    private constructor(authHandler: AuthHandler) : this() {
         this.authHandler = authHandler
     }
 
-    private var authHandler : AuthHandler? = null
-    private lateinit var binding : FragmentEmployeeAuthBinding
+    private var authHandler: AuthHandler? = null
+    private lateinit var binding: FragmentEmployeeAuthBinding
     private lateinit var auth: FirebaseAuth
+    private var authType: AuthType = AuthType.EMPLOYEE
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,8 +53,15 @@ class FragmentAuthEmployee() : Fragment() {
         binding.buttonEmployeeAuth.setOnClickListener {
             binding.authProgressBar.visibility = View.VISIBLE
             binding.buttonEmployeeAuth.visibility = View.INVISIBLE
+            when (binding.authModeToggle.checkedButtonId) {
+                R.id.employeeAuthButton -> authType = AuthType.EMPLOYEE
+                R.id.managerAuthButton -> authType = AuthType.MANAGER
+                else -> showError()
+            }
             authorizationHandler.launch(getSignInIntent())
         }
+
+        binding.authModeToggle.check(R.id.employeeAuthButton)
 
         database = Firebase.database.reference.child("users")
         auth = Firebase.auth
@@ -117,7 +126,7 @@ class FragmentAuthEmployee() : Fragment() {
 
 
     private fun onSignedIn() {
-        authHandler?.handleSuccessAuth()
+        authHandler?.handleSuccessAuth(authType)
         binding.authProgressBar.visibility = View.INVISIBLE
         binding.buttonEmployeeAuth.visibility = View.VISIBLE
     }
