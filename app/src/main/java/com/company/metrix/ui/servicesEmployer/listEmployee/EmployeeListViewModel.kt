@@ -22,6 +22,11 @@ class EmployeeListViewModel @Inject constructor(val userRepo: UserRepository) : 
         updateValues()
     }
 
+
+    suspend fun getTeamNameByTeamId(teamId : Long, companyName : String) : Team{
+        return userRepo.getTeamByTeamAndCompany(teamId, companyName)
+    }
+
     private suspend fun updateValues() {
         allUsers.value = userRepo.getAllUsersByCompany(currentUser.value!!.companyName)
 

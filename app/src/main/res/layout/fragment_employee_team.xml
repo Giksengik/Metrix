@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:text="@string/estimate_empty"
+                android:text="@string/no_people_in_team"
                 android:textSize="20sp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -37,24 +37,39 @@ class PulseResultFragment : Fragment() {
         return binding.root
     }
 
+    //TODO заменить на ресайклер
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.loadingBar.visibility = View.GONE
-        binding.content.visibility = View.VISIBLE
+        with(binding) {
+            loadingBar.visibility = View.GONE
+            content.visibility = View.VISIBLE
 
-        binding.pulseOne.icon = R.drawable.ic_first_choice
-        binding.pulseTwo.icon = R.drawable.ic_second_choice
-        binding.pulseThree.icon = R.drawable.ic_third_choice
-        binding.pulseFour.icon = R.drawable.ic_fourth_choice
+            pulseOne.icon = R.drawable.ic_first_choice
+            pulseTwo.icon = R.drawable.ic_second_choice
+            pulseThree.icon = R.drawable.ic_third_choice
+            pulseFour.icon = R.drawable.ic_fourth_choice
 
-        viewModel.viewModelScope.launch {
-            team?.let { viewModel.getTeamPulseResults(it.teamId) }
-            // binding.teamDescription.text =
-            //    "${viewModel.currenTeamPulse.value!!.votesOne}  ${viewModel.currenTeamPulse.value!!.votesTwo} ${viewModel.currenTeamPulse.value!!.votesThree} ${viewModel.currenTeamPulse.value!!.votesFour} "
+            q2PulseFirst.icon = R.drawable.ic_first_choice
+            q2PulseSecond.icon = R.drawable.ic_second_choice
+            q2PulseThird.icon = R.drawable.ic_third_choice
+            q2PulseFourth.icon = R.drawable.ic_fourth_choice
+
+            viewModel.apply {
+                viewModelScope.launch {
+                    team?.let { getTeamPulseResults(it.teamId) }
+
+                    pulseOne.percent = percent1Q1.value ?: 0
+                    pulseTwo.percent = percent2Q1.value ?: 0
+                    pulseThree.percent = percent3Q1.value ?: 0
+                    pulseFour.percent = percent4Q1.value ?: 0
+
+                    q2PulseFirst.percent = percent1Q2.value ?: 0
+                    q2PulseSecond.percent = percent2Q2.value ?: 0
+                    q2PulseThird.percent = percent3Q2.value ?: 0
+                    q2PulseFourth.percent = percent4Q2.value ?: 0
+                }
+            }
         }
-
-        //binding.teamDescription.text = "TEST TEST TEST"
-
     }
 
 }

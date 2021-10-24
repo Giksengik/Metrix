@@ -23,6 +23,11 @@ class PulseCustomLayout @JvmOverloads constructor(
     private val messageRect = Rect()
 
     var percent = 0
+    set(value) {
+        field = value
+        requestLayout()
+    }
+
     var icon = R.drawable.ic_first_choice
     set(value) {
         numQuestion.setImageDrawable(

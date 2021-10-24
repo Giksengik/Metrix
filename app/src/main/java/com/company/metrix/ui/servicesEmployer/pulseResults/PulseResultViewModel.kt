@@ -16,11 +16,41 @@ class PulseResultViewModel @Inject constructor(
     private val userRepo: UserRepository
 ) : ViewModel() {
 
-    val currenTeamPulse : MutableLiveData<Pulse> = MutableLiveData<Pulse>()
+    val percent1Q1: MutableLiveData<Int> = MutableLiveData<Int>()
+    val percent2Q1: MutableLiveData<Int> = MutableLiveData<Int>()
+    val percent3Q1: MutableLiveData<Int> = MutableLiveData<Int>()
+    val percent4Q1: MutableLiveData<Int> = MutableLiveData<Int>()
+
+    val percent1Q2: MutableLiveData<Int> = MutableLiveData<Int>()
+    val percent2Q2: MutableLiveData<Int> = MutableLiveData<Int>()
+    val percent3Q2: MutableLiveData<Int> = MutableLiveData<Int>()
+    val percent4Q2: MutableLiveData<Int> = MutableLiveData<Int>()
 
     suspend fun getTeamPulseResults(teamId: Long) {
         val user = userRepo.getUserByEmail(Firebase.auth.currentUser?.email!!)
-        val results = pulseRepo.getPulseByCompanyAndIdQuestion(user.companyName, 1, teamId)
-        currenTeamPulse.value = results
+        val results1 = pulseRepo.getPulseByCompanyAndIdQuestion(user.companyName, 1, teamId)
+        val results2 = pulseRepo.getPulseByCompanyAndIdQuestion(user.companyName, 1, teamId)
+
+        val totalRes1 = results1.votesOne + results1.votesTwo + results1.votesThree + results1.votesFour
+        val totalRes2 = results2.votesOne + results2.votesTwo + results2.votesThree + results2.votesFour
+
+        if (totalRes1 != 0) {
+            results1.also {
+                percent1Q1.value = it.votesOne * 100 / totalRes1
+                percent2Q1.value = it.votesTwo * 100 / totalRes1
+                percent3Q1.value = it.votesThree * 100 / totalRes1
+                percent4Q1.value = it.votesFour * 100 / totalRes1
+            }
+        }
+
+        if (totalRes2 != 0) {
+            results2.also {
+                percent1Q2.value = it.votesOne * 100 / totalRes2
+                percent2Q2.value = it.votesTwo * 100 / totalRes2
+                percent3Q2.value = it.votesThree * 100 / totalRes2
+                percent4Q2.value = it.votesFour * 100 / totalRes2
+            }
+        }
+
     }
 }

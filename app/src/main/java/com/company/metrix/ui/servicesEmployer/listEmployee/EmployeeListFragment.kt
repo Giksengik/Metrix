@@ -159,10 +159,14 @@ class EmployeeListFragment : Fragment() {
         }
         val name: AppCompatTextView = dialog.findViewById(R.id.name_remove)
         val role: AppCompatTextView = dialog.findViewById(R.id.role_remove)
+        val teamName: AppCompatTextView = dialog.findViewById(R.id.teamName)
         val exitMove: AppCompatImageButton = dialog.findViewById(R.id.exit_remove)
 
         name.text = user.name
         role.text = user.role
+        viewModel.viewModelScope.launch {
+            teamName.text = viewModel.getTeamNameByTeamId(user.teamId, user.companyName).team_name
+        }
 
         val confirm: MaterialButton = dialog.findViewById(R.id.button_confirm_remove)
         confirm.setOnClickListener {
