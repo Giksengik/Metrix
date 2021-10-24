@@ -1,6 +1,5 @@
 package com.company.metrix.db.entity
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

@@ -1,7 +1,6 @@
 package com.company.metrix.dataProvider
 
 import com.company.metrix.data.model.Estimation
-import com.company.metrix.db.entity.EstimationEntity
 
 interface LocalEstimationDataProvider {
     suspend fun insertEstimation(item: Estimation)

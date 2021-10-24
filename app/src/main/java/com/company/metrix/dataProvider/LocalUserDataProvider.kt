@@ -1,13 +1,7 @@
-package com.company.metrix.db
+package com.company.metrix.dataProvider
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
 import com.company.metrix.data.model.Team
 import com.company.metrix.data.model.User
-import com.company.metrix.db.entity.TeamEntity
-import com.company.metrix.db.entity.UserEntity
 
 interface LocalUserDataProvider {
     suspend fun insertUser(item: User)

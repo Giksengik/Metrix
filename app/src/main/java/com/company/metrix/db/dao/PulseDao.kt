@@ -17,7 +17,7 @@ interface PulseDao {
     @Query("Select * from `pulse` where companyName = :companyName and question_id = :question_id and team_id = :team_id")
     suspend fun getPulseByCompanyAndIdQuestion(companyName : String, question_id : Long, team_id : Long): PulseEntity
 
-    @Delete()
+    @Delete
     suspend fun deletePulse(item: PulseEntity)
 
     @Update

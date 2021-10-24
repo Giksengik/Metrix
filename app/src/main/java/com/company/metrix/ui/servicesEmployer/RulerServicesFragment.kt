@@ -5,19 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.metrix.databinding.FragmentServicesBinding
 import com.company.metrix.ui.servicesEmployee.ServiceListAdapter
 import com.company.metrix.ui.servicesEmployee.ServiceType
-import com.company.metrix.ui.servicesEmployee.ServiceViewModel
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RulerServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
@@ -53,7 +47,6 @@ class RulerServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListe
     }
 
     private fun setupAdapterItems() {
-        //serviceAdapter.submitList(ServiceType.values().toList())
         serviceAdapter.submitList(
             arrayListOf(
                 ServiceType.TEAM, ServiceType.DIAGNOSTIC,
@@ -67,12 +60,10 @@ class RulerServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListe
         when (serviceType) {
             ServiceType.AWARDS -> showAwardsService()
             ServiceType.DIAGNOSTIC -> showDiagnosticService()
-            ServiceType.RATING -> showRatingsService()
-            ServiceType.RECOMENDATIONS -> showRecomendationsService()
-            ServiceType.STRENGTHS -> showStrengthsService()
             ServiceType.TEAM -> showTeamService()
             ServiceType.PULSE -> showPulseService()
             ServiceType.USER -> showEmployeeService()
+            else -> throw UnknownError("Something went wrong")
         }
 
     private fun showPulseService() {
@@ -91,27 +82,6 @@ class RulerServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListe
         findNavController().navigate(
             RulerServicesFragmentDirections.actionRulerServicesFragmentToEmployeeTeamChoiceFragment()
         )
-    }
-
-    private fun showStrengthsService() {
-        //TODO
-//        findNavController().navigate(
-//            ServicesFragmentDirections.actionServiceFragmentToFragmentStrengths()
-//        )
-    }
-
-    private fun showRecomendationsService() {
-        //TODO
-//        findNavController().navigate(
-//            ServicesFragmentDirections.actionServiceFragmentToFragmentRecomendations()
-//        )
-    }
-
-    private fun showRatingsService() {
-        //TODO
-//        findNavController().navigate(
-//            ServicesFragmentDirections.actionServiceFragmentToFragmentRating()
-//        )
     }
 
     private fun showDiagnosticService() {

@@ -2,7 +2,6 @@ package com.company.metrix.ui.servicesEmployer.pulseResults
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.company.metrix.data.model.Pulse
 import com.company.metrix.data.repository.PulseRepository
 import com.company.metrix.data.repository.UserRepository
 import com.google.firebase.auth.ktx.auth

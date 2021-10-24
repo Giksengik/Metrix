@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.databinding.DiagnosticResultItemBinding
 
-class ResultsAdapter(
-) : ListAdapter<String, ResultsAdapter.ViewHolder>( //TODO model
+class ResultsAdapter : ListAdapter<String, ResultsAdapter.ViewHolder>( //TODO model
     SkillDiffUtil()
 ) {
 

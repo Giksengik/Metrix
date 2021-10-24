@@ -2,7 +2,6 @@ package com.company.metrix.dataProvider
 
 import com.company.metrix.data.model.Team
 import com.company.metrix.data.model.User
-import com.company.metrix.db.LocalUserDataProvider
 import com.company.metrix.db.dao.UserDao
 import com.company.metrix.db.entity.TeamEntity
 import com.company.metrix.db.entity.UserEntity

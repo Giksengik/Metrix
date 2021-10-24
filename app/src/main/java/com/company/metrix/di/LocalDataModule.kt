@@ -1,7 +1,7 @@
 package com.company.metrix.di
 
 import com.company.metrix.dataProvider.*
-import com.company.metrix.db.LocalUserDataProvider
+import com.company.metrix.dataProvider.LocalUserDataProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -14,7 +14,7 @@ interface EstimationDao {
     @Query("Select * from `estimation` where user_id = :user_id " )
     suspend fun getEstimationsByUserId(user_id : Long) :  List<EstimationEntity>
 
-    @Delete()
+    @Delete
     suspend fun deleteEstimation(item : EstimationEntity)
 
 }

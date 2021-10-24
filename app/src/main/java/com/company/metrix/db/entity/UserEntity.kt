@@ -1,10 +1,7 @@
 package com.company.metrix.db.entity
 
-import android.net.Uri
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.company.metrix.data.model.Estimation
 
 @Entity(tableName = "users")
 data class UserEntity (

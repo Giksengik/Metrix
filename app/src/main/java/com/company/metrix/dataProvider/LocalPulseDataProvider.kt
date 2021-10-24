@@ -1,8 +1,6 @@
 package com.company.metrix.dataProvider
 
-import androidx.room.Query
 import com.company.metrix.data.model.Pulse
-import com.company.metrix.db.entity.PulseEntity
 
 interface LocalPulseDataProvider {
     suspend fun insertPulse(item: Pulse)

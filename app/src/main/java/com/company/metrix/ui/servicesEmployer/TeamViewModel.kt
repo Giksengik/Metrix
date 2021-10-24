@@ -25,7 +25,7 @@ class TeamViewModel @Inject constructor(val userRepo: UserRepository) : ViewMode
 
         for (team in allTeams) {
             val usersInTeam = userRepo.getAllUsersByTeamAndCompany(team.team_id, currentUser.value!!.companyName)
-            Log.d("test_test", "NEW getTeamsOfUser: ${usersInTeam}")
+            Log.d("test_test", "NEW getTeamsOfUser: $usersInTeam")
 
             list.add(
                 TeamModel(

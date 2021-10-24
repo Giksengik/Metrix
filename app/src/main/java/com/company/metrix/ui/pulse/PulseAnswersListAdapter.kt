@@ -7,11 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.R
-import com.company.metrix.data.model.User
 import com.company.metrix.databinding.AnswerItemBinding
-import java.lang.IllegalArgumentException
 
-class PulseAnswersListAdapter(val onClickListener: OnPulseAnswersListener) :
+class PulseAnswersListAdapter(private val onClickListener: OnPulseAnswersListener) :
     ListAdapter<String, PulseAnswersListAdapter.ViewHolder>(PulseAnswerDiffUtil()) {
 
     interface OnPulseAnswersListener {
@@ -63,7 +61,7 @@ class PulseAnswersListAdapter(val onClickListener: OnPulseAnswersListener) :
 
     }
 
-    class ViewHolder(val binding: AnswerItemBinding, val onClickListener: OnPulseAnswersListener) :
+    class ViewHolder(val binding: AnswerItemBinding, private val onClickListener: OnPulseAnswersListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(question: String, position: Int, selected: Int?) {
             binding.answerValue.text = question

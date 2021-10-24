@@ -2,17 +2,15 @@ package com.company.metrix.ui.pulse
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.company.metrix.databinding.PulseItemBinding
 import com.company.metrix.data.model.PulseQuestion
-import com.company.metrix.data.model.User
+import com.company.metrix.databinding.PulseItemBinding
 
 
-class PulseQuestionsListAdapter(val onClick: OnPulseQuestionsListener) :
+class PulseQuestionsListAdapter(private val onClick: OnPulseQuestionsListener) :
     ListAdapter<PulseQuestion, PulseQuestionsListAdapter.ViewHolder>
         (PulseQuestionDiffUtil()) {
 
@@ -52,11 +50,11 @@ class PulseQuestionsListAdapter(val onClick: OnPulseQuestionsListener) :
         fun bind(pulseQuestion: PulseQuestion) {
             binding.questionValue.text = pulseQuestion.question
 
-            val pos = position
+            val pos = adapterPosition
 
              val onClick = object : PulseAnswersListAdapter.OnPulseAnswersListener {
-                override fun onPulseClick(value: String, positionIn: Int) {
-                    onClickQuestion.onPulseClick(value, pos, positionIn)
+                override fun onPulseClick(value: String, position: Int) {
+                    onClickQuestion.onPulseClick(value, pos, position)
                 }
             }
             val answersListAdapter = PulseAnswersListAdapter(onClick)
