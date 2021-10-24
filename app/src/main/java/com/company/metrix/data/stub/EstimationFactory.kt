@@ -1,7 +1,6 @@
 package com.company.metrix.data.stub
 
 import com.company.metrix.data.model.Estimation
-import com.company.metrix.data.model.User
 
 class EstimationFactory {
     fun getAllEstimations(): List<Estimation> =

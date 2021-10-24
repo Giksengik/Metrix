@@ -3,8 +3,6 @@ package com.company.metrix.db.dao
 import androidx.room.*
 import com.company.metrix.db.entity.TeamEntity
 import com.company.metrix.db.entity.UserEntity
-import io.reactivex.Flowable
-import io.reactivex.Single
 
 @Dao
 interface UserDao {
@@ -41,7 +39,7 @@ interface UserDao {
     @Query(value = "Select * from `teams` where companyName = :companyName ")
     suspend fun getAllTeamsByCompany(companyName: String): List<TeamEntity>
 
-    @Delete()
+    @Delete
     suspend fun deleteUser(item: UserEntity)
 
     @Update

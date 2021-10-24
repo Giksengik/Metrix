@@ -35,7 +35,6 @@ class PulseViewModel @Inject constructor(
                     votesFour = currentPulse.votesFour
                 )
 
-                val pulss = newPulse
                 pulseRepository.updatePulse(
                     newPulse
                 )
@@ -90,14 +89,6 @@ class PulseViewModel @Inject constructor(
             }
 
         }
-    }
-
-
-    //TODO to initial stub
-    suspend fun addPulseStatistics(pulse: Pulse) {
-        pulseRepository.insertPulse(
-            pulse
-        )
     }
 
 }

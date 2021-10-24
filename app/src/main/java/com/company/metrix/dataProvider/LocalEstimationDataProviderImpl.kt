@@ -1,11 +1,8 @@
 package com.company.metrix.dataProvider
 
 import com.company.metrix.data.model.Estimation
-import com.company.metrix.db.LocalUserDataProvider
 import com.company.metrix.db.dao.EstimationDao
-import com.company.metrix.db.dao.UserDao
 import com.company.metrix.db.entity.EstimationEntity
-import com.company.metrix.db.entity.UserEntity
 import javax.inject.Inject
 
 class LocalEstimationDataProviderImpl @Inject constructor(val dao: EstimationDao) :

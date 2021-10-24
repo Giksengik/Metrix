@@ -52,9 +52,7 @@ class FragmentDiagnostic : Fragment(), BackButtonHandler {
             val rand = java.util.Random()
             val teamMember = viewModel.users.value!![rand.nextInt(viewModel.users.value!!.size)]
 
-            binding.diagnosticDescription.text = "${
-                binding.diagnosticDescription.text
-            } ${teamMember.name}"
+            binding.diagnosticDescription.text = "${binding.diagnosticDescription.text} ${teamMember.name}"
         }
 
         return binding.root

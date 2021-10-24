@@ -8,13 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
-import com.company.metrix.databinding.FragmentPulseResultBinding
 import com.company.metrix.databinding.FragmentPulseResultChoiceBinding
 import com.company.metrix.ui.servicesEmployer.TeamViewModel
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamAdapter
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

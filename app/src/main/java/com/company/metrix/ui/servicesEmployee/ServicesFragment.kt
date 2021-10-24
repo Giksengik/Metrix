@@ -1,22 +1,15 @@
 package com.company.metrix.ui.servicesEmployee
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.company.metrix.databinding.FragmentRulerServicesBinding
 import com.company.metrix.databinding.FragmentServicesBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
@@ -25,10 +18,6 @@ class ServicesFragment : Fragment(), ServiceListAdapter.OnServiceClickListener {
     private val binding get() = _binding!!
 
     private lateinit var serviceAdapter: ServiceListAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

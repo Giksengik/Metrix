@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.company.metrix.databinding.CharacteristicItemBinding
 import com.company.metrix.data.model.CharacteristicInfo
 
-class CharacteristicAdapter(private val data: MutableList<CharacteristicInfo>, private val clickListener: (id: String, isSelected: Boolean) -> Unit) :
+class CharacteristicAdapter(
+    private val data: MutableList<CharacteristicInfo>,
+    private val clickListener: (id: String, isSelected: Boolean) -> Unit
+) :
     RecyclerView.Adapter<CharacteristicAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,16 +34,21 @@ class CharacteristicAdapter(private val data: MutableList<CharacteristicInfo>, p
         notifyItemRangeInserted(0, itemCount)
     }
 
-    class ViewHolder(private val binding: CharacteristicItemBinding, private val clickListener: (id: String, isSelected: Boolean) -> Unit) :
+    class ViewHolder(
+        private val binding: CharacteristicItemBinding,
+        private val clickListener: (id: String, isSelected: Boolean) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(characteristic: CharacteristicInfo) {
-            binding.characteristicEmoji.text = characteristic.emoji
-            binding.characteristicName.text = characteristic.textShort
-            binding.characteristicEmoji.alpha = 0.4f
-            binding.root.setOnClickListener {
-                val isSelected = binding.characteristicEmoji.alpha == 1.0f
-                binding.characteristicEmoji.alpha = if (!isSelected) 1.0f else 0.4f
-                clickListener(characteristic.id, isSelected)
+            with(binding) {
+                characteristicEmoji.text = characteristic.emoji
+                characteristicName.text = characteristic.textShort
+                characteristicEmoji.alpha = 0.4f
+                root.setOnClickListener {
+                    val isSelected = characteristicEmoji.alpha == 1.0f
+                    characteristicEmoji.alpha = if (!isSelected) 1.0f else 0.4f
+                    clickListener(characteristic.id, isSelected)
+                }
             }
         }
     }

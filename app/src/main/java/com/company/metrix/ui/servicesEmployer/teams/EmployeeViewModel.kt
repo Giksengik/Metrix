@@ -33,7 +33,7 @@ class EmployeeViewModel @Inject constructor(
 //        }
     }
 
-    suspend fun calculateRatings() {
+    private suspend fun calculateRatings() {
         val users = userRepo.getAllUsers()
         val userIds: MutableSet<Long> = mutableSetOf()
         for (userId in users) {
@@ -48,7 +48,7 @@ class EmployeeViewModel @Inject constructor(
         }
     }
 
-    suspend fun initial() {
+    private suspend fun initial() {
         val user = Firebase.auth.currentUser?.email?.let { userRepo.getUserByEmail(it) }!!
         currentUser.value = user
         companyName.value = user.companyName
@@ -66,7 +66,7 @@ class EmployeeViewModel @Inject constructor(
         getTeamsOfCompany()
     }
 
-    suspend fun getTeamsOfCompany() {
+    private suspend fun getTeamsOfCompany() {
         teamList.value =
             userRepo.getAllTeamsByCompany(currentUser.value!!.companyName).map { it.team_name }
     }

@@ -2,7 +2,7 @@ package com.company.metrix.data.repository
 
 import com.company.metrix.data.model.Team
 import com.company.metrix.data.model.User
-import com.company.metrix.db.LocalUserDataProvider
+import com.company.metrix.dataProvider.LocalUserDataProvider
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
