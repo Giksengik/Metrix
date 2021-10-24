@@ -55,8 +55,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -81,8 +80,7 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
-                    app:percent="20" />
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
                 <com.company.metrix.pulseCustom.PulseCustomLayout
                     android:id="@+id/pulse_two"
@@ -92,8 +90,7 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pulse_one"
-                    app:percent="40" />
+                    app:layout_constraintTop_toBottomOf="@+id/pulse_one" />
 
                 <com.company.metrix.pulseCustom.PulseCustomLayout
                     android:id="@+id/pulse_three"
@@ -103,8 +100,7 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pulse_two"
-                    app:percent="30" />
+                    app:layout_constraintTop_toBottomOf="@+id/pulse_two" />
 
                 <com.company.metrix.pulseCustom.PulseCustomLayout
                     android:id="@+id/pulse_four"
@@ -114,16 +110,15 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pulse_three"
-                    app:percent="30" />
+                    app:layout_constraintTop_toBottomOf="@+id/pulse_three" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView3"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:layout_height="wrap_content"
                     android:text="@string/default_questions"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -158,8 +153,7 @@
                     android:layout_marginStart="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/how_ruler_acts"
-                    app:percent="10" />
+                    app:layout_constraintTop_toBottomOf="@+id/how_ruler_acts" />
 
                 <com.company.metrix.pulseCustom.PulseCustomLayout
                     android:id="@+id/q2_pulse_second"
@@ -168,8 +162,7 @@
                     android:layout_marginStart="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/q2_pulse_first"
-                    app:percent="50" />
+                    app:layout_constraintTop_toBottomOf="@+id/q2_pulse_first" />
 
                 <com.company.metrix.pulseCustom.PulseCustomLayout
                     android:id="@+id/q2_pulse_third"
@@ -178,8 +171,7 @@
                     android:layout_marginStart="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/q2_pulse_second"
-                    app:percent="40" />
+                    app:layout_constraintTop_toBottomOf="@+id/q2_pulse_second" />
 
                 <com.company.metrix.pulseCustom.PulseCustomLayout
                     android:id="@+id/q2_pulse_fourth"
@@ -188,8 +180,7 @@
                     android:layout_marginStart="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/q2_pulse_third"
-                    app:percent="20" />
+                    app:layout_constraintTop_toBottomOf="@+id/q2_pulse_third" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

@@ -34,15 +34,19 @@ class PulseResultViewModel @Inject constructor(
         val totalRes1 = results1.votesOne + results1.votesTwo + results1.votesThree + results1.votesFour
         val totalRes2 = results2.votesOne + results2.votesTwo + results2.votesThree + results2.votesFour
 
-        percent1Q1.value = results1.votesOne * 100/totalRes1
-        percent2Q1.value = results1.votesTwo * 100/totalRes1
-        percent3Q1.value = results1.votesThree * 100/totalRes1
-        percent4Q1.value = results1.votesFour * 100/totalRes1
+        if (totalRes1 != 0) {
+            percent1Q1.value = results1.votesOne * 100 / totalRes1
+            percent2Q1.value = results1.votesTwo * 100 / totalRes1
+            percent3Q1.value = results1.votesThree * 100 / totalRes1
+            percent4Q1.value = results1.votesFour * 100 / totalRes1
+        }
 
-        percent1Q2.value = results1.votesOne * 100/totalRes2
-        percent2Q2.value = results1.votesTwo * 100/totalRes2
-        percent3Q2.value = results1.votesThree * 100/totalRes2
-        percent4Q2.value = results1.votesFour * 100/totalRes2
+        if (totalRes2 != 0) {
+            percent1Q2.value = results1.votesOne * 100 / totalRes2
+            percent2Q2.value = results1.votesTwo * 100 / totalRes2
+            percent3Q2.value = results1.votesThree * 100 / totalRes2
+            percent4Q2.value = results1.votesFour * 100 / totalRes2
+        }
 
     }
 }
