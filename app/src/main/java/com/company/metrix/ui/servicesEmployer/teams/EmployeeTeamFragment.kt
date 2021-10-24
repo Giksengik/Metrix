@@ -21,6 +21,7 @@ import com.company.metrix.R
 import com.company.metrix.data.model.User
 import com.company.metrix.databinding.FragmentEmployeeTeamBinding
 import com.company.metrix.ui.servicesEmployer.teamRecycler.TeamModel
+import com.company.metrix.ui.servicesEmployer.teams.recyclerEmployee.EmployeeAdapter
 import com.company.metrix.ui.support.getOnItemSelectListener
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,7 @@ import kotlinx.coroutines.launch
 class EmployeeTeamFragment : Fragment() {
     private val viewModel: EmployeeViewModel by viewModels()
     private val args: EmployeeTeamFragmentArgs by navArgs()
-    //private lateinit var adapter: EmployeeAdapter
+    private lateinit var adapter: EmployeeAdapter
 
     private var _binding: FragmentEmployeeTeamBinding? = null
     private val binding get() = _binding!!
@@ -66,10 +67,16 @@ class EmployeeTeamFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.userList.observe(viewLifecycleOwner, {
-            binding.loadingBar.visibility = View.VISIBLE
-            //adapter.submitList(viewModel.userList.value)
-            //binding.teamsList.adapter = adapter
-            binding.loadingBar.visibility = View.GONE
+            if (it.isEmpty()) {
+                binding.emptyView.visibility = View.VISIBLE
+                binding.loadingBar.visibility = View.GONE
+            } else {
+                binding.emptyView.visibility = View.GONE
+                binding.loadingBar.visibility = View.VISIBLE
+                adapter.submitList(it)
+                binding.teamsList.adapter = adapter
+                binding.loadingBar.visibility = View.GONE
+            }
         })
 
         viewModel.userRatings.observe(viewLifecycleOwner, {
@@ -78,7 +85,7 @@ class EmployeeTeamFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        /*val clickListener = object : EmployeeAdapter.OnEmployeeClickListener {
+        val clickListener = object : EmployeeAdapter.OnEmployeeClickListener {
             override fun onEmployeeClick(teamModel: User, position: Int) {
             }
         }
@@ -92,7 +99,7 @@ class EmployeeTeamFragment : Fragment() {
                     removeUser(user)
                 }
             }
-        }*/
+        }
     }
 
     private fun removeUser(user: User) {

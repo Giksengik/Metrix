@@ -35,10 +35,10 @@ class TeamAdapter(private val onClickListener : OnTeamClickListener) : ListAdapt
             oldItem == newItem
     }
 
-    class ViewHolder(val binding: TeamItemBinding, val onClickListener : OnTeamClickListener) : RecyclerView.ViewHolder(binding.root)  {
+    class ViewHolder(val binding: TeamItemBinding, private val onClickListener : OnTeamClickListener) : RecyclerView.ViewHolder(binding.root)  {
 
         fun bind(team: TeamModel) {
-            binding.teamName.text = team.teamName + team.peopleCount + ", ID : " + team.teamId
+            binding.teamName.text = team.teamName + team.peopleCount
 
             itemView.setOnClickListener {
                 onClickListener.onTeamClick(team, position)

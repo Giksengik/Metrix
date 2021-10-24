@@ -1,4 +1,3 @@
-/*
 package com.company.metrix.ui.servicesEmployer.teams.recyclerEmployee
 
 import android.view.LayoutInflater
@@ -70,7 +69,7 @@ class EmployeeAdapter(
             binding.data.nameInTeam.text = "${user.name}, ${user.role}"
             var average = 0.0
             for (estim in estimList.indices) {
-                if (estimList[estim].isNotEmpty() && estimList[estim].get(0).user_id == user.id) {
+                if (estimList[estim].isNotEmpty() ) {
                     average = estimList[estim].map { it.rate }.average()
                 }
             }
@@ -100,4 +99,4 @@ class EmployeeAdapter(
             binding.swipeToAction.close()
         }
     }
-}*/
+}
