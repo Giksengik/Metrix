@@ -37,35 +37,39 @@ class PulseResultFragment : Fragment() {
         return binding.root
     }
 
+    //TODO заменить на ресайклер
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.loadingBar.visibility = View.GONE
-        binding.content.visibility = View.VISIBLE
+        with(binding) {
+            loadingBar.visibility = View.GONE
+            content.visibility = View.VISIBLE
 
-        binding.pulseOne.icon = R.drawable.ic_first_choice
-        binding.pulseTwo.icon = R.drawable.ic_second_choice
-        binding.pulseThree.icon = R.drawable.ic_third_choice
-        binding.pulseFour.icon = R.drawable.ic_fourth_choice
+            pulseOne.icon = R.drawable.ic_first_choice
+            pulseTwo.icon = R.drawable.ic_second_choice
+            pulseThree.icon = R.drawable.ic_third_choice
+            pulseFour.icon = R.drawable.ic_fourth_choice
 
-        binding.q2PulseFirst.icon = R.drawable.ic_first_choice
-        binding.q2PulseSecond.icon = R.drawable.ic_second_choice
-        binding.q2PulseThird.icon = R.drawable.ic_third_choice
-        binding.q2PulseFourth.icon = R.drawable.ic_fourth_choice
+            q2PulseFirst.icon = R.drawable.ic_first_choice
+            q2PulseSecond.icon = R.drawable.ic_second_choice
+            q2PulseThird.icon = R.drawable.ic_third_choice
+            q2PulseFourth.icon = R.drawable.ic_fourth_choice
 
-        viewModel.viewModelScope.launch {
-            team?.let { viewModel.getTeamPulseResults(it.teamId) }
+            viewModel.apply {
+                viewModelScope.launch {
+                    team?.let { getTeamPulseResults(it.teamId) }
 
-            binding.pulseOne.percent = viewModel.percent1Q1.value!!
-            binding.pulseTwo.percent =  viewModel.percent2Q1.value!!
-            binding.pulseThree.percent =  viewModel.percent3Q1.value!!
-            binding.pulseFour.percent =  viewModel.percent4Q1.value!!
+                    pulseOne.percent = percent1Q1.value ?: 0
+                    pulseTwo.percent = percent2Q1.value ?: 0
+                    pulseThree.percent = percent3Q1.value ?: 0
+                    pulseFour.percent = percent4Q1.value ?: 0
 
-            binding.q2PulseFirst.percent = viewModel.percent1Q2.value!!
-            binding.q2PulseSecond.percent = viewModel.percent2Q2.value!!
-            binding.q2PulseThird.percent = viewModel.percent3Q2.value!!
-            binding.q2PulseFourth.percent = viewModel.percent4Q2.value!!
-         }
-
+                    q2PulseFirst.percent = percent1Q2.value ?: 0
+                    q2PulseSecond.percent = percent2Q2.value ?: 0
+                    q2PulseThird.percent = percent3Q2.value ?: 0
+                    q2PulseFourth.percent = percent4Q2.value ?: 0
+                }
+            }
+        }
     }
 
 }

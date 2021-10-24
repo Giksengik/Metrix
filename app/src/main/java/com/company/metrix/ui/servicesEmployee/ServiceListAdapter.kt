@@ -31,7 +31,6 @@ class ServiceListAdapter(private val clickListener: OnServiceClickListener) :
                 clickListener.onServiceClick(getItem(holder.adapterPosition))
             }
         }
-
         return holder
     }
 

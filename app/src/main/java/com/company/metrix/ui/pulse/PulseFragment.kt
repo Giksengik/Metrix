@@ -39,10 +39,7 @@ class PulseFragment : Fragment() {
         setupButton()
     }
 
-    var position: Long = 0L
     var positionIn: Int = 0
-
-    var position2: Long = 0L
     var positionIn2: Int = 0
 
     private fun setupButton() {
@@ -93,9 +90,9 @@ class PulseFragment : Fragment() {
                 }
 
                 if (_position == 0) {
-                    positionIn = (_positionIn+1)
+                    positionIn = (_positionIn + 1)
                 } else if (_position == 1) {
-                    positionIn2 = (_positionIn+1)
+                    positionIn2 = (_positionIn + 1)
                 }
             }
         }
